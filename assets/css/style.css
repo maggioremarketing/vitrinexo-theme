@@ -349,13 +349,13 @@ h2 strong {
 /* Outline */
 .btn-outline-primary {
   background: transparent;
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
   border: 1.5px solid var(--salvia);
 }
 
 .btn-outline-primary:hover {
   background: var(--salvia-suave);
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
 }
 
 .btn-outline-secondary {
@@ -454,7 +454,7 @@ h2 strong {
 
 .badge-primary {
   background: var(--salvia-suave);
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
 }
 
 .badge-secondary {
@@ -474,7 +474,7 @@ h2 strong {
 
 .badge-verified {
   background: var(--salvia-suave);
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
   border: 1px solid var(--salvia-suave);
 }
 
@@ -485,7 +485,7 @@ h2 strong {
 
 .badge-success {
   background: var(--salvia-suave);
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
 }
 
 .badge-danger {
@@ -627,7 +627,7 @@ h2 strong {
 .profile-title {
   font-size: 15px;
   font-weight: 500;
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
   margin: 0 0 2px;
 }
 
@@ -799,7 +799,7 @@ a.profile-company:hover {
 }
 
 .profile-pill-offer .profile-pill-title {
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
 }
 
 .profile-pill-seek .profile-pill-title {
@@ -1097,7 +1097,7 @@ a.profile-company:hover {
   background: var(--salvia-suave);
   border-left: 3px solid var(--salvia);
   border-radius: 0;
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
   line-height: 1.4;
 }
 
@@ -1243,7 +1243,7 @@ select.form-control-vx {
 
 .alert-success {
   background: var(--salvia-suave);
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
   border: 1px solid var(--salvia-suave);
 }
 
@@ -3417,7 +3417,7 @@ section#offers {
 
 .profile-company-meta-title {
   font-size: 12px;
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
   font-weight: 500;
   margin-top: 1px;
 }
@@ -3886,7 +3886,7 @@ section#offers {
 .tag-option--selected-offer {
   border-color: var(--color-success);
   background: var(--salvia-suave);
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
 }
 
 .tag-option--selected-seek {
@@ -4191,7 +4191,7 @@ section#offers {
 
 .contact-reveal-role {
   font-size: 12px;
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
   font-weight: 500;
   margin-bottom: 0.5rem;
 }
@@ -4250,12 +4250,12 @@ section#offers {
 
 .contact-action-btn--wa {
   border-color: var(--salvia);
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
 }
 
 .contact-action-btn--wa:hover {
   background: var(--salvia-suave);
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
 }
 
 .contact-reveal-link {
@@ -4785,7 +4785,7 @@ textarea.vx-form__input,
 .vx-perfil__avatar-wrap { margin-top: -56px; flex-shrink: 0; z-index: 2; }
 .vx-perfil__info    { flex: 1; min-width: 0; padding-top: 0.5rem; }
 .vx-perfil__name    { font-family: var(--font-display); font-size: 22px; font-weight: 400; letter-spacing: var(--ls-h3); color: var(--color-text-primary); line-height: 1.2; margin: 0 0 2px; }
-.vx-perfil__empresa { font-size: 13px; font-weight: 600; color: var(--salvia-presion); margin-bottom: 2px; }
+.vx-perfil__empresa { font-size: 13px; font-weight: 600; color: var(--color-text-primary); margin-bottom: 2px; }
 .vx-perfil__location { font-size: 12px; }
 .vx-perfil__badges  { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 6px; }
 .vx-perfil__actions { display: flex; gap: 0.4rem; margin-top: 0.5rem; }
@@ -5020,7 +5020,7 @@ textarea.vx-form__input,
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: var(--ls-sobretitulo-xs);
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
 }
 .contact-link {
   font-size: 13px;
@@ -5381,7 +5381,7 @@ textarea.vx-form__input,
 
 .vx-alert--success {
   background: var(--salvia-suave);
-  color: var(--salvia-presion);
+  color: var(--color-text-primary);
   border: 1px solid var(--salvia-suave);
 }
 
