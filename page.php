@@ -33,7 +33,7 @@ $content = get_the_content();
 
 <main class="vx-legal-main">
   <div class="vx-legal-wrap">
-    <p class="vx-legal-eyebrow">Vitrinexo</p>
+    <p class="vx-legal-eyebrow">Documento legal</p>
     <h1 class="vx-legal-title"><?php echo esc_html( $title ); ?></h1>
     <div class="vx-legal-content">
       <?php echo apply_filters( 'the_content', $content ); ?>

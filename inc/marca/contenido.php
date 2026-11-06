@@ -297,6 +297,7 @@ function vx_marca_voz(): void {
         vx_marca_p( '<strong>Tipo oración en todas partes</strong>: en títulos, botones, etiquetas y avisos. Solo va mayúscula la primera letra y lo que sea nombre propio.' );
         vx_marca_p( 'La caja alta se reserva para los sobretítulos, que son rótulos de sección y no texto para leer. Nunca se usa para dar énfasis: para eso está el peso.' );
         vx_marca_p( 'El nombre de la marca se escribe siempre <strong>Vitrinexo</strong>, con una sola mayúscula. Nunca «VitriNexo» ni «VITRINEXO», tampoco en logotipos de terceros ni en firmas de correo.' );
+        vx_marca_p( 'De ahí sale una regla que no es obvia hasta que choca: <strong>el nombre nunca va dentro de un sobretítulo</strong>. El sobretítulo es caja alta por definición, así que meter la marca ahí la grita aunque en el código esté bien escrita. Pasó en las páginas legales, donde el sobretítulo decía la marca y se leía VITRINEXO.' );
     } );
 
     vx_marca_bloque( 'voz-vocabulario', function () {
