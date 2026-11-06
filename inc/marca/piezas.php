@@ -79,6 +79,35 @@ function vx_marca_kses(): array {
 }
 
 /**
+ * Las variantes de una marca, cada una sobre el fondo que le toca.
+ *
+ * Una monocroma mostrada sobre el fondo equivocado no documenta nada: la
+ * blanca sobre blanco no se ve, y enseñarla sobre gris de catálogo esconde
+ * justamente el caso para el que existe.
+ *
+ * @param array<int,array{0:string,1:string,2:string,3:string}> $variantes
+ *        archivo, token de fondo, rótulo y texto alternativo.
+ */
+function vx_marca_variantes( array $variantes, string $pie ): void {
+    ?>
+    <figure class="vx-variantes">
+        <div class="vx-variantes-fila">
+            <?php foreach ( $variantes as [ $archivo, $fondo, $rotulo, $alt ] ) : ?>
+                <span class="vx-variante">
+                    <span class="vx-variante-caja" style="background:var(<?php echo esc_attr( $fondo ); ?>)">
+                        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/' . $archivo ); ?>"
+                             alt="<?php echo esc_attr( $alt ); ?>" data-logotipo="1">
+                    </span>
+                    <span class="vx-dato vx-tenue"><?php echo esc_html( $rotulo ); ?></span>
+                </span>
+            <?php endforeach; ?>
+        </div>
+        <figcaption class="vx-nota"><?php echo esc_html( $pie ); ?></figcaption>
+    </figure>
+    <?php
+}
+
+/**
  * Una pieza de marca a los tamaños en que de verdad se usa. Mostrarla grande y
  * decir que funciona chica no es documentarla: hay que verla chica.
  */

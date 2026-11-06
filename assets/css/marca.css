@@ -284,6 +284,24 @@
 .vx-bloque { margin-top: var(--space-12); scroll-margin-top: var(--space-6); }
 .vx-bloque-cuerpo { margin-top: var(--space-4); }
 
+.vx-variantes { margin: var(--space-6) 0 0; }
+.vx-variantes-fila {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+  gap: var(--space-4);
+}
+.vx-variante { display: flex; flex-direction: column; gap: var(--space-2); }
+.vx-variante-caja {
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+  min-height: 112px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+.vx-variante-caja img { display: block; width: 56px; height: auto; }
+.vx-variantes figcaption { margin-top: var(--space-3); }
+
 .vx-tamanos { margin: var(--space-6) 0 0; }
 .vx-tamanos-fila {
   display: flex;

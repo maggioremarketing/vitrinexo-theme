@@ -113,7 +113,12 @@ function vx_marca_identidad(): void {
         vx_marca_p( 'Por los cuatro lados, y se mide sola: <strong>89 unidades de las 246 que mide el logotipo de alto</strong>, o sea un 36% de su altura, a cualquier tamaño. Se eligió una medida del propio logotipo y no un número redondo para que el respeto escale con él sin que nadie tenga que recalcularlo.' );
         vx_marca_declaracion( 'El tamaño mínimo son 90 px de ancho.' );
         vx_marca_p( 'Es donde la o mide 11 px, que es el piso en que una minúscula todavía se lee en pantalla. Más abajo no se achica el logotipo: se cambia por el isotipo.' );
-        vx_marca_p( '<strong>Hay dos monocromas y están hechas</strong>, una en tinta y otra en blanco, para fondos saturados y para impresión a un color. Son archivos aparte, no un filtro: nadie recolorea el logotipo desde el CSS.' );
+        vx_marca_p( '<strong>Hay dos monocromas</strong>, una en tinta y otra en blanco, con la misma regla que el isotipo: la de tinta sobre claro y la blanca sobre oscuro. Son archivos aparte, no un filtro, porque nadie recolorea el logotipo desde el CSS.' );
+        vx_marca_variantes( [
+            [ 'vitrinexo.svg', '--color-background', 'color · sobre claro', 'Logotipo en color sobre fondo claro.' ],
+            [ 'vitrinexo-tinta.svg', '--color-surface', 'tinta · sobre claro', 'Logotipo monocromo en tinta sobre fondo claro.' ],
+            [ 'vitrinexo-blanco.svg', '--color-text-primary', 'blanco · sobre tinta', 'Logotipo monocromo en blanco sobre fondo de tinta.' ],
+        ], 'En monocromo el marco pierde el acento, así que la palabra queda sola y el nombre pesa más.' );
         ?>
         <div class="vx-celdas">
             <?php
@@ -132,7 +137,21 @@ function vx_marca_identidad(): void {
         vx_marca_p( 'El trazo del marco mide 1,6 px cuando el isotipo se dibuja a 16, y a ese tamaño un contorno desaparece. La versión llena invierte el problema: la vitrina se rellena y <strong>los dos nexos quedan calados</strong>, así que lo que se ve es la forma y no la línea.' );
         vx_marca_tamanos( 'isotipo-lleno.svg', 'Isotipo lleno de Vitrinexo: un cuadrado coral redondeado con dos círculos calados.', [ 64, 48, 32, 24, 16 ], 'Es la misma idea resuelta al revés, y es la que vive en el favicon.' );
         vx_marca_p( 'No se mezclan: la abierta nunca baja de 48 y la llena nunca sube de 32. Entre medio manda el soporte, y si hay duda se usa la llena.' );
-        vx_marca_p( 'Las dos resoluciones tienen su par monocromo, en tinta y en blanco, así que son seis archivos en total. La llena en blanco es la que va sobre tinta: la vitrina se recorta y los nexos dejan pasar el fondo.' );
+        vx_marca_declaracion( 'Dos monocromas, y cada una tiene su fondo.' );
+        vx_marca_p( 'Existen para donde el color no puede ir: un fondo saturado, una impresión a un color, un sello. No son un filtro sobre la versión de color, son archivos aparte, y <strong>la elección no es de gusto sino de fondo</strong>: la de tinta va sobre claro y la blanca sobre oscuro. Nunca al revés, y nunca la de color sobre un fondo que compita con el coral.' );
+        vx_marca_variantes( [
+            [ 'isotipo.svg', '--color-background', 'color · sobre claro', 'Isotipo en color sobre fondo claro.' ],
+            [ 'isotipo-tinta.svg', '--color-surface', 'tinta · sobre claro', 'Isotipo monocromo en tinta sobre fondo claro.' ],
+            [ 'isotipo-blanco.svg', '--color-text-primary', 'blanco · sobre tinta', 'Isotipo monocromo en blanco sobre fondo de tinta.' ],
+            [ 'isotipo-blanco.svg', '--color-primary', 'blanco · sobre coral', 'Isotipo monocromo en blanco sobre fondo coral.' ],
+        ], 'La abierta. Sobre coral va la blanca y no la de color: el marco coral sobre coral desaparece.' );
+        vx_marca_p( 'La llena tiene las mismas dos, y en ella la monocroma hace algo que la de color no puede: <strong>los nexos dejan pasar el fondo</strong>. Calados sobre tinta, la vitrina se recorta y se lee a cualquier tamaño.' );
+        vx_marca_variantes( [
+            [ 'isotipo-lleno.svg', '--color-background', 'color · sobre claro', 'Isotipo lleno en color sobre fondo claro.' ],
+            [ 'isotipo-lleno-tinta.svg', '--color-surface', 'tinta · sobre claro', 'Isotipo lleno monocromo en tinta sobre fondo claro.' ],
+            [ 'isotipo-lleno-blanco.svg', '--color-text-primary', 'blanco · sobre tinta', 'Isotipo lleno monocromo en blanco sobre fondo de tinta.' ],
+            [ 'isotipo-lleno-blanco.svg', '--color-primary', 'blanco · sobre coral', 'Isotipo lleno monocromo en blanco sobre fondo coral.' ],
+        ], 'Seis archivos en total entre las dos resoluciones, y ninguno se genera desde el CSS.' );
     } );
 
     vx_marca_bloque( 'identidad-tipografias', function () {

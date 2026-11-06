@@ -7,13 +7,20 @@
  * lugar.
  */
 
-import { informar, leer, resolver, tokensDelSistema } from '../comun.mjs';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { TEMA, informar, leer, resolver, tokensDelSistema } from '../comun.mjs';
 
 const OFICIAL = 'assets/img/vitrinexo.svg';
 /** Las otras piezas de marca que el manual sí puede mostrar. */
-const DE_MARCA = [ 'assets/img/isotipo.svg', 'assets/img/isotipo-lleno.svg', 'assets/img/compartir.png',
-                   'assets/img/favicon-16.png', 'assets/img/favicon-32.png', 'assets/img/favicon-180.png',
-                   'assets/img/favicon-192.png', 'assets/img/favicon-512.png', 'assets/img/isotipo-512.png' ];
+const DE_MARCA = [
+  'assets/img/isotipo.svg', 'assets/img/isotipo-lleno.svg', 'assets/img/compartir.png',
+  'assets/img/favicon-16.png', 'assets/img/favicon-32.png', 'assets/img/favicon-180.png',
+  'assets/img/favicon-192.png', 'assets/img/favicon-512.png', 'assets/img/isotipo-512.png',
+  'assets/img/vitrinexo-tinta.svg', 'assets/img/vitrinexo-blanco.svg',
+  'assets/img/isotipo-tinta.svg', 'assets/img/isotipo-blanco.svg',
+  'assets/img/isotipo-lleno-tinta.svg', 'assets/img/isotipo-lleno-blanco.svg',
+];
 const fallos = [];
 
 for ( const archivo of [ 'templates/page-marca.php', 'inc/marca/contenido.php', 'inc/marca/piezas.php' ] ) {
@@ -65,7 +72,36 @@ for ( const archivo of [ 'templates/page-marca.php', 'inc/marca/contenido.php', 
  * miraba el SVG. Un documento que se jacta de no poder desincronizarse no puede
  * tener un criterio que nadie mide.
  */
-const svg = [ OFICIAL, 'assets/img/isotipo.svg', 'assets/img/isotipo-lleno.svg' ].map( leer ).join( '\n' );
+/**
+ * Los archivos que el manual pinta pasándolos como argumento.
+ *
+ * Las fotos de referencia quedan fuera: viven en assets/img/marca y no son
+ * piezas de marca, son material que el manual cita.
+ *
+ * La regla del archivo oficial miraba rutas literales, y estas no lo son: el
+ * nombre viaja en una variable y la ruta se arma dentro de la pieza. Sin esto,
+ * agregar una monocroma apagaba la comprobación sin que nadie se enterara.
+ */
+const porArgumento = [ ...leer( 'inc/marca/contenido.php' )
+  .matchAll( /vx_marca_(?:variantes|tamanos)\(\s*\[?\s*(?:\[\s*)?'([\w.-]+\.(?:svg|png|jpe?g))'/g ) ]
+  .map( ( m ) => m[ 1 ] );
+
+for ( const [ , nombre ] of leer( 'inc/marca/contenido.php' ).matchAll( /\[\s*'([\w.-]+\.(?:svg|png|jpe?g))'\s*,\s*'--/g ) ) {
+  porArgumento.push( nombre );
+}
+
+for ( const nombre of [ ...new Set( porArgumento ) ] ) {
+  const ruta = `assets/img/${ nombre }`;
+  if ( ruta !== OFICIAL && ! DE_MARCA.includes( ruta ) && ! nombre.startsWith( 'marca/' ) ) {
+    fallos.push( `el manual pinta ${ nombre }, que no está declarado como pieza de marca` );
+  }
+  if ( ! existsSync( join( TEMA, ruta ) ) && ! existsSync( join( TEMA, 'assets/img/marca', nombre ) ) ) {
+    fallos.push( `el manual pinta ${ nombre } y ese archivo no existe` );
+  }
+}
+
+/** Y los colores de cada pieza de marca salen de la paleta. */
+const svg = [ OFICIAL, ...DE_MARCA.filter( ( r ) => r.endsWith( '.svg' ) ) ].map( leer ).join( '\n' );
 const palabra = /#[0-9a-fA-F]{6}\b/g;
 
 const delSistema = new Set(
