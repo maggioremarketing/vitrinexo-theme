@@ -37,7 +37,10 @@ for ( const archivo of [ 'templates/page-marca.php', 'inc/marca/contenido.php', 
   // El logotipo se marca para que las pruebas de pantalla lo reconozcan: la
   // norma exime del contraste al texto que es parte de una marca, y sin marca
   // explícita esa exención habría que deducirla del tamaño o del color.
-  if ( fuente.includes( OFICIAL ) ) {
+  // La plantilla puede nombrar el archivo o llamar a vx_logo_url(). Si solo se
+  // mirara la ruta, pasar las plantillas a la función apagaría esta regla sin
+  // que nadie se entere, que es la peor forma de perder una comprobación.
+  if ( fuente.includes( OFICIAL ) || fuente.includes( 'vx_logo_url()' ) ) {
     for ( const [ etiqueta ] of etiquetas.matchAll( /<img[^>]*>/g ) ) {
       if ( ! etiqueta.includes( 'data-logotipo' ) && ! etiqueta.includes( 'vx-imagen' ) ) {
         fallos.push( `${ archivo } pinta el logotipo sin data-logotipo: ${ etiqueta.replace( /\s+/g, ' ' ).slice( 0, 64 ) }` );

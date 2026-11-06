@@ -99,7 +99,7 @@ function vx_marca_identidad(): void {
         vx_marca_p( 'El logotipo es un archivo vectorial, <code>assets/img/vitrinexo.svg</code>, de proporción <strong>724 × 246</strong>. Se usa siempre ese archivo: ninguna pantalla lo vuelve a dibujar, ni con tipografía ni con formas.' );
         ?>
         <div class="vx-logo-caja">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>"
+            <img src="<?php echo esc_url( vx_logo_url() ); ?>"
                  alt="Logotipo de Vitrinexo: la palabra vitrinexo en minúsculas, con un marco coral alrededor del centro y los puntos de las íes en salvia y lavanda."
                  class="vx-logo" data-logotipo="1">
         </div>

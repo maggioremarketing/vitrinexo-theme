@@ -50,7 +50,7 @@ $vx_contenido = [
 
 <aside class="vx-menu" id="vx-menu">
   <a class="vx-menu-logo" href="#documento">
-    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>"
+    <img src="<?php echo esc_url( vx_logo_url() ); ?>"
          alt="Vitrinexo" data-logotipo="1">
   </a>
   <nav aria-label="Criterios del manual">

@@ -20,7 +20,7 @@ if ( is_user_logged_in() ) {
 
 <nav class="navbar bg-white border-bottom px-4 py-2">
   <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="navbar-brand d-flex align-items-center gap-2">
-    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>" width="104" alt="Vitrinexo" class="flex-shrink-0">
+    <img src="<?php echo esc_url( vx_logo_url() ); ?>" width="104" alt="Vitrinexo" class="flex-shrink-0">
   </a>
 </nav>
 

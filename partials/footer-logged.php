@@ -3,7 +3,7 @@
   <div class="container">
     <div class="footer-vx__top">
       <a href="<?php echo esc_url( home_url( '/dashboard/' ) ); ?>" class="footer-vx__brand" aria-label="Ir al dashboard">
-        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>" alt="Vitrinexo">
+        <img src="<?php echo esc_url( vx_logo_url() ); ?>" alt="Vitrinexo">
       </a>
       <a href="<?php echo esc_url( home_url( '/editar-perfil/' ) ); ?>" class="btn-vx btn-soft-primary btn-vx-sm">
         <i class="ti ti-pencil"></i> Editar perfil

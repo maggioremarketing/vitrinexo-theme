@@ -126,6 +126,18 @@ add_filter( 'document_title_parts', function ( array $title ): array {
 // ─── La marca, en un solo lugar ────────────────────────────────────────────────
 
 /**
+ * La URL del archivo del logotipo, con la versión del tema pegada.
+ *
+ * La versión no es decoración: el CDN de Hostinger cachea los assets por URL,
+ * y un <img src> sin query nunca cambia de URL. El archivo se actualizaba en el
+ * servidor y los nodos del CDN seguían sirviendo el logotipo viejo durante
+ * días, con curl trayendo uno y el navegador otro.
+ */
+function vx_logo_url(): string {
+    return get_template_directory_uri() . '/assets/img/vitrinexo.svg?v=' . wp_get_theme()->get( 'Version' );
+}
+
+/**
  * El tagline oficial. Vive acá y no escrito a mano en cada plantilla: una
  * frase que se copia y se pega se desincroniza en la tercera copia, y la
  * tercera copia es siempre la que ve el cliente.

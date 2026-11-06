@@ -29,7 +29,7 @@ $comunidad_activa = is_page( 'comunidad-out2b' ) || is_page( 'comunidad-woman' )
 <!-- Barra fija superior (mismo formato que la landing) -->
 <header class="vx-topbar">
   <a href="<?php echo esc_url( home_url( '/dashboard/' ) ); ?>" class="vx-topbar__logo">
-    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>" alt="Vitrinexo" height="26">
+    <img src="<?php echo esc_url( vx_logo_url() ); ?>" alt="Vitrinexo" height="26">
   </a>
 
   <!-- Navegación desktop -->
@@ -89,7 +89,7 @@ $comunidad_activa = is_page( 'comunidad-out2b' ) || is_page( 'comunidad-woman' )
 <div class="offcanvas offcanvas-end vx-drawer" tabindex="-1" id="vxDrawer" aria-labelledby="vxDrawerLabel">
   <div class="vx-drawer__header">
     <a href="<?php echo esc_url( home_url( '/dashboard/' ) ); ?>">
-      <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>" alt="Vitrinexo" height="24">
+      <img src="<?php echo esc_url( vx_logo_url() ); ?>" alt="Vitrinexo" height="24">
     </a>
     <button type="button" class="vx-drawer__close" data-bs-dismiss="offcanvas" aria-label="Cerrar">
       <i class="ti ti-x"></i>
