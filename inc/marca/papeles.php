@@ -48,7 +48,8 @@ function vx_marca_familias(): array {
                 '--color-primary-hover'  => 'La misma acción con el puntero encima.',
                 '--color-primary-active' => 'La misma acción mientras se presiona.',
                 '--color-primary-soft'   => 'El fondo tenue que señala sin gritar: avisos, distintivos, filas activas.',
-                '--color-primary-ink'    => 'El teal cuando tiene que leerse: enlaces, títulos de acento e íconos sobre superficie clara.',
+                '--color-primary-ink'    => 'El coral cuando tiene que leerse: enlaces, títulos de acento e íconos sobre superficie clara.',
+                '--color-on-primary'     => 'La tinta que va encima del relleno de marca. Es oscura, no blanca: blanco sobre coral da 2,58 y no se lee.',
             ],
         ],
         [
@@ -156,7 +157,7 @@ function vx_marca_familias(): array {
  * a romper.
  */
 function vx_marca_grupos_primitivos(): array {
-    return [ 'Verde', 'Teal', 'Púrpura', 'Rosa', 'Hielo' ];
+    return [ 'Base', 'Coral', 'Lavanda', 'Rosa', 'Celeste', 'Salvia', 'Mantequilla', 'Terracota' ];
 }
 
 /** Todos los papeles declarados, en un mapa nombre → oficio. */

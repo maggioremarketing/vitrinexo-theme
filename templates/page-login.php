@@ -126,7 +126,7 @@ if ( is_user_logged_in() ) {
       if (!telefonoEl || !telefonoEl.value.trim()) {
         errDiv.textContent = 'El teléfono es obligatorio. Incluye el prefijo de tu país.';
         errDiv.classList.remove('d-none');
-        if (telefonoEl) { telefonoEl.focus(); telefonoEl.style.borderColor = 'var(--color-pink-500)'; }
+        if (telefonoEl) { telefonoEl.focus(); telefonoEl.style.borderColor = 'var(--rosa)'; }
         return;
       }
 

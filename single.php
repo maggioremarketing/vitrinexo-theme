@@ -53,9 +53,9 @@ $related = get_posts( [
 ] );
 
 $related_gradients = [
-    'linear-gradient(135deg,var(--color-purple-600),var(--color-purple-400))',
+    'linear-gradient(135deg,var(--lavanda-hover),var(--lavanda))',
     'linear-gradient(135deg,#f59e0b,#f97316)',
-    'linear-gradient(135deg,var(--color-pink-600),var(--color-pink-400))',
+    'linear-gradient(135deg,var(--rosa-hover),var(--rosa))',
 ];
 ?>
 <!DOCTYPE html>

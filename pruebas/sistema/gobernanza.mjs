@@ -41,7 +41,18 @@ for ( const suelto of readdirSync( join( TEMA, 'pruebas' ) ) ) {
 const mapa = Object.fromEntries( tokensDelSistema().flatMap( ( g ) => g.tokens.map( ( t ) => [ t.nombre, t.valor ] ) ) );
 const registro = leer( 'inc/marca/decisiones.php' );
 
-for ( const [ , bloque ] of registro.matchAll( /'tokens'\s*=>\s*\[([^\]]*)\]/g ) ) {
+/**
+ * Una decisión superada guarda el valor que el token tuvo mientras rigió, no el
+ * de hoy. Compararla obligaría a reescribir la historia cada vez que algo
+ * cambia, y un registro que se reescribe solo deja de ser un registro.
+ */
+const decisiones = registro.split( /\n        \[\n/ ).slice( 1 );
+
+for ( const decision of decisiones ) {
+  const estado = decision.match( /'estado'\s*=>\s*'([^']+)'/ )?.[ 1 ] ?? '';
+  if ( estado === 'superada' ) continue;
+
+  const bloque = decision.match( /'tokens'\s*=>\s*\[([^\]]*)\]/ )?.[ 1 ] ?? '';
   for ( const [ , nombre, escrito ] of bloque.matchAll( /'(--[\w-]+)'\s*=>\s*'([^']+)'/g ) ) {
     const real = mapa[ nombre ];
     if ( real === undefined ) {

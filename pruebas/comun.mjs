@@ -49,7 +49,12 @@ export function tokensDelSistema() {
   const grupos = [];
   let actual = { titulo: '', tokens: [] };
 
-  for ( const parte of raiz[ 1 ].split( /(\/\*[^*]*\*\/)/ ) ) {
+  // El mismo criterio que inc/marca/tokens.php: un comentario al final de una
+  // línea explica el valor de al lado y no abre familia. Si los dos lectores
+  // dejaran de coincidir, la prueba mediría grupos que la página no pinta.
+  const bloque = raiz[ 1 ].replace( /(?<=\S)[ \t]*\/\*[\s\S]*?\*\//g, '' );
+
+  for ( const parte of bloque.split( /(\/\*[^*]*\*\/)/ ) ) {
     const comentario = parte.trim().match( /^\/\*\s*(.+?)\s*\*\/$/s );
     if ( comentario ) {
       if ( actual.tokens.length ) grupos.push( actual );

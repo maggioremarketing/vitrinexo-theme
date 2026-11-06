@@ -35,11 +35,20 @@ function vx_marca_grupos_tokens(): array {
         return $cache = [];
     }
 
+    // Un comentario al final de una línea explica el valor que tiene al lado;
+    // no abre familia. Se quitan antes de partir, así solo titula grupo el
+    // comentario que va solo en su línea.
+    $bloque = preg_replace( '/(?<=\S)[ \t]*\/\*.*?\*\//s', '', $m[1] );
+
     $grupos = [];
     $actual = [ 'titulo' => '', 'tokens' => [] ];
 
-    foreach ( preg_split( '/(\/\*[^*]*\*\/)/', $m[1], -1, PREG_SPLIT_DELIM_CAPTURE ) as $parte ) {
-        if ( preg_match( '/^\/\*\s*(.+?)\s*\*\/$/', trim( $parte ), $c ) ) {
+    foreach ( preg_split( '/(\/\*[^*]*\*\/)/', $bloque, -1, PREG_SPLIT_DELIM_CAPTURE ) as $parte ) {
+        // Con /s, igual que la prueba: un comentario de varias líneas también
+        // titula grupo. Sin el modificador, el lector y la prueba leían grupos
+        // distintos y la comprobación medía algo que la página no pintaba.
+        if ( preg_match( '/^\/\*\s*(.+?)\s*\*\/$/s', trim( $parte ), $c ) ) {
+            $c[1] = trim( explode( "\n", $c[1] )[0] );
             if ( $actual['tokens'] ) $grupos[] = $actual;
             $actual = [ 'titulo' => $c[1], 'tokens' => [] ];
             continue;

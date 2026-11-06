@@ -96,18 +96,20 @@ function vx_marca_estrategia(): void {
 function vx_marca_identidad(): void {
 
     vx_marca_bloque( 'identidad-logotipo', function () {
-        vx_marca_p( 'El logotipo es un archivo vectorial, <code>assets/img/vitrinexo.svg</code>, de proporción <strong>1400 × 502</strong>. Se usa siempre ese archivo: ninguna pantalla lo vuelve a dibujar, ni con tipografía ni con formas.' );
+        vx_marca_p( 'El logotipo es un archivo vectorial, <code>assets/img/vitrinexo.svg</code>, de proporción <strong>724 × 246</strong>. Se usa siempre ese archivo: ninguna pantalla lo vuelve a dibujar, ni con tipografía ni con formas.' );
         ?>
         <div class="vx-logo-caja">
             <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/vitrinexo.svg' ); ?>"
-                 alt="Logotipo de Vitrinexo: la palabra Vitrinexo en navy, con el símbolo de la vitrina en degradado verde."
+                 alt="Logotipo de Vitrinexo: la palabra vitrinexo en minúsculas, con un marco coral alrededor del centro y los puntos de las íes en salvia y lavanda."
                  class="vx-logo" data-logotipo="1">
         </div>
         <?php
-        vx_marca_p( 'La marca se resuelve como palabra con un símbolo dentro: la vitrina ocupa el lugar de la primera letra, y esa es la decisión, no un adorno. El símbolo no se separa de la palabra para usarlo suelto.' );
-        vx_marca_p( '<strong>El logotipo tiene sus propios colores y no salen de la paleta de la interfaz.</strong> Trae un navy <code>#2F365B</code> y un degradado verde de <code>#62FA7C</code> a <code>#34998D</code>, mientras el color de acción del producto es el teal <code>--color-primary</code>. Los dos mundos conviven a propósito: el logotipo firma, la interfaz opera. Nadie repinta el logotipo en teal para que combine.' ); // color ajeno: son los del archivo del logotipo, que es lo que este párrafo documenta.
-        vx_marca_p( 'Va sobre fondo claro. Sobre fondo oscuro o sobre foto no hay versión aprobada, así que en esos casos se pone sobre una superficie clara antes que inventarle un tratamiento.' );
-        vx_marca_pendiente( 'Falta el área de respeto y el tamaño mínimo, los dos medidos. Propuesta a aprobar: respeto igual a la altura de la vitrina del símbolo por cada lado, y mínimo de 140 px de ancho en pantalla, que es donde la palabra deja de leerse cómodo.' );
+        vx_marca_declaracion( 'Los cuatro colores del logotipo son del sistema.' );
+        vx_marca_p( 'Eso es nuevo y es la diferencia que más importa. La palabra va en la tinta, el marco en el acento, y los puntos de las dos íes en salvia y lavanda. <strong>No hay un color de logotipo que la interfaz no pueda usar, ni uno de interfaz que el logotipo desconozca.</strong> Antes había dos mundos cromáticos conviviendo y había que explicarlo; ahora no hay nada que explicar.' );
+        vx_marca_p( '<strong>El marco es la vitrina.</strong> Abre arriba y cierra abajo alrededor del centro de la palabra, y es el único elemento gráfico propio del logotipo. No se separa de la palabra, no se usa suelto como sello y no se rellena.' );
+        vx_marca_p( '<strong>La palabra va en minúsculas, siempre.</strong> Es la única excepción a la regla de escritura: en texto corrido el nombre se escribe Vitrinexo con mayúscula inicial, y en el logotipo no. Nadie lo corrige.' );
+        vx_marca_p( 'Va sobre fondo claro, blanco o hueso. Sobre tinta hace falta la versión monocroma en blanco, que todavía no existe como archivo.' );
+        vx_marca_pendiente( 'Faltan tres cosas, las tres medidas: el área de respeto, el tamaño mínimo y las dos versiones monocromas, tinta y blanco. Propuesta a aprobar para las dos primeras: respeto igual al alto del marco por cada lado, y mínimo de 140 px de ancho en pantalla, que es donde la palabra deja de leerse cómoda.' );
     } );
 
     vx_marca_bloque( 'identidad-isotipo', function () {
@@ -148,47 +150,43 @@ function vx_marca_identidad(): void {
     } );
 
     vx_marca_bloque( 'identidad-paleta-de-color', function () {
+        vx_marca_declaracion( 'Pasteles sobre blanco, y un solo acento.' );
         vx_marca_p( 'La paleta tiene dos capas y solo una se puede nombrar desde una pantalla.' );
-        vx_marca_p( '<strong>Los primitivos son la escala.</strong> Cinco rampas de diez peldaños. No significan nada: son colores. Una rampa puede tener peldaños sin usar, y existe justamente para que lo próximo que haga falta caiga en un peldaño en vez de inventar un color nuevo.' );
+        vx_marca_p( '<strong>Los primitivos son el valor.</strong> Siete familias: la base, el coral y cinco pasteles. Cada familia trae su color, el que toma con el puntero encima, el que toma mientras se presiona y una versión suave para fondos. No significan nada por sí mismos: son colores.' );
 
         $prim = vx_marca_grupos_primitivos();
         foreach ( vx_marca_grupos_tokens() as $g ) {
             if ( in_array( $g['titulo'], $prim, true ) ) vx_marca_rampa( $g['titulo'], $g['tokens'] );
         }
 
-        vx_marca_p( '<strong>Los papeles dicen para qué sirve cada color, nunca de qué color son.</strong> Es lo único que una pantalla puede nombrar. El día que el teal cambie de valor, cambia en un lugar; cada primitivo suelto en una pantalla es un sitio donde no va a cambiar.' );
+        vx_marca_declaracion( 'El coral es el único acento, y por eso no se gasta.' );
+        vx_marca_p( 'Va en la acción principal, en lo que hay que encontrar de un vistazo y en el marco del logotipo. Nada más. Si en una pantalla hay tres cosas en coral, dos están mal: el acento que se repite deja de serlo.' );
+        vx_marca_p( 'Los pasteles acompañan y no compiten. Sirven de fondo, de distintivo y de estado, siempre con la tinta encima. <strong>Ninguno de los seis sirve como texto</strong>: salvia da 2,14 sobre la hoja, celeste 1,76, terracota 2,82. Lo que se lee va en tinta, en tinta secundaria o en el coral que se lee.' );
+
+        vx_marca_p( '<strong>Los papeles dicen para qué sirve cada color, nunca de qué color son.</strong> Es lo único que una pantalla puede nombrar. El día que el coral cambie de valor, cambia en un lugar.' );
 
         foreach ( vx_marca_familias() as $f ) {
             $primero = array_key_first( $f['papeles'] );
             if ( str_starts_with( (string) $primero, '--color' ) ) vx_marca_familia( $f );
         }
 
-        vx_marca_p( '<strong>El teal de marca no alcanza el mínimo de contraste.</strong> Medido contra la superficie de las tarjetas da 2,64:1 como texto. Con tinta blanca encima, que es como se pinta todo botón primario, da 2,71:1. El mínimo para texto es 4,5:1.' );
+        vx_marca_declaracion( 'Dos medidas que cambian cómo se pinta un botón.' );
+        vx_marca_p( '<strong>La tinta sobre el coral es oscura, no blanca.</strong> Blanco sobre coral da 2,58 y no llega al mínimo de 4,5; la tinta da 6,99. Es lo contrario de lo que pide el reflejo, y por eso existe el papel <code>--color-on-primary</code>.' );
         ?>
         <div class="vx-celdas">
             <?php
-            vx_marca_celda( '--color-primary', '--color-surface' );
+            vx_marca_celda( '--color-on-primary', '--color-primary' );
             vx_marca_celda( '--color-text-inverse', '--color-primary' );
-            vx_marca_celda( '--color-accent', '--color-surface' );
+            vx_marca_celda( '--color-primary-ink', '--color-background' );
             vx_marca_celda( '--color-text-primary', '--color-surface' );
             vx_marca_celda( '--color-text-secondary', '--color-surface' );
-            vx_marca_celda( '--color-secondary', '--color-surface' );
+            vx_marca_celda( '--color-text-primary', '--color-secondary' );
             ?>
         </div>
         <?php
-        vx_marca_p( 'Para el texto ya hay salida y está aplicada: <code>--color-primary-ink</code>, el teal que sí se lee. Es el peldaño 900, y se eligió midiendo: el 800 pasa sobre la tarjeta con 4,51:1 pero se queda en <strong>4,37:1</strong> sobre el fondo de página, y un papel que pasa en una superficie y falla en la de al lado no sirve. El 900 da 6,48:1 en el peor caso de las tres superficies del sistema.' );
-        ?>
-        <div class="vx-celdas">
-            <?php
-            vx_marca_celda( '--color-primary-ink', '--color-background' );
-            vx_marca_celda( '--color-primary-ink', '--color-surface' );
-            vx_marca_celda( '--color-primary-ink', '--color-surface-muted' );
-            ?>
-        </div>
-        <?php
-        vx_marca_p( 'El mismo problema tienen dos estados: <code>--color-success</code> da 2,70:1 sobre el fondo de página y <code>--color-warning</code> da 2,98:1. Como tinta no se leen. Sirven como fondo, junto a sus pares <code>-bg</code>, y el texto encima va en tinta normal.' );
-        vx_marca_p( 'Lo que queda sin resolver es el botón: el fondo teal con tinta blanca encima da 2,71:1, y arreglarlo cambia el color de todos los botones primarios del producto.' );
-        vx_marca_pendiente( 'Esa decisión es de sistema y la toma quien responde por la marca: o el botón primario se pinta con el teal que se lee, o el teal de marca deja de ser fondo de botón.' );
+        vx_marca_p( '<strong>El coral que se lee es un paso más oscuro que el del boceto.</strong> El valor propuesto daba 4,47 sobre la superficie hundida, y un papel que pasa en una superficie y falla en la de al lado no sirve. El que quedó da 4,80 en el peor caso de las tres.' );
+        vx_marca_p( 'Y una consecuencia que conviene saber antes de diseñar: <strong>el foco va en tinta</strong>. Ningún pastel llega al 3:1 que la norma pide para un contorno, así que el contorno de foco no es de color de marca.' );
+        vx_marca_pendiente( 'El repintado del producto va por la primera de tres etapas. La capa de tokens ya está, pero quedan 247 colores escritos a mano en el CSS del tema y 451 en el plugin, buena parte de ellos en los correos, donde no hay variables que valgan.' );
     } );
 
     vx_marca_bloque( 'identidad-iconografia', function () {

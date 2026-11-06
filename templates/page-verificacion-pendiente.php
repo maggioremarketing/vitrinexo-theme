@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php wp_head(); ?>
 </head>
-<body <?php body_class( 'vx-page-verificacion-pendiente' ); ?> style="background:var(--color-ice-500)">
+<body <?php body_class( 'vx-page-verificacion-pendiente' ); ?> style="background:var(--hueso-2)">
 
 <?php get_template_part( 'partials/nav' ); ?>
 

@@ -9,6 +9,10 @@
  * Cuando una decisión movió un token, deja escrito su valor de hoy en
  * `tokens`. Una prueba lo compara con el valor real del CSS: un registro que
  * se desincroniza del sistema es peor que no tener registro, porque se cree.
+ *
+ * Una decisión con estado `superada` no se compara: guarda el valor que el
+ * token tuvo mientras rigió. Sin esa distinción, la única forma de que la
+ * prueba pase es reescribir la historia, y entonces el registro deja de serlo.
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
@@ -21,6 +25,51 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  */
 function vx_marca_decisiones(): array {
     return [
+        [
+            'fecha'    => '2026-11-06',
+            'titulo'   => 'La paleta pasa a pasteles sobre blanco con un solo acento',
+            'eligio'   => 'La paleta de la propuesta de identidad de Elisa: base, coral y cinco pasteles. Página blanca, paneles hueso, paneles oscuros en tinta.',
+            'contra'   => 'Seguir con el teal, el púrpura y el rosa vibrantes, que es lo que el producto tenía lanzado.',
+            'medicion' => 'La capa semántica entera se repuntó y 256 referencias a los primitivos viejos se remapearon. Quedan 247 colores a mano en el CSS del tema y 451 en el plugin.',
+            'estado'   => 'aplicada',
+            'tokens'   => [ '--color-background' => 'var(--blanco)', '--color-surface' => 'var(--hueso)', '--color-primary' => 'var(--coral)' ], // primitivo a propósito: el registro nombra los tokens que movió.
+        ],
+        [
+            'fecha'    => '2026-11-06',
+            'titulo'   => 'La tinta sobre el relleno de marca es oscura',
+            'eligio'   => 'Un papel nuevo, --color-on-primary, que vale tinta. El botón primario lleva texto oscuro.',
+            'contra'   => 'Tinta blanca sobre coral, que es lo que el producto hacía con el teal y lo que pide el reflejo.',
+            'medicion' => 'Blanco sobre coral da 2,58 y no llega al mínimo de 4,5. La tinta da 6,99, medido sobre la portada renderizada.',
+            'estado'   => 'aplicada',
+            'tokens'   => [ '--color-on-primary' => 'var(--tinta)' ], // primitivo a propósito: el registro nombra el token que movió.
+        ],
+        [
+            'fecha'    => '2026-11-06',
+            'titulo'   => 'El coral que se lee baja un paso respecto del boceto',
+            'eligio'   => '#AD4319 para --coral-tinta.', // color ajeno y primitivo a propósito: el registro cita el valor elegido.
+            'contra'   => 'El #B4471F que la propuesta usa para el texto de error.', // color ajeno: el valor del boceto que se descartó.
+            'medicion' => '#B4471F da 5,44 sobre blanco y 4,83 sobre hueso, pero 4,47 sobre la superficie hundida, bajo el mínimo. #AD4319 da 4,80 en el peor caso de las tres superficies.', // color ajeno: la medición que sostiene la decisión.
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-06',
+            'titulo'   => 'El contorno de foco no es de color de marca',
+            'eligio'   => 'El foco se dibuja en tinta.',
+            'contra'   => 'Usar el coral o un pastel, que sería lo coherente con la marca.',
+            'medicion' => 'La norma pide 3:1 para lo que no es texto. Sobre la hoja, lavanda da 1,76, salvia 2,14, celeste 1,76 y coral 2,58. Ninguno llega.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-06',
+            'titulo'   => 'El logotipo deja de tener colores propios',
+            'eligio'   => 'El archivo nuevo, con sus cuatro colores tomados de la paleta: tinta, coral, salvia y lavanda.',
+            'contra'   => 'El anterior, que traía un navy y un degradado verde que no estaban en ninguna paleta y había que explicar como una convivencia a propósito.',
+            'medicion' => 'Una comprobación compara ahora los colores del archivo contra la paleta, y lo que la prosa cita contra el archivo. Esa prueba no existía, y por eso el manual afirmó durante semanas unos colores que el logotipo ya no tenía.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
         [
             'fecha'    => '2026-09-24',
             'titulo'   => 'La escala tipográfica es de ocho peldaños',
@@ -57,8 +106,8 @@ function vx_marca_decisiones(): array {
             'eligio'   => 'Un papel nuevo, --color-primary-ink, para el teal que tiene que leerse: enlaces, títulos de acento e íconos.',
             'contra'   => 'Usar --color-primary #00AEB8, que es lo que se venía haciendo, o subir solo hasta cyan-800.', // color ajeno: el registro cita la medición y el token que movió.
             'medicion' => 'Sobre las tres superficies del sistema: #00AEB8 da 2,55 / 2,64 / 2,68. cyan-800 da 4,37 / 4,51 / 4,58, y el 4,37 del fondo de página está bajo el mínimo. cyan-900 da 6,48 / 6,70 / 6,81.', // color ajeno: el registro cita la medición y el token que movió.
-            'estado'   => 'aplicada',
-            'tokens'   => [ '--color-primary-ink' => 'var(--color-cyan-900)' ], // primitivo a propósito: el registro cita la medición y el token que movió.
+            'estado'   => 'superada',
+            'tokens'   => [ '--color-primary-ink' => 'var(--color-cyan-900)' ], // primitivo a propósito: el valor que tuvo mientras rigió.
         ],
         [
             'fecha'    => '2026-09-24',

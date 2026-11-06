@@ -7,7 +7,7 @@
  * lugar.
  */
 
-import { informar, leer } from '../comun.mjs';
+import { informar, leer, resolver, tokensDelSistema } from '../comun.mjs';
 
 const OFICIAL = 'assets/img/vitrinexo.svg';
 const fallos = [];
@@ -43,6 +43,41 @@ for ( const archivo of [ 'templates/page-marca.php', 'inc/marca/contenido.php', 
         fallos.push( `${ archivo } pinta el logotipo sin data-logotipo: ${ etiqueta.replace( /\s+/g, ' ' ).slice( 0, 64 ) }` );
       }
     }
+  }
+}
+
+/**
+ * Y los colores del archivo son del sistema.
+ *
+ * Esta es la comprobación que faltaba. El manual afirmaba que el logotipo traía
+ * un navy y un degradado verde «que conviven a propósito» con la paleta, y
+ * siguió afirmándolo después de que el archivo cambiara entero: ninguna prueba
+ * miraba el SVG. Un documento que se jacta de no poder desincronizarse no puede
+ * tener un criterio que nadie mide.
+ */
+const svg = leer( OFICIAL );
+const palabra = /#[0-9a-fA-F]{6}\b/g;
+
+const delSistema = new Set(
+  tokensDelSistema()
+    .flatMap( ( g ) => g.tokens.map( ( t ) => resolver( t.valor, Object.fromEntries( tokensDelSistema().flatMap( ( x ) => x.tokens.map( ( y ) => [ y.nombre, y.valor ] ) ) ) ) ) )
+    .filter( ( v ) => /^#[0-9a-fA-F]{6}$/.test( v ) )
+    .map( ( v ) => v.toUpperCase() )
+);
+
+const enElArchivo = [ ...new Set( ( svg.match( palabra ) ?? [] ).map( ( c ) => c.toUpperCase() ) ) ];
+
+if ( ! enElArchivo.length ) fallos.push( 'el archivo del logotipo no declara ningún color' );
+for ( const color of enElArchivo ) {
+  if ( ! delSistema.has( color ) ) fallos.push( `el logotipo usa ${ color }, que no está en la paleta del sistema` );
+}
+
+// Y lo que la prosa afirma del logotipo tiene que estar en el archivo.
+const prosa = leer( 'inc/marca/contenido.php' );
+const bloque = prosa.slice( prosa.indexOf( "'identidad-logotipo'" ), prosa.indexOf( "'identidad-isotipo'" ) );
+for ( const [ citado ] of bloque.matchAll( palabra ) ) {
+  if ( ! enElArchivo.includes( citado.toUpperCase() ) ) {
+    fallos.push( `el criterio Logotipo cita ${ citado } y el archivo no lo tiene` );
   }
 }
 

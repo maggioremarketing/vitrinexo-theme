@@ -434,10 +434,10 @@
     if (existing) existing.remove();
 
     if (!valid) {
-      input.style.borderColor = 'var(--color-pink-500)';
+      input.style.borderColor = 'var(--rosa)';
       var msg = document.createElement('span');
       msg.className = 'vx-linkedin-error form-hint';
-      msg.style.cssText = 'color:var(--color-pink-600);display:flex;align-items:center;gap:4px;margin-top:4px';
+      msg.style.cssText = 'color:var(--rosa-hover);display:flex;align-items:center;gap:4px;margin-top:4px';
       msg.innerHTML = '<i class="ti ti-alert-circle" style="font-size:13px"></i> Ingresa una URL de LinkedIn válida (ej: linkedin.com/in/tu-nombre o linkedin.com/company/empresa)';
       // Insertar después del input o de su contenedor padre inmediato
       var container = input.closest('.input-group-vx') || input;
@@ -447,7 +447,7 @@
       input.style.borderColor = '';
       // Si el campo tiene un valor válido y no vacío, mostrar un check sutil
       if (input.value.trim()) {
-        input.style.borderColor = 'var(--color-green-500)';
+        input.style.borderColor = 'var(--salvia)';
       }
     }
   }

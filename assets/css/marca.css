@@ -3,7 +3,7 @@
  *
  * Todo lo de acá nombra papeles, nunca primitivos: es la primera regla que el
  * manual enuncia y este archivo es donde se comprueba. Si alguien escribe un
- * #hexadecimal o un --color-cyan-600 acá, la prueba de tokens lo caza.
+ * #hexadecimal o un --coral acá, la prueba de tokens lo caza.
  *
  * El contorno de foco está siempre puesto, transparente cuando no toca, para
  * que ningún estado cambie el tamaño de nada: si el foco agregara borde, la
@@ -387,7 +387,10 @@
  * dependa de distinguirlo.
  */
 .vx-pasa { color: var(--color-text-secondary); }
-.vx-falla { color: var(--color-accent-active); font-weight: 700; }
+/* El rosa de apoyo daba 4,82 con la paleta vieja y da 2,25 con la nueva. El
+   número que denuncia un contraste no puede ser el que falla, así que va en la
+   tinta de marca, que da 5,44 sobre la hoja. */
+.vx-falla { color: var(--color-primary-ink); font-weight: 700; }
 
 /* ── La escala tipográfica ────────────────────────────────────────────── */
 

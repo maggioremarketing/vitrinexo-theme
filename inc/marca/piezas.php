@@ -124,9 +124,15 @@ function vx_marca_pendiente( string $pregunta ): void {
 
 /** Una rampa de primitivos: una fila por matiz, un peldaño por casilla. */
 function vx_marca_rampa( string $titulo, array $tokens ): void {
-    // El orden del archivo no es el de la rampa, y una rampa fuera de orden no
-    // es una rampa: es una fila de colores.
-    usort( $tokens, fn( $a, $b ) => (int) substr( strrchr( $a['nombre'], '-' ), 1 ) <=> (int) substr( strrchr( $b['nombre'], '-' ), 1 ) );
+    // El orden de una familia no es el del archivo: es base, puntero encima,
+    // presionado y suave. Fuera de ese orden no es una familia, es una fila de
+    // colores.
+    $orden = [ 'hover' => 1, 'presion' => 2, 'tinta' => 3, 'suave' => 4 ];
+    $peldano = static function ( string $nombre ) use ( $orden ): int {
+        $cola = substr( strrchr( $nombre, '-' ), 1 );
+        return $orden[ $cola ] ?? 0;
+    };
+    usort( $tokens, fn( $a, $b ) => $peldano( $a['nombre'] ) <=> $peldano( $b['nombre'] ) );
     ?>
     <div class="vx-rampa">
         <p class="vx-rampa-nombre"><?php echo esc_html( $titulo ); ?></p>
@@ -135,6 +141,7 @@ function vx_marca_rampa( string $titulo, array $tokens ): void {
                 $valor = vx_marca_resolver( $t['valor'] );
                 [ $hex, $op ] = vx_marca_como_se_escribe( $valor );
                 $paso = substr( strrchr( $t['nombre'], '-' ), 1 );
+                if ( ! isset( $orden[ $paso ] ) ) $paso = 'base';
                 ?>
                 <div class="vx-peldano">
                     <span class="vx-muestra" data-hex="<?php echo esc_attr( $hex ); ?>"
