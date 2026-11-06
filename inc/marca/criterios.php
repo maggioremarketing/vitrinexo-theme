@@ -83,7 +83,7 @@ function vx_marca_partes(): array {
                 [ 'Idioma', 'parcial', 'Español de Hispanoamérica, de tú, sin voseo. Faltan portugués e inglés.' ],
                 [ 'Tono', 'definido', 'Directo y sin adorno. Se le da la razón a la objeción antes de responderla.' ],
                 [ 'Mayúsculas y minúsculas', 'definido', 'Tipo oración en todas partes. Caja alta solo en sobretítulos.' ],
-                [ 'Vocabulario', 'parcial', 'Ocho pares y siete palabras sin reemplazo. El producto todavía usa «match» en tres rutas vivas.' ],
+                [ 'Vocabulario', 'definido', 'Ocho pares y siete palabras sin reemplazo. El producto ya no dice «match» en ninguna parte.' ],
                 [ 'Patrones de copy', 'definido', 'Botón, título, error, campo obligatorio, aviso y pantalla vacía. Una sola forma para cada uno.' ],
                 [ 'Números y formatos', 'parcial', 'Teléfono, moneda, fecha, hora, decimales y porcentaje. La fecha corta se revisa cuando entre Estados Unidos.' ],
                 [ 'Emojis', 'definido', 'Ninguno, en ninguna parte. Incluye el visto, el aspa y la flecha escrita en un rótulo.' ],

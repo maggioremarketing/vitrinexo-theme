@@ -35,7 +35,7 @@ $comunidad_activa = is_page( 'comunidad-out2b' ) || is_page( 'comunidad-woman' )
   <!-- Navegación desktop -->
   <nav class="vx-topbar__nav-desktop">
     <a href="<?php echo esc_url( home_url( '/directorio/' ) ); ?>"<?php echo is_page( 'directorio' ) ? ' class="active"' : ''; ?>>Directorio</a>
-    <a href="<?php echo esc_url( home_url( '/matches/' ) ); ?>"<?php echo is_page( 'matches' ) ? ' class="active"' : ''; ?>>Matches</a>
+    <a href="<?php echo esc_url( home_url( '/nexos/' ) ); ?>"<?php echo is_page( 'matches' ) ? ' class="active"' : ''; ?>>Nexos</a>
     <a href="<?php echo esc_url( home_url( '/conexiones/' ) ); ?>"<?php echo is_page( 'conexiones' ) ? ' class="active"' : ''; ?>>Conexiones</a>
     <a href="<?php echo esc_url( home_url( '/favoritos/' ) ); ?>"<?php echo is_page( 'favoritos' ) ? ' class="active"' : ''; ?>>Favoritos</a>
     <?php if ( ! empty( $mis_comunidades ) ) : ?>
@@ -98,7 +98,7 @@ $comunidad_activa = is_page( 'comunidad-out2b' ) || is_page( 'comunidad-woman' )
   <nav class="vx-drawer__nav">
     <a href="<?php echo esc_url( home_url( '/dashboard/' ) ); ?>"     data-bs-dismiss="offcanvas">Dashboard</a>
     <a href="<?php echo esc_url( home_url( '/directorio/' ) ); ?>"    data-bs-dismiss="offcanvas">Directorio</a>
-    <a href="<?php echo esc_url( home_url( '/matches/' ) ); ?>"       data-bs-dismiss="offcanvas">Matches</a>
+    <a href="<?php echo esc_url( home_url( '/nexos/' ) ); ?>"       data-bs-dismiss="offcanvas">Nexos</a>
     <a href="<?php echo esc_url( home_url( '/conexiones/' ) ); ?>"    data-bs-dismiss="offcanvas">Conexiones</a>
     <a href="<?php echo esc_url( home_url( '/favoritos/' ) ); ?>"     data-bs-dismiss="offcanvas">Favoritos</a>
     <?php foreach ( $mis_comunidades as $com ) : ?>

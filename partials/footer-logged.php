@@ -19,7 +19,7 @@
       <nav class="footer-vx__nav" aria-label="Explorar">
         <span class="footer-vx__label">Explorar</span>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/directorio/' ) ); ?>">Directorio</a>
-        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/matches/' ) ); ?>">Mis matches</a>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/nexos/' ) ); ?>">Mis nexos</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/favoritos/' ) ); ?>">Mis favoritos</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>">4Dinner</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a>

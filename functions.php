@@ -126,6 +126,24 @@ add_filter( 'document_title_parts', function ( array $title ): array {
 // ─── La marca, en un solo lugar ────────────────────────────────────────────────
 
 /**
+ * El nombre de la marca se escribe Vitrinexo, aunque en el editor diga otra cosa.
+ *
+ * Las páginas legales están escritas en el escritorio de WordPress y dicen
+ * VITRINEXO en caja alta, que el manual prohíbe: el nombre en mayúsculas
+ * grita. Corregirlo en el editor dura hasta que alguien pegue el texto de
+ * nuevo desde el documento original, así que se corrige al renderizar.
+ *
+ * Solo la palabra suelta: no toca direcciones de correo ni dominios.
+ */
+function vx_nombre_de_marca( string $texto ): string {
+    return preg_replace( '/\bVITRINEXO\b(?![@.])/', 'Vitrinexo', $texto ) ?? $texto;
+}
+
+foreach ( [ 'the_content', 'the_title', 'the_excerpt' ] as $vx_filtro ) {
+    add_filter( $vx_filtro, 'vx_nombre_de_marca', 20 );
+}
+
+/**
  * La URL del archivo del logotipo, con la versión del tema pegada.
  *
  * La versión no es decoración: el CDN de Hostinger cachea los assets por URL,
@@ -195,6 +213,7 @@ function vx_tagline_html(): string {
 // documento que se genera del sistema de diseño, no una página del sitio.
 
 require_once get_template_directory() . '/inc/marca/ruta.php';
+require_once get_template_directory() . '/inc/nexos.php';
 
 // ─── Template loader por slug de página ────────────────────────────────────────
 
@@ -221,9 +240,6 @@ add_filter( 'template_include', function ( string $template ): string {
         'directorio'              => 'page-directorio',
         'ayuda'                   => 'page-ayuda',
         'busqueda'                => 'page-search-results',
-        'matches'                 => 'page-matches',
-        'match-seeks'             => 'page-matches',
-        'match-offers'            => 'page-matches',
         'perfil'                  => 'page-perfil',
         'editar-perfil'           => 'page-editor-perfil',
         'favoritos'               => 'page-favoritos',
