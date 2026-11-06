@@ -178,11 +178,11 @@ function vx_marca_identidad(): void {
         }
 
         vx_marca_declaracion( 'Dos medidas que cambian cómo se pinta un botón.' );
-        vx_marca_p( '<strong>La tinta sobre el coral es oscura, no blanca.</strong> Blanco sobre coral da 2,58 y no llega al mínimo de 4,5; la tinta da 6,99. Es lo contrario de lo que pide el reflejo, y por eso existe el papel <code>--color-on-primary</code>.' );
+        vx_marca_p( '<strong>La tinta sobre el coral es oscura, no blanca.</strong> Blanco sobre coral da 2,58 y no llega al mínimo de 4,5; la tinta da 6,99. Es lo contrario de lo que pide el reflejo, y por eso existe el papel <code>--color-on-fill</code>.' );
         ?>
         <div class="vx-celdas">
             <?php
-            vx_marca_celda( '--color-on-primary', '--color-primary' );
+            vx_marca_celda( '--color-on-fill', '--color-primary' );
             vx_marca_celda( '--color-text-inverse', '--color-primary' );
             vx_marca_celda( '--color-primary-ink', '--color-background' );
             vx_marca_celda( '--color-text-primary', '--color-surface' );

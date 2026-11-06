@@ -37,11 +37,11 @@ function vx_marca_decisiones(): array {
         [
             'fecha'    => '2026-11-06',
             'titulo'   => 'La tinta sobre el relleno de marca es oscura',
-            'eligio'   => 'Un papel nuevo, --color-on-primary, que vale tinta. El botón primario lleva texto oscuro.',
+            'eligio'   => 'Un papel nuevo, --color-on-fill, que vale tinta. El botón primario lleva texto oscuro.',
             'contra'   => 'Tinta blanca sobre coral, que es lo que el producto hacía con el teal y lo que pide el reflejo.',
             'medicion' => 'Blanco sobre coral da 2,58 y no llega al mínimo de 4,5. La tinta da 6,99, medido sobre la portada renderizada.',
             'estado'   => 'aplicada',
-            'tokens'   => [ '--color-on-primary' => 'var(--tinta)' ], // primitivo a propósito: el registro nombra el token que movió.
+            'tokens'   => [ '--color-on-fill' => 'var(--tinta)' ], // primitivo a propósito: el registro nombra el token que movió.
         ],
         [
             'fecha'    => '2026-11-06',

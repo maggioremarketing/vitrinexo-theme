@@ -13,9 +13,9 @@ $vx_user_nav     = class_exists( 'VX_User' ) ? VX_User::get( $user_id ) : null;
 $mis_comunidades = [];
 if ( $vx_user_nav ) {
     $coms_map = [
-        'out2b'  => [ 'slug' => 'comunidad-out2b',  'label' => 'LGBTQ+',  'icon' => 'ti-rainbow',       'color' => '#a855f7' ],
-        'woman'  => [ 'slug' => 'comunidad-woman',   'label' => 'Woman',  'icon' => 'ti-gender-female', 'color' => '#ec4899' ],
-        'senior' => [ 'slug' => 'comunidad-senior',  'label' => 'Senior', 'icon' => 'ti-award',         'color' => '#d97706' ],
+        'out2b'  => [ 'slug' => 'comunidad-out2b',  'label' => 'LGBTQ+',  'icon' => 'ti-rainbow',       'color' => 'var(--lavanda-presion)' ],
+        'woman'  => [ 'slug' => 'comunidad-woman',   'label' => 'Woman',  'icon' => 'ti-gender-female', 'color' => 'var(--rosa-presion)' ],
+        'senior' => [ 'slug' => 'comunidad-senior',  'label' => 'Senior', 'icon' => 'ti-award',         'color' => 'var(--mantequilla-presion)' ],
     ];
     foreach ( $coms_map as $id => $data ) {
         if ( $vx_user_nav->is_in_community( $id ) ) {

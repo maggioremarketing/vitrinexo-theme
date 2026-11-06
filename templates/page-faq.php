@@ -27,7 +27,7 @@ if ( $vx_is_logged ) {
   <div class="container" style="max-width:900px;padding-top:2.5rem;padding-bottom:3.5rem;">
     <header style="text-align:center;margin-bottom:2rem;">
       <h1 style="font-weight:800;margin-bottom:.5rem;letter-spacing:var(--ls-display);">Preguntas frecuentes</h1>
-      <p style="color:var(--color-text-secondary,#6b7280);max-width:620px;margin:0 auto;">
+      <p style="color:var(--color-text-secondary,var(--color-text-secondary));max-width:620px;margin:0 auto;">
         Todo lo que necesitas saber sobre Vitrinexo. Si no encuentras tu respuesta, escríbenos a
         <a href="mailto:hola@vitrinexo.com">hola@vitrinexo.com</a>.
       </p>
