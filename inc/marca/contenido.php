@@ -235,42 +235,35 @@ function vx_marca_identidad(): void {
     } );
 
     vx_marca_bloque( 'identidad-motivos', function () {
-        vx_marca_p( 'El motivo de la marca es la <strong>red</strong>: puntos que se unen con líneas, animada sobre el fondo en <code>assets/js/network.js</code>. Es la imagen literal de lo que hace el producto, así que no compite con el contenido: va detrás, tenue, y el contenido siempre queda encima.' );
-        vx_marca_p( 'Aparece en la portada y en las páginas legales. No se usa como textura de tarjeta, ni detrás de texto largo, ni en correos.' );
+        vx_marca_declaracion( 'Un encuentro tiene muchas caras.' );
+        vx_marca_p( 'El motivo de la marca es el <strong>collage de perfiles</strong>: un rostro armado con recortes de varias personas distintas. No es un adorno, es la tesis dibujada. Un nexo no es una persona, es lo que pasa entre varias.' );
+        vx_marca_foto( 'collage.svg', 'Un rostro armado con recortes de seis perfiles distintos, cada uno sobre un fondo pastel.', 'Seis recortes de seis personas. Lo que lo hace funcionar no es la composición: es que los rasgos están en el mismo lugar en todos los perfiles.' );
+
+        vx_marca_valor( 'Los rasgos van en posiciones fijas', 'Ojos, nariz y boca ocupan las mismas coordenadas en todos los perfiles. Por eso un recorte calza con cualquier otro sin empujar nada, y por eso el collage se lee como una cara y no como un rompecabezas mal armado. Es la única regla que no se puede negociar: si una ilustración mueve los rasgos, deja de servir.' );
+        vx_marca_valor( 'La piel es un color de la paleta', 'Lavanda, rosa, mantequilla, celeste, salvia o terracota. Nadie va en color carne. No es un recurso gráfico: es lo que permite que el directorio entero se dibuje sin que el color de piel de nadie sea un dato.' );
+        vx_marca_valor( 'Cada recorte lleva su propio fondo', 'Pastel distinto por casilla. Cuando el fondo coincide con la piel de ese perfil, se cambia por hueso o blanco: una cara no puede desaparecer contra su propio fondo.' );
+        vx_marca_valor( 'Los rubros rotan', 'Tecnología, arte, música, recursos humanos, gastronomía. El collage es el directorio, así que no puede parecer una sola industria.' );
+
+        vx_marca_declaracion( 'El lugar libre.' );
+        vx_marca_p( 'Es la silueta punteada que ocupa un recorte en vez de un rostro: <strong>el miembro que todavía no está</strong>. Era el recurso de la silueta en las fotos y ahora tiene nombre y oficio, porque es el argumento del programa de lanzamiento: queda un puesto y puede ser el tuyo.' );
+        vx_marca_foto( 'collage-lugar-libre.svg', 'El mismo collage con un recorte punteado en lugar de un rostro.', 'Uno por pieza y nunca dos. Dos lugares libres dejan de ser una invitación y pasan a parecer un directorio vacío.' );
+        vx_marca_p( 'Se usa en captación de Miembros Pioneros y en nada más. Nunca en una pantalla de miembro: adentro ya no hay lugar que ofrecer.' );
+
+        vx_marca_declaracion( 'La red de puntos baja a fondo.' );
+        vx_marca_p( 'Los puntos que se unen con líneas siguen existiendo, animados en <code>assets/js/network.js</code>, pero dejan de ser el motivo principal. Van tenues y detrás, nunca encima del contenido ni como textura de tarjeta. Dibujan la red; el collage dibuja a la gente, y la gente manda.' );
+
+        vx_marca_p( 'Lo que nunca se dibuja: corazones, porcentajes de parecido, barras de compatibilidad ni nada que se parezca a una aplicación de citas. Acá no hay afinidad que medir, hay trabajo que se cruza.' );
     } );
 
     vx_marca_bloque( 'identidad-direccion-fotografica', function () {
-        vx_marca_declaracion( 'Gente trabajando, nunca gente posando.' );
-        vx_marca_p( 'En todas las fotos de la marca hay alguien a media acción: un apretón que ya empezó, una mano sobre el teclado, una copa levantada, una mirada a la pantalla. <strong>Nadie mira a la cámara</strong>, porque en cuanto alguien mira deja de trabajar y empieza a actuar, y la foto se vuelve stock.' );
-
-        vx_marca_valor( 'El lugar dice el rubro, sin leyenda', 'Planos y una maqueta dicen arquitectura; una calculadora y gráficos dicen contabilidad; un casco al fondo dice obra. El oficio se reconoce por los objetos que hay sobre la mesa, así que la mesa se arma antes de disparar. Un escritorio limpio no dice nada.' );
-        vx_marca_valor( 'Luz natural y lateral', 'Ventanal grande fuera de cuadro, sombra suave, nada de flash ni de estudio. De noche manda la luz que está en la escena: velas sobre la mesa, guirnalda arriba, ciudad desenfocada atrás.' );
-        vx_marca_valor( 'Altura de los ojos y plano medio', 'Horizontal, de pie o sentado a la misma altura que la persona. Sin picados, sin contrapicados y sin primerísimos planos: se ve la persona y se ve dónde está.' );
-        vx_marca_valor( 'Profundidad corta', 'El fondo se reconoce y no compite. La estantería, el ventanal y la ciudad están, pero suaves.' );
-        vx_marca_valor( 'Ropa de trabajo de verdad', 'Camisa lisa, mangas arremangadas, sin corbata. Colores de la misma familia que la paleta: celeste, beige, blanco, verde oliva. Nada de traje de catálogo.' );
-        vx_marca_valor( 'Diversidad que no es el tema', 'Edad, género y origen variados en el mismo cuadro, sin que la foto trate de eso. Hay gente de treinta y gente de sesenta, y nadie está ahí para representar una categoría.' );
-
-        vx_marca_p( 'Hay <strong>dos registros de luz</strong> y no se mezclan. El de la plataforma es de día y frío: vidrio, hormigón, azul grisáceo y blanco, con madera y beige para templar. El de lo presencial es de noche y cálido: ámbar, vela y bokeh de ciudad.' );
-
-        vx_marca_foto( 'nexo-ausente.jpg', 'Dos hombres se dan la mano en una oficina con estantería de madera; entre ellos, una tercera persona traslúcida con el contorno de línea discontinua.', 'El registro de día: luz de ventanal a la izquierda, madera, camisa celeste y beige, apretón a media altura.' );
-
-        vx_marca_declaracion( 'La silueta del nexo' );
-        vx_marca_p( 'Es el recurso propio de la marca en fotografía, y no se usa en cualquier foto: <strong>aparece solo cuando la imagen habla de la conexión que todavía no existe</strong>. Una persona o una escena entera, traslúcida, con contorno de línea discontinua blanca, integrada en la misma perspectiva y con la misma luz que el resto.' );
-        vx_marca_p( 'Una por imagen, nunca dos. No tapa la cara de nadie real. Y no se usa en las fotos presenciales: ahí la gente ya está, que es justamente el punto.' );
-        vx_marca_foto( 'escena-imaginada.jpg', 'Una mujer sentada frente a su laptop mira hacia una escena traslúcida de una reunión de seis personas; el contorno punteado rodea solo el apretón de manos.', 'Acá la silueta es una escena completa y el contorno marca una sola cosa: el apretón. Lo que ella está imaginando es el nexo, no la reunión.' );
-
-        vx_marca_p( 'El <strong>apretón de manos es el gesto de la marca</strong> y aparece en casi todas las fotos. Siempre dentro de una escena de trabajo, nunca recortado sobre fondo blanco ni en primer plano sin contexto.' );
-
-        vx_marca_foto( 'rubros.jpg', 'Tríptico: una mujer revisa gráficos con una calculadora, un hombre trabaja sobre planos junto a una maqueta, y dos personas se dan la mano en una oficina.', 'Para mostrar variedad de rubros: tres paneles verticales, un oficio por panel, la misma luz y la misma altura de cámara en los tres.' );
-        vx_marca_foto( 'comunidades.jpg', 'Terraza de noche con guirnalda de luces, cuatro mesas redondas ocupadas por grupos distintos y la ciudad desenfocada al fondo.', 'Para hablar de las comunidades: un plano general, varias mesas en una misma azotea. Una foto que dice una plataforma y muchas comunidades sin escribirlo.' );
-        vx_marca_foto( '4dinner.jpg', 'Cuatro personas cenando en una terraza de noche, con velas sobre la mesa y luces de la ciudad al fondo.', 'Vitrinexo 4Dinner: exactamente cuatro personas y una mesa redonda. El número es la promesa, así que la foto lo cumple.' );
-
-        vx_marca_p( 'Lo que no se fotografía: nadie mirando a cámara, nadie saltando ni chocando los cinco, ningún gráfico ni ícono flotando encima de la imagen, ninguna oficina vacía, ningún escritorio sin rastro de trabajo y ningún recorte sobre fondo blanco.' );
-
-        vx_marca_declaracion( 'Para encargar o generar una' );
-        vx_marca_p( '<strong>Persona en su lugar de trabajo.</strong> «Fotografía editorial horizontal de una [profesión] de [edad] trabajando en su [lugar], a media acción y sin mirar a cámara. Sobre la mesa, los objetos de su oficio. Luz natural lateral de ventanal grande, sombras suaves, profundidad de campo corta con el fondo reconocible y desenfocado. Paleta de neutros fríos con madera y beige. Camisa lisa, mangas arremangadas, sin corbata. Altura de los ojos, plano medio.»' );
-        vx_marca_p( '<strong>La silueta del nexo.</strong> Se agrega a la anterior: «Entre las personas, una figura humana traslúcida con contorno de línea discontinua blanca, integrada en la misma perspectiva y con la misma luz, que representa a alguien que todavía no está en la escena.»' );
-        vx_marca_p( '<strong>Presencial de noche.</strong> «Cuatro personas cenando en una terraza urbana de noche, mesa redonda, conversación a media frase. Luz cálida de velas sobre la mesa y guirnalda de bombillas arriba; ciudad desenfocada al fondo. Paleta ámbar. Nadie mira a cámara. Horizontal, altura de los ojos.»' );
+        vx_marca_declaracion( 'La marca ilustra, no fotografía.' );
+        vx_marca_p( 'Es la decisión más grande de la identidad y conviene decirla sin rodeos: <strong>el perfil ilustrado reemplaza a la foto</strong>. No por presupuesto ni por falta de material, sino porque la foto de oficina promete algo que el producto no entrega. Un directorio de empresas verificadas no se parece a una reunión con buena luz.' );
+        vx_marca_foto( 'retrato.svg', 'Un perfil ilustrado: rostro de frente sobre fondo hueso, con la piel en mantequilla y la ropa en salvia.', 'Un perfil suelto. Mismo encuadre siempre: de frente, hombros adentro, mirada al lente, fondo liso de un solo color.' );
+        vx_marca_valor( 'Encuadre', 'De frente y a la altura de los ojos, con los hombros dentro del cuadro y el rostro centrado. Vertical, proporción 4 a 5. Sin perfiles de tres cuartos ni planos cortados: el recorte tiene que poder cruzarse con cualquier otro.' );
+        vx_marca_valor( 'Fondo', 'Liso, de un solo color de la paleta. Sin degradados, sin textura y sin escenario. El fondo identifica el recorte dentro del collage; si tuviera contenido, competiría con la cara.' );
+        vx_marca_valor( 'Expresión', 'Neutra o apenas amable. Nadie ríe a carcajadas ni posa de brazos cruzados. El perfil es una ficha, no una foto de perfil de red social.' );
+        vx_marca_p( 'Para encargar o generar una: «Retrato ilustrado vectorial de una persona, de frente, hombros dentro del cuadro, sobre fondo liso de un solo color. Formas planas sin degradados ni sombras. La piel en un color pastel que no imita el tono real. Rasgos simples en trazo oscuro. Proporción vertical 4 a 5.»' );
+        vx_marca_pendiente( 'El sitio todavía muestra las cinco fotos de oficina y de 4Dinner. Reemplazarlas por collage es trabajo de producto, y falta decidir una cosa que la dirección no cubre: si las cenas, que son un evento real con gente real, se ilustran igual o son la única excepción fotográfica de la marca.' );
     } );
 
     vx_marca_bloque( 'identidad-favicon', function () {
