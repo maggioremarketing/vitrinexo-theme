@@ -63,7 +63,7 @@ function vx_marca_partes(): array {
             'bajada'  => 'Cómo se ve la marca.',
             'criterios' => [
                 [ 'Logotipo', 'parcial', 'Archivo nuevo, y sus cuatro colores son del sistema. Faltan área de respeto, tamaño mínimo y las monocromas.' ],
-                [ 'Isotipo', 'pendiente' ],
+                [ 'Isotipo', 'parcial', 'La vitrina con los nexos en sus aberturas. Abierta sobre 48 px, llena bajo 32. Faltan las monocromas.' ],
                 [ 'Tipografías', 'definido', 'Switzer Variable, servida localmente. Cuatro pesos en uso de los nueve disponibles.' ],
                 [ 'Jerarquía', 'definido', 'Tamaño, peso y tinta, en ese orden. El color nunca distingue solo.' ],
                 [ 'Escala tipográfica', 'definido', 'Ocho peldaños. Esta página los obedece, así que si alguien la rompe se nota leyendo.' ],
@@ -71,8 +71,8 @@ function vx_marca_partes(): array {
                 [ 'Iconografía', 'definido', 'Tabler Icons 3.19.0, trazo de 2 px sobre rejilla de 24. Una sola familia.' ],
                 [ 'Motivos', 'definido', 'La red: puntos que se unen. Va detrás del contenido y nunca encima.' ],
                 [ 'Dirección fotográfica', 'definido', 'Gente trabajando, nunca posando. Dos registros de luz y la silueta del nexo como recurso propio.' ],
-                [ 'Favicon', 'pendiente', 'El sitio no declara ninguno. Depende del isotipo.' ],
-                [ 'Imagen para compartir', 'pendiente', 'Quien pega un enlace de Vitrinexo ve una tarjeta vacía.' ],
+                [ 'Favicon', 'definido', 'El isotipo lleno, en SVG y en PNG de 32, 16 y 180.' ],
+                [ 'Imagen para compartir', 'definido', '1200 × 630 sobre hueso, con el logotipo, el tagline y el dominio.' ],
             ],
         ],
         [

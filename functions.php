@@ -138,6 +138,35 @@ function vx_logo_url(): string {
 }
 
 /**
+ * El ícono del navegador y la tarjeta para compartir.
+ *
+ * Los dos llevan la versión del tema pegada por lo mismo que el logotipo: el
+ * CDN cachea por URL y un ícono sin query no cambia nunca.
+ *
+ * El SVG es la versión calada del isotipo, no la abierta: a 16 px el trazo del
+ * marco queda en 1,6 px y las aberturas se cierran. Los PNG están para los
+ * navegadores y los sistemas que no toman SVG.
+ */
+function vx_asset_url( string $archivo ): string {
+    return get_template_directory_uri() . '/assets/img/' . $archivo . '?v=' . wp_get_theme()->get( 'Version' );
+}
+
+add_action( 'wp_head', function () {
+    printf( '<link rel="icon" type="image/svg+xml" href="%s">' . "\n", esc_url( vx_asset_url( 'isotipo-lleno.svg' ) ) );
+    printf( '<link rel="icon" type="image/png" sizes="32x32" href="%s">' . "\n", esc_url( vx_asset_url( 'favicon-32.png' ) ) );
+    printf( '<link rel="icon" type="image/png" sizes="16x16" href="%s">' . "\n", esc_url( vx_asset_url( 'favicon-16.png' ) ) );
+    printf( '<link rel="apple-touch-icon" sizes="180x180" href="%s">' . "\n", esc_url( vx_asset_url( 'favicon-180.png' ) ) );
+
+    // Quien pega un enlace de Vitrinexo veía una tarjeta vacía.
+    printf( '<meta property="og:title" content="%s">' . "\n", esc_attr( wp_get_document_title() ) );
+    printf( '<meta property="og:description" content="%s">' . "\n", esc_attr( vx_tagline() ) );
+    printf( '<meta property="og:image" content="%s">' . "\n", esc_url( vx_asset_url( 'compartir.png' ) ) );
+    printf( '<meta property="og:url" content="%s">' . "\n", esc_url( home_url( add_query_arg( [] ) ) ) );
+    echo '<meta property="og:type" content="website">' . "\n";
+    echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+}, 3 );
+
+/**
  * El tagline oficial. Vive acá y no escrito a mano en cada plantilla: una
  * frase que se copia y se pega se desincroniza en la tercera copia, y la
  * tercera copia es siempre la que ve el cliente.

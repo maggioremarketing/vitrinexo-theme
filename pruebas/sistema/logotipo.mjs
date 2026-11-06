@@ -10,6 +10,10 @@
 import { informar, leer, resolver, tokensDelSistema } from '../comun.mjs';
 
 const OFICIAL = 'assets/img/vitrinexo.svg';
+/** Las otras piezas de marca que el manual sí puede mostrar. */
+const DE_MARCA = [ 'assets/img/isotipo.svg', 'assets/img/isotipo-lleno.svg', 'assets/img/compartir.png',
+                   'assets/img/favicon-16.png', 'assets/img/favicon-32.png', 'assets/img/favicon-180.png',
+                   'assets/img/favicon-192.png', 'assets/img/favicon-512.png', 'assets/img/isotipo-512.png' ];
 const fallos = [];
 
 for ( const archivo of [ 'templates/page-marca.php', 'inc/marca/contenido.php', 'inc/marca/piezas.php' ] ) {
@@ -26,7 +30,10 @@ for ( const archivo of [ 'templates/page-marca.php', 'inc/marca/contenido.php', 
   // Las fotos de referencia del manual viven en su propia carpeta y no son
   // logotipos; lo que se vigila es que nadie apunte a otra copia de la marca.
   for ( const [ , ruta ] of fuente.matchAll( /assets\/img\/(?!marca\/)([\w.-]+\.(?:svg|png|jpe?g))/g ) ) {
-    if ( `assets/img/${ ruta }` !== OFICIAL ) fallos.push( `${ archivo } apunta a ${ ruta } en vez de al archivo oficial` );
+    const completa = `assets/img/${ ruta }`;
+    if ( completa !== OFICIAL && ! DE_MARCA.includes( completa ) ) {
+      fallos.push( `${ archivo } apunta a ${ ruta }, que no es una pieza de marca` );
+    }
   }
 
   // Toda imagen dice qué hay en ella.
@@ -58,7 +65,7 @@ for ( const archivo of [ 'templates/page-marca.php', 'inc/marca/contenido.php', 
  * miraba el SVG. Un documento que se jacta de no poder desincronizarse no puede
  * tener un criterio que nadie mide.
  */
-const svg = leer( OFICIAL );
+const svg = [ OFICIAL, 'assets/img/isotipo.svg', 'assets/img/isotipo-lleno.svg' ].map( leer ).join( '\n' );
 const palabra = /#[0-9a-fA-F]{6}\b/g;
 
 const delSistema = new Set(

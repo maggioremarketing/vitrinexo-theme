@@ -79,6 +79,27 @@ function vx_marca_kses(): array {
 }
 
 /**
+ * Una pieza de marca a los tamaños en que de verdad se usa. Mostrarla grande y
+ * decir que funciona chica no es documentarla: hay que verla chica.
+ */
+function vx_marca_tamanos( string $archivo, string $alt, array $tamanos, string $pie ): void {
+    ?>
+    <figure class="vx-tamanos">
+        <div class="vx-tamanos-fila">
+            <?php foreach ( $tamanos as $t ) : ?>
+                <span class="vx-tamano">
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/' . $archivo ); ?>"
+                         alt="<?php echo esc_attr( $alt ); ?>" width="<?php echo (int) $t; ?>" height="<?php echo (int) $t; ?>">
+                    <span class="vx-dato vx-tenue"><?php echo (int) $t; ?></span>
+                </span>
+            <?php endforeach; ?>
+        </div>
+        <figcaption class="vx-nota"><?php echo esc_html( $pie ); ?></figcaption>
+    </figure>
+    <?php
+}
+
+/**
  * Una foto de referencia con su pie. El pie no describe lo que se ve, que ya
  * se ve: dice qué hay que repetir de esa foto.
  */

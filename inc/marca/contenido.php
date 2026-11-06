@@ -113,7 +113,14 @@ function vx_marca_identidad(): void {
     } );
 
     vx_marca_bloque( 'identidad-isotipo', function () {
-        vx_marca_pendiente( 'No existe una versión reducida del logotipo. Hace falta para el favicon, el avatar de redes y cualquier lugar donde la palabra completa no se lea: a partir de qué tamaño reemplaza al logotipo y qué parte del símbolo sobrevive.' );
+        vx_marca_declaracion( 'La vitrina, con los nexos en sus aberturas.' );
+        vx_marca_p( 'El isotipo sale del marco del logotipo, no de otra idea. En el logotipo el marco se abre a los lados y <strong>los dos puntos están centrados justo sobre esas aberturas</strong>: la vitrina se abre y los nexos la ocupan. El isotipo conserva eso y nada más.' );
+        vx_marca_tamanos( 'isotipo.svg', 'Isotipo de Vitrinexo: un marco coral abierto a los lados, con un punto salvia y uno lavanda ocupando las aberturas.', [ 128, 64, 48, 32 ], 'La versión de marca. Se usa de 48 px para arriba: más abajo el trazo baja de 2 px y las aberturas se cierran.' );
+        vx_marca_declaracion( 'De 32 para abajo, la versión llena.' );
+        vx_marca_p( 'El trazo del marco mide 1,6 px cuando el isotipo se dibuja a 16, y a ese tamaño un contorno desaparece. La versión llena invierte el problema: la vitrina se rellena y <strong>los dos nexos quedan calados</strong>, así que lo que se ve es la forma y no la línea.' );
+        vx_marca_tamanos( 'isotipo-lleno.svg', 'Isotipo lleno de Vitrinexo: un cuadrado coral redondeado con dos círculos calados.', [ 64, 48, 32, 24, 16 ], 'Es la misma idea resuelta al revés, y es la que vive en el favicon.' );
+        vx_marca_p( 'No se mezclan: la abierta nunca baja de 48 y la llena nunca sube de 32. Entre medio manda el soporte, y si hay duda se usa la llena.' );
+        vx_marca_pendiente( 'Faltan las dos monocromas, tinta y blanco, para fondos saturados y para impresión a un color.' );
     } );
 
     vx_marca_bloque( 'identidad-tipografias', function () {
@@ -235,11 +242,22 @@ function vx_marca_identidad(): void {
     } );
 
     vx_marca_bloque( 'identidad-favicon', function () {
-        vx_marca_pendiente( 'El sitio no declara favicon: la pestaña muestra el ícono genérico del navegador. Hace falta el isotipo primero, porque el logotipo completo no se lee a 16 px.' );
+        vx_marca_p( 'El ícono del navegador es <strong>el isotipo lleno</strong>, nunca el logotipo: la palabra completa a 16 px es una mancha.' );
+        vx_marca_tamanos( 'favicon-32.png', 'Favicon de Vitrinexo a 32 píxeles.', [ 32, 16 ], 'Los dos tamaños que el navegador pide de verdad.' );
+        vx_marca_p( 'Se sirven cuatro archivos: el SVG para los navegadores que lo toman, y PNG de 32, 16 y 180, este último para el ícono de pantalla de inicio en iOS. Todos llevan la versión del tema en la URL, porque el CDN cachea por URL y un ícono sin query no cambia nunca.' );
     } );
 
     vx_marca_bloque( 'identidad-imagen-para-compartir', function () {
-        vx_marca_pendiente( 'El sitio no declara imagen para compartir ni descripción para redes: quien pega un enlace de Vitrinexo en LinkedIn o WhatsApp ve una tarjeta vacía. Falta la pieza de 1200 × 630 y qué texto lleva.' );
+        vx_marca_p( 'Lo que se ve cuando alguien pega un enlace de Vitrinexo en LinkedIn o en WhatsApp. Mide <strong>1200 × 630</strong>, va sobre hueso y lleva tres cosas: el logotipo, el tagline y el dominio. Nada más.' );
+        ?>
+        <figure class="vx-foto">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/compartir.png' ); ?>"
+                 alt="Tarjeta para compartir: el logotipo de Vitrinexo sobre fondo hueso, con el tagline debajo y el dominio al pie."
+                 class="vx-imagen" loading="lazy">
+            <figcaption class="vx-nota">Sin fotos y sin texto de campaña: lo que se comparte es la marca, no una promoción que caduca.</figcaption>
+        </figure>
+        <?php
+        vx_marca_p( 'El texto sale del tagline declarado, así que si el tagline cambia, la tarjeta se regenera y no queda una versión vieja circulando por ahí.' );
     } );
 }
 
