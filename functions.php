@@ -175,6 +175,21 @@ function vx_tagline(): string {
     return 'Tu vitrina para construir nexos de negocio.';
 }
 
+/**
+ * El tagline con sus dos mitades destacadas.
+ *
+ * Vitrina y nexo son las dos mitades del nombre, y en el titular se marcan.
+ * Se derivan de la frase en vez de escribirse aparte: así el destacado es una
+ * regla y no una edición a mano que alguien tiene que repetir.
+ */
+function vx_tagline_html(): string {
+    $frase = esc_html( vx_tagline() );
+    foreach ( [ 'vitrina', 'nexos' ] as $mitad ) {
+        $frase = str_replace( $mitad, '<strong>' . $mitad . '</strong>', $frase );
+    }
+    return $frase;
+}
+
 // ─── Manual de marca ───────────────────────────────────────────────────────────
 // La ruta /marca, su hoja y su regla de reescritura. Vive aparte porque es un
 // documento que se genera del sistema de diseño, no una página del sitio.

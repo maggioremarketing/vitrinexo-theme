@@ -35,7 +35,7 @@ function vx_marca_estrategia(): void {
         vx_marca_declaracion( 'Tu vitrina para construir nexos de negocio.' );
         vx_marca_p( 'Se escribe entera y con punto final. Las dos mitades del nombre aparecen en ella en el mismo orden en que se leen, y por eso no se abrevia ni se parte en dos líneas por diseño.' );
         vx_marca_p( 'Vive declarado una sola vez, en <code>vx_tagline()</code>, y el titular de este manual sale de ahí: lo que estás leyendo arriba es el mismo texto que usaría cualquier plantilla.' );
-        vx_marca_pendiente( 'La portada del sitio todavía lo escribe a mano, y vive en el plugin. Falta que lo lea de la misma función.' );
+        vx_marca_p( 'La portada del sitio también lo lee de ahí. Sus dos mitades, vitrina y nexos, se destacan solas: <code>vx_tagline_html()</code> las marca a partir de la misma frase, así que el destacado es una regla y no una edición a mano que alguien tiene que repetir cuando el tagline cambie.' );
     } );
 
     vx_marca_bloque( 'estrategia-linea-de-producto', function () {
@@ -109,7 +109,19 @@ function vx_marca_identidad(): void {
         vx_marca_p( '<strong>El marco es la vitrina.</strong> Abre arriba y cierra abajo alrededor del centro de la palabra, y es el único elemento gráfico propio del logotipo. No se separa de la palabra, no se usa suelto como sello y no se rellena.' );
         vx_marca_p( '<strong>La palabra va en minúsculas, siempre.</strong> Es la única excepción a la regla de escritura: en texto corrido el nombre se escribe Vitrinexo con mayúscula inicial, y en el logotipo no. Nadie lo corrige.' );
         vx_marca_p( 'Va sobre fondo claro, blanco o hueso. Sobre tinta hace falta la versión monocroma en blanco, que todavía no existe como archivo.' );
-        vx_marca_pendiente( 'Faltan tres cosas, las tres medidas: el área de respeto, el tamaño mínimo y las dos versiones monocromas, tinta y blanco. Propuesta a aprobar para las dos primeras: respeto igual al alto del marco por cada lado, y mínimo de 140 px de ancho en pantalla, que es donde la palabra deja de leerse cómoda.' );
+        vx_marca_declaracion( 'El área de respeto es la altura de la o.' );
+        vx_marca_p( 'Por los cuatro lados, y se mide sola: <strong>89 unidades de las 246 que mide el logotipo de alto</strong>, o sea un 36% de su altura, a cualquier tamaño. Se eligió una medida del propio logotipo y no un número redondo para que el respeto escale con él sin que nadie tenga que recalcularlo.' );
+        vx_marca_declaracion( 'El tamaño mínimo son 90 px de ancho.' );
+        vx_marca_p( 'Es donde la o mide 11 px, que es el piso en que una minúscula todavía se lee en pantalla. Más abajo no se achica el logotipo: se cambia por el isotipo.' );
+        vx_marca_p( '<strong>Hay dos monocromas y están hechas</strong>, una en tinta y otra en blanco, para fondos saturados y para impresión a un color. Son archivos aparte, no un filtro: nadie recolorea el logotipo desde el CSS.' );
+        ?>
+        <div class="vx-celdas">
+            <?php
+            vx_marca_celda( '--color-text-primary', '--color-background' );
+            vx_marca_celda( '--color-text-inverse', '--color-text-primary' );
+            ?>
+        </div>
+        <?php
     } );
 
     vx_marca_bloque( 'identidad-isotipo', function () {
@@ -120,7 +132,7 @@ function vx_marca_identidad(): void {
         vx_marca_p( 'El trazo del marco mide 1,6 px cuando el isotipo se dibuja a 16, y a ese tamaño un contorno desaparece. La versión llena invierte el problema: la vitrina se rellena y <strong>los dos nexos quedan calados</strong>, así que lo que se ve es la forma y no la línea.' );
         vx_marca_tamanos( 'isotipo-lleno.svg', 'Isotipo lleno de Vitrinexo: un cuadrado coral redondeado con dos círculos calados.', [ 64, 48, 32, 24, 16 ], 'Es la misma idea resuelta al revés, y es la que vive en el favicon.' );
         vx_marca_p( 'No se mezclan: la abierta nunca baja de 48 y la llena nunca sube de 32. Entre medio manda el soporte, y si hay duda se usa la llena.' );
-        vx_marca_pendiente( 'Faltan las dos monocromas, tinta y blanco, para fondos saturados y para impresión a un color.' );
+        vx_marca_p( 'Las dos resoluciones tienen su par monocromo, en tinta y en blanco, así que son seis archivos en total. La llena en blanco es la que va sobre tinta: la vitrina se recorta y los nexos dejan pasar el fondo.' );
     } );
 
     vx_marca_bloque( 'identidad-tipografias', function () {
@@ -193,7 +205,8 @@ function vx_marca_identidad(): void {
         <?php
         vx_marca_p( '<strong>El coral que se lee es un paso más oscuro que el del boceto.</strong> El valor propuesto daba 4,47 sobre la superficie hundida, y un papel que pasa en una superficie y falla en la de al lado no sirve. El que quedó da 4,80 en el peor caso de las tres.' );
         vx_marca_p( 'Y una consecuencia que conviene saber antes de diseñar: <strong>el foco va en tinta</strong>. Ningún pastel llega al 3:1 que la norma pide para un contorno, así que el contorno de foco no es de color de marca.' );
-        vx_marca_pendiente( 'El repintado del producto va por la primera de tres etapas. La capa de tokens ya está, pero quedan 247 colores escritos a mano en el CSS del tema y 451 en el plugin, buena parte de ellos en los correos, donde no hay variables que valgan.' );
+        vx_marca_p( '<strong>No queda un solo color escrito a mano en el producto.</strong> Eran 638 repartidos en los dos repositorios, y tres familias enteras que no seguían a ningún token: el ámbar del distintivo Pionero, el rosa de Woman y el púrpura de LGBTQ+. Ahora el ámbar es mantequilla, el rosa es rosa y el púrpura es lavanda.' );
+        vx_marca_p( 'Los correos y el panel de administración son la excepción obligada: un cliente de correo no entiende variables y el panel no carga la hoja del tema. Ahí el valor va literal, y lo que se comprueba no es que se nombre un papel sino que el valor exista en esta paleta.' );
     } );
 
     vx_marca_bloque( 'identidad-iconografia', function () {
@@ -298,9 +311,10 @@ function vx_marca_voz(): void {
             [ 'directorio', 'listado, catálogo, base de datos' ],
             [ 'membresía', 'suscripción, plan de pago' ],
         ] );
-        vx_marca_p( 'Hay además cuatro palabras que no se dicen de ninguna forma, porque no significan nada y se nota: <strong>ecosistema</strong>, <strong>sinergia</strong>, <strong>solución</strong> y <strong>partner</strong>. No tienen reemplazo: si una frase las necesita, la frase no estaba diciendo nada.' );
+        vx_marca_p( 'Hay además siete palabras que no se dicen de ninguna forma: <strong>ecosistema</strong>, <strong>sinergia</strong>, <strong>solución</strong>, <strong>partner</strong>, <strong>match</strong>, <strong>early adopter</strong> y <strong>VITRINEXO</strong> en mayúsculas. Las cuatro primeras no significan nada y se nota. Las tres siguientes significan otra cosa: <em>match</em> es de las aplicaciones de citas y acá nadie busca pareja, <em>early adopter</em> ya tiene nombre en español y es Miembro Pionero, y el nombre en caja alta grita.' );
         vx_marca_p( 'Y una regla de puntuación: <strong>no se usan guiones largos</strong> en ningún texto de la marca. Donde aparezca uno va una coma, un punto o dos puntos.' );
         vx_marca_p( 'El verbo propio, <strong>vitrinear</strong>, se conjuga normal y no se pone entre comillas. Está en el diccionario de la marca, no es una gracia.' );
+        vx_marca_pendiente( 'El producto contradice la prohibición de «match» en tres direcciones vivas: /matches, /match-seeks y /match-offers, más una sección del menú y 229 menciones en el código. Renombrarlas rompe enlaces que los miembros ya tienen guardados, así que es una migración con redirecciones, no una búsqueda y reemplazo.' );
     } );
 
     vx_marca_bloque( 'voz-patrones-de-copy', function () {
@@ -320,7 +334,8 @@ function vx_marca_voz(): void {
         vx_marca_valor( 'Hora', 'En formato de 24 horas y con dos puntos: 20:00. Cuando algo pasa a la vez en varias ciudades, la hora va siempre seguida de «hora local», porque sin eso la mitad de los invitados calcula mal.' );
         vx_marca_valor( 'Miles y decimales', 'Punto para los miles y coma para los decimales: 1.234,56. Es la convención del español, y mezclarla con la inglesa en la misma pantalla es la forma más rápida de que alguien lea mil veces de más.' );
         vx_marca_valor( 'Porcentaje', 'Pegado al número: 35%.' );
-        vx_marca_pendiente( 'El sitio anuncia las cenas como «miércoles 8pm» y el código guarda 20:00. Hay que elegir uno. Y cuando entre Estados Unidos, la fecha corta d/m/Y se va a leer al revés: esa revisión queda anotada para entonces.' );
+        vx_marca_p( 'El sitio anunciaba las cenas como «miércoles 8pm» mientras el código guardaba 20:00. Ya no: manda el formato de 24 horas en los dos lados, que es el que no se lee mal en ningún país donde la marca quiere estar.' );
+        vx_marca_pendiente( 'Cuando entre Estados Unidos, la fecha corta d/m/Y se va a leer al revés. Esa revisión queda anotada para entonces y no antes: cambiarla ahora rompería la lectura de todos los miembros de hoy.' );
     } );
 
     vx_marca_bloque( 'voz-emojis', function () {
