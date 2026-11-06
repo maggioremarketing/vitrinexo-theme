@@ -263,7 +263,15 @@ function vx_marca_identidad(): void {
         vx_marca_valor( 'Fondo', 'Liso, de un solo color de la paleta. Sin degradados, sin textura y sin escenario. El fondo identifica el recorte dentro del collage; si tuviera contenido, competiría con la cara.' );
         vx_marca_valor( 'Expresión', 'Neutra o apenas amable. Nadie ríe a carcajadas ni posa de brazos cruzados. El perfil es una ficha, no una foto de perfil de red social.' );
         vx_marca_p( 'Para encargar o generar una: «Retrato ilustrado vectorial de una persona, de frente, hombros dentro del cuadro, sobre fondo liso de un solo color. Formas planas sin degradados ni sombras. La piel en un color pastel que no imita el tono real. Rasgos simples en trazo oscuro. Proporción vertical 4 a 5.»' );
-        vx_marca_pendiente( 'El sitio todavía muestra las cinco fotos de oficina y de 4Dinner. Reemplazarlas por collage es trabajo de producto, y falta decidir una cosa que la dirección no cubre: si las cenas, que son un evento real con gente real, se ilustran igual o son la única excepción fotográfica de la marca.' );
+        vx_marca_declaracion( 'Las cenas son la única excepción.' );
+        vx_marca_p( 'Vitrinexo 4Dinner es un evento real con gente real sentada a una mesa real, y eso no se ilustra: <strong>la foto se reserva para lo presencial</strong>. La frontera es simple de aplicar porque es la misma que separa al producto de su experiencia. Si ocurre en la plataforma, se ilustra. Si ocurre en un restaurante, se fotografía.' );
+        vx_marca_foto( '4dinner.jpg', 'Cuatro personas cenando en una terraza de noche, con velas sobre la mesa y luces de la ciudad al fondo.', 'La excepción, y su registro: de noche, cálida, con la luz que ya está en la escena.' );
+        vx_marca_valor( 'Cuatro personas y una mesa redonda', 'El número es la promesa del formato, así que la foto lo cumple. Nunca cinco, nunca una mesa larga, nunca una sala con varias mesas si la pieza habla de una cena.' );
+        vx_marca_valor( 'La luz está en la escena', 'Velas sobre la mesa, guirnalda arriba, ciudad desenfocada atrás. Nada de flash ni de luz montada: si hiciera falta iluminar, la escena no era la correcta.' );
+        vx_marca_valor( 'Conversación a media frase', 'Nadie mira a la cámara y nadie brinda para la foto. Se fotografía una conversación que ya estaba ocurriendo, que es exactamente lo que el formato promete.' );
+        vx_marca_p( 'Para encargar o generar una: «Fotografía editorial horizontal de cuatro personas cenando en una terraza urbana de noche, mesa redonda, conversación a media frase. Luz cálida de velas sobre la mesa y guirnalda de bombillas arriba; ciudad desenfocada al fondo. Paleta ámbar. Nadie mira a cámara. Altura de los ojos.»' );
+        vx_marca_p( 'Fuera de las cenas no hay foto. Ni retratos de miembros, ni oficinas, ni manos estrechándose: eso es el producto, y el producto se ilustra.' );
+        vx_marca_pendiente( 'El sitio todavía muestra tres fotos de oficina en la plataforma, que según esta regla deberían ser collage: la de la portada, la de la sección del problema y el tríptico de rubros. Las dos de lo presencial se quedan. Reemplazar las tres es trabajo de producto y el formato no es directo: el collage es vertical 4 a 5 y la portada necesita una composición ancha.' );
     } );
 
     vx_marca_bloque( 'identidad-favicon', function () {
