@@ -122,6 +122,8 @@ El canvas se inyecta automáticamente con `position: fixed; z-index: 0`. El cont
 
 **Sube la versión del tema en `style.css` cada vez que cambies un asset.** El `?ver=` sale de ahí, y sin cambiarlo el CDN sigue sirviendo el archivo viejo desde algunos nodos: `curl` puede traer el nuevo mientras el navegador recibe el anterior. Pasó con los tokens del manual de marca, y se ve como una variable CSS que existe en el archivo y llega vacía a la página.
 
+**Las imágenes no llevan `?ver=` solas.** El `?ver=` lo agrega `wp_enqueue_*` a CSS y JS, pero un `<img src>` escrito en una plantilla tiene URL fija y el CDN nunca la suelta: el logotipo nuevo estuvo horas en el servidor mientras el navegador seguía recibiendo el viejo, con `curl` trayendo uno y Chrome otro. Por eso la URL del logotipo sale de `vx_logo_url()`, que le pega la versión del tema. Cualquier imagen que cambie necesita lo mismo.
+
 Si aun así hay que purgar a mano: **hPanel → vitrinexo.com → Rendimiento → CDN → Vaciar caché**
 
 LiteSpeed se purga automáticamente al hacer deploy.
