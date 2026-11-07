@@ -20,6 +20,13 @@ $paginas = [
   'login'            => [ 'Ingresar',           'vx_login' ],
   'home'             => [ 'Inicio',             'vx_landing' ],
   'preguntas-frecuentes' => [ 'Preguntas frecuentes', 'vx_faq' ],
+  /* El evento y las tres comunidades, que el banco no creaba y nadie medía.
+     Los títulos son los mismos que pone el plugin al activarse. */
+  '4dinner'          => [ 'Vitrinexo 4Dinner',  'vx_4dinner' ],
+  'landing-4dinner'  => [ 'Vitrinexo 4Dinner: Sobre el evento', 'vx_landing_4dinner' ],
+  'comunidad-out2b'  => [ 'Vitrinexo LGBTQ+',   'vx_comunidad slug="out2b"' ],
+  'comunidad-woman'  => [ 'Vitrinexo Woman',    'vx_comunidad slug="woman"' ],
+  'comunidad-senior' => [ 'Vitrinexo Senior',   'vx_comunidad slug="senior"' ],
 ];
 
 /* Las dos legales no tienen shortcode: su contenido lo escribe alguien en el

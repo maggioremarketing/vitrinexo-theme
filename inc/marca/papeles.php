@@ -82,6 +82,7 @@ function vx_marca_familias(): array {
                 '--color-success-ink'   => 'La salvia cuando tiene que leerse. «Ofrece» iba en el pastel y daba 2,14:1.',
                 '--color-info-ink'      => 'El celeste cuando tiene que leerse: un dato escrito, no un panel.',
                 '--color-remarcado'  => 'El subrayado de una palabra dentro de una frase. Es el otro oficio de la mantequilla, y no es un aviso: un aviso interrumpe, un remarcado acompaña.',
+                '--color-marcador'   => 'La mantequilla entera, detrás del remate de un titular. Es el tercer oficio de la familia y el único que sí interrumpe: el remarcado acompaña la prosa, el marcador corta el titular en dos. Nunca en prosa, nunca dos veces en una pieza.',
             ],
         ],
         [

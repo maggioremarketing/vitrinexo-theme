@@ -26,7 +26,7 @@ export const BASE = () => process.argv[ 2 ] ?? 'https://vitrinexo.com/marca';
  * /marca, y dar por buena una página que no se abrió es la peor forma de
  * pasar en verde.
  */
-export const RUTAS = [ '/', '/preguntas-frecuentes/', '/login/', '/privacidad/', '/terminos/' ];
+export const RUTAS = [ '/', '/preguntas-frecuentes/', '/login/', '/privacidad/', '/terminos/', '/landing-4dinner/' ];
 
 /**
  * El área de miembros, que solo existe detrás de una sesión.
@@ -40,12 +40,57 @@ export const RUTAS = [ '/', '/preguntas-frecuentes/', '/login/', '/privacidad/',
  * dentro, y las pruebas siempre miraron desde fuera.
  */
 export const RUTAS_MIEMBRO = [
-  '/dashboard/', '/perfil/', '/editar-perfil/', '/directorio/', '/conexiones/',
+  // El perfil lleva slug. `/perfil/` a secas no es la pantalla: es la frase
+  // «Perfil no encontrado», que es lo que midió la suite desde el primer día.
+  '/dashboard/', '/perfil/ana-reyes/', '/editar-perfil/', '/directorio/', '/conexiones/',
   '/favoritos/', '/notificaciones/', '/configuracion/', '/nexos/', '/mis-eventos/',
   '/mis-publicaciones/', '/feed/', '/ayuda/',
+  // Las cuatro que faltaban, y son justo las que nombran las piezas de la línea:
+  // la página del evento y las tres comunidades. Mientras no estuvieron, la
+  // regla de la marca madre se podía medir en verde sin abrir ni una sola
+  // pantalla que la rompiera.
+  '/4dinner/', '/comunidad-out2b/', '/comunidad-woman/', '/comunidad-senior/',
+  // /onboarding/ no está, y conviene decir por qué: la sesión del banco ya
+  // terminó el onboarding, así que esa ruta redirige al panel y medirla sería
+  // medir el panel dos veces con otro nombre. El paso 5, donde se eligen las
+  // comunidades, hoy no lo mide nadie.
 ];
 
 export const SESION = process.env.VX_SESION || '';
+
+/**
+ * Que la sesión siga viva, y que se note cuando no.
+ *
+ * Esta es la trampa más cara del banco y no se ve venir: `npm run banco`
+ * vuelve a poner la clave de cada miembro con `wp_set_password`, y eso
+ * invalida todas las sesiones abiertas. El `sesion.json` de antes sigue ahí,
+ * Playwright lo carga sin quejarse, WordPress devuelve **200** y la ruta de
+ * miembro dibuja la página de visitante: un pie público de cuatrocientos
+ * caracteres. Las catorce pantallas pasan en verde sin haberse abierto.
+ *
+ * Por eso no alcanza con mirar el código de respuesta. WordPress le pone
+ * `logged-in` al body cuando hay sesión, así que se pregunta por eso, y si no
+ * está se falla en vez de informar: un banco roto que pasa en verde es peor
+ * que un banco caído.
+ *
+ * Devuelve `true` si hay sesión, `false` si la página es la de visitante y
+ * `null` si no se puede saber, que es el caso de las pocas plantillas que no
+ * llaman a `body_class()`. Callar es mejor que inventar: se falla con el
+ * `false`, no con la ausencia de dato.
+ */
+export const receta = ( rutas ) => {
+  const donde = rutas.length > 3
+    ? `${ rutas.length } rutas (${ rutas.slice( 0, 3 ).join( ', ' ) }…)`
+    : rutas.join( ', ' );
+  return `se midió la página de visitante en ${ donde }: la sesión del banco ya no sirve. `
+    + 'Se rehace con `npm run banco:sesion` (montar el banco repone las claves y eso invalida la sesión guardada).';
+};
+
+export const estaDentro = ( pagina ) => pagina.evaluate( () => {
+  const clases = document.body.className.trim();
+  if ( ! clases ) return null;
+  return clases.split( /\s+/ ).includes( 'logged-in' );
+} );
 
 /** Las rutas a recorrer, con el origen de BASE y el propio camino de BASE. */
 export function rutas() {
@@ -92,6 +137,7 @@ export function visitas() {
 export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBase = false } = {} ) {
   const navegador = await chromium.launch();
   const fallos = [], mudas = [];
+  const afuera = [];
   const destinos = soloBase ? [ { url: BASE(), conSesion: !! SESION } ] : visitas();
 
   try {
@@ -110,6 +156,8 @@ export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBa
           continue;
         }
 
+        if ( SESION && conSesion && false === await estaDentro( pagina ) && ! afuera.includes( camino ) ) afuera.push( camino );
+
         const altoDoc = await pagina.evaluate( () => document.documentElement.scrollHeight );
         await pagina.setViewportSize( { width: ancho, height: Math.min( altoDoc, 30000 ) } );
 
@@ -121,6 +169,7 @@ export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBa
     await navegador.close();
   }
 
+  if ( afuera.length ) fallos.unshift( receta( afuera ) );
   if ( mudas.length ) fallos.nota = `no respondieron, no se midieron: ${ mudas.join( ', ' ) }`;
   return fallos;
 }

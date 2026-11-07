@@ -21,7 +21,7 @@
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/directorio/' ) ); ?>">Directorio</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/nexos/' ) ); ?>">Mis nexos</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/favoritos/' ) ); ?>">Mis favoritos</a>
-        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>">4Dinner</a>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>">Vitrinexo 4Dinner</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>">Preguntas frecuentes</a>
       </nav>
@@ -31,9 +31,9 @@
       $vx_footer_coms = [];
       if ( $vx_footer_user ) {
           foreach ( [
-              'out2b'  => [ 'slug' => 'comunidad-out2b',  'label' => 'LGBTQ+' ],
-              'woman'  => [ 'slug' => 'comunidad-woman',   'label' => 'Woman' ],
-              'senior' => [ 'slug' => 'comunidad-senior',  'label' => 'Senior' ],
+              'out2b'  => [ 'slug' => 'comunidad-out2b',  'label' => 'Vitrinexo LGBTQ+' ],
+              'woman'  => [ 'slug' => 'comunidad-woman',   'label' => 'Vitrinexo Woman' ],
+              'senior' => [ 'slug' => 'comunidad-senior',  'label' => 'Vitrinexo Senior' ],
           ] as $vx_cid => $vx_cdata ) {
               if ( $vx_footer_user->is_in_community( $vx_cid ) ) {
                   $vx_footer_coms[] = $vx_cdata;

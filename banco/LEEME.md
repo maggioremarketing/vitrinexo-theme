@@ -21,6 +21,18 @@ inventados, viven en un archivo SQLite de esta máquina y no salen de ella.
     npm run banco:servir    lo deja escuchando en 127.0.0.1:8910
     npm run banco:sesion    inicia sesión y guarda el estado en sesion.json
 
+`banco:servir` levanta PHP con **opcache apagado**, y eso no es un detalle de
+rendimiento. La regla del proyecto dice que una comprobación no vale hasta que
+se verifica rompiendo el código a propósito, y con opcache encendido el banco
+sirve la versión anterior del archivo durante un par de segundos: el fallo
+sembrado pasa en verde y la vuelta siguiente se pone roja con el código ya
+arreglado. O sea, exactamente al revés. Se perdió un rato largo en eso.
+
+La sesión también caduca. Si las rutas de miembro devuelven páginas de unos
+pocos cientos de caracteres, no es que estén vacías: es que `sesion.json` ya no
+sirve y se está midiendo el pie público. Se vuelve a hacer con
+`npm run banco:sesion`.
+
 Y después, las comprobaciones de pantalla sobre el área de miembros:
 
     VX_SESION=banco/wp/sesion.json npm run accesibilidad -- http://127.0.0.1:8910/marca

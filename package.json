@@ -9,7 +9,7 @@
     "retratos": "node herramientas/retratos.mjs assets/img/marca",
     "clases-sin-uso": "node herramientas/clases-sin-uso.mjs",
     "banco": "bash banco/montar.sh",
-    "banco:servir": "php -S 127.0.0.1:8910 -t banco/wp/sitio",
+    "banco:servir": "php -d opcache.enable=0 -S 127.0.0.1:8910 -t banco/wp/sitio",
     "banco:sesion": "node banco/sesion.mjs",
     "miembros": "VX_SESION=banco/wp/sesion.json npm run accesibilidad -- http://127.0.0.1:8910/marca"
   },

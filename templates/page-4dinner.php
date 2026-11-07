@@ -1,6 +1,6 @@
 <?php
 /*
- * Template Name: 4Dinner (Privado)
+ * Template Name: Vitrinexo 4Dinner (Privado)
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
 ?>

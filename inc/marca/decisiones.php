@@ -27,6 +27,24 @@ function vx_marca_decisiones(): array {
     return [
         [
             'fecha'    => '2026-11-07',
+            'titulo'   => 'El mito tachado, con la negación escrita y no solo dibujada',
+            'eligio'   => 'La creencia enunciada y tachada en coral-tinta, el titular contestándola sobre mantequilla entera, y un «Mito:» que solo oyen los lectores de pantalla.',
+            'contra'   => 'La raya en coral, que es el color obvio y el que pedía el diseño, y dejar que la raya fuera lo único que niega la frase.',
+            'medicion' => 'El coral sobre hueso da 2,29:1 y la norma pide 3 para lo que no es texto: una raya que no se destaca deja la frase afirmando lo que niega. El coral-tinta da 5,19:1 y a 2 px se ve igual de rojo. Aparte, ningún lector de pantalla anuncia un `s` por omisión, así que sin el «Mito:» escondido la portada le dice a quien la escucha justo lo contrario de lo que dice. La comprobación `tachado` mide las dos cosas en todo tachado del sitio y se verificó rompiéndola dos veces: con la raya en coral y sacando el texto escondido.',
+            'estado'   => 'aplicada',
+            'tokens'   => [ '--color-marcador' => 'var(--mantequilla)' ], // primitivo a propósito: el registro nombra el token que creó.
+        ],
+        [
+            'fecha'    => '2026-11-07',
+            'titulo'   => 'Vitrinexo 4Dinner sale de las mesas y pasa a ser una sección',
+            'eligio'   => 'Cuatro mesas en la grilla —la marca madre y las tres comunidades— y Vitrinexo 4Dinner con sección propia, su foto y su texto.',
+            'contra'   => 'Dejarlo como la quinta tarjeta, que es lo que pedía la propuesta de la portada.',
+            'medicion' => 'No es una medición, es una decisión de negocio: Vitrinexo 4Dinner es el plato principal de la propuesta de valor, y una tarjeta entre cinco lo presenta como una opción más. La foto de la cena quedaba colgando sin texto al final de Comunidades, con un degradado encima que estaba hecho para un texto que nunca se puso. La sección nueva le devuelve el texto y se queda con #for-dinner, que es adonde apuntan el menú y el pie; `anclas` lo comprueba.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-07',
             'titulo'   => 'Los enlaces del menú y del pie apuntan a bloques que existen',
             'eligio'   => 'Fragmento absoluto, con home_url(), en todo enlace del pie, y una comprobación de pantalla que recorre el sitio entero.',
             'contra'   => 'Dejar los fragmentos pelados del pie, que funcionan en la portada y en ninguna otra parte.',
@@ -73,7 +91,7 @@ function vx_marca_decisiones(): array {
         [
             'fecha'    => '2026-11-07',
             'titulo'   => 'Tres botones tenían tinta blanca sobre un relleno pastel',
-            'eligio'   => 'Tinta oscura, con --color-on-fill, en el botón de peligro, su estado hover y los dos botones de 4Dinner.',
+            'eligio'   => 'Tinta oscura, con --color-on-fill, en el botón de peligro, su estado hover y los dos botones de Vitrinexo 4Dinner.',
             'contra'   => 'Dejar el blanco que venía del relleno saturado anterior.',
             'medicion' => 'Blanco sobre terracota 2,82:1, sobre terracota-presión 3,98:1 y sobre mantequilla-presión 1,87:1, contra el mínimo de 4,5:1. Con tinta dan 6,40, 4,53 y 9,64. Son el mismo error que el botón primario de septiembre: el relleno se repintó a pastel y la tinta encima se quedó blanca.',
             'estado'   => 'aplicada',
@@ -189,10 +207,10 @@ function vx_marca_decisiones(): array {
         ],
         [
             'fecha'    => '2026-11-07',
-            'titulo'   => 'Terracota es 4Dinner y mantequilla remarca',
-            'eligio'   => 'Los oficios que la propuesta de identidad asigna: terracota para 4Dinner, mantequilla para remarcar, rosa para error y peligro.',
-            'contra'   => 'Lo que el producto hacía: 4Dinner en mantequilla y terracota como botón de borrar.',
-            'medicion' => 'Se repintaron 23 reglas de 4Dinner. De paso separa 4Dinner de la comunidad Senior, que compartían mantequilla y tenían tarjetas indistinguibles. Y salieron cuatro contrastes de 1,13:1, texto en el paso -presion de un pastel sobre el -suave de la misma familia, que ahora van en tinta: 16,50.',
+            'titulo'   => 'Terracota es Vitrinexo 4Dinner y mantequilla remarca',
+            'eligio'   => 'Los oficios que la propuesta de identidad asigna: terracota para Vitrinexo 4Dinner, mantequilla para remarcar, rosa para error y peligro.',
+            'contra'   => 'Lo que el producto hacía: Vitrinexo 4Dinner en mantequilla y terracota como botón de borrar.',
+            'medicion' => 'Se repintaron 23 reglas de Vitrinexo 4Dinner. De paso separa Vitrinexo 4Dinner de Vitrinexo Senior, que compartían mantequilla y tenían tarjetas indistinguibles. Y salieron cuatro contrastes de 1,13:1, texto en el paso -presion de un pastel sobre el -suave de la misma familia, que ahora van en tinta: 16,50.',
             'estado'   => 'aplicada',
             'tokens'   => [],
         ],

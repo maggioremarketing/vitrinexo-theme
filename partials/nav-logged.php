@@ -13,9 +13,9 @@ $vx_user_nav     = class_exists( 'VX_User' ) ? VX_User::get( $user_id ) : null;
 $mis_comunidades = [];
 if ( $vx_user_nav ) {
     $coms_map = [
-        'out2b'  => [ 'slug' => 'comunidad-out2b',  'label' => 'LGBTQ+',  'icon' => 'ti-rainbow',       'color' => 'var(--lavanda-presion)' ],
-        'woman'  => [ 'slug' => 'comunidad-woman',   'label' => 'Woman',  'icon' => 'ti-gender-female', 'color' => 'var(--rosa-presion)' ],
-        'senior' => [ 'slug' => 'comunidad-senior',  'label' => 'Senior', 'icon' => 'ti-award',         'color' => 'var(--mantequilla-presion)' ],
+        'out2b'  => [ 'slug' => 'comunidad-out2b',  'label' => 'Vitrinexo LGBTQ+',  'icon' => 'ti-rainbow',       'color' => 'var(--lavanda-presion)' ],
+        'woman'  => [ 'slug' => 'comunidad-woman',   'label' => 'Vitrinexo Woman',  'icon' => 'ti-gender-female', 'color' => 'var(--rosa-presion)' ],
+        'senior' => [ 'slug' => 'comunidad-senior',  'label' => 'Vitrinexo Senior', 'icon' => 'ti-award',         'color' => 'var(--mantequilla-presion)' ],
     ];
     foreach ( $coms_map as $id => $data ) {
         if ( $vx_user_nav->is_in_community( $id ) ) {
@@ -48,7 +48,7 @@ $comunidad_activa = is_page( 'comunidad-out2b' ) || is_page( 'comunidad-woman' )
       </ul>
     </div>
     <?php endif; ?>
-    <a href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>"<?php echo is_page( '4dinner' ) ? ' class="active"' : ''; ?>>4Dinner</a>
+    <a href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>"<?php echo is_page( '4dinner' ) ? ' class="active"' : ''; ?>>Vitrinexo 4Dinner</a>
     <a href="<?php echo esc_url( home_url( '/oportunidades/' ) ); ?>"<?php echo is_page( 'oportunidades' ) ? ' class="active"' : ''; ?>>Oportunidades</a>
     <a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"<?php echo is_page( 'blog' ) ? ' class="active"' : ''; ?>>Blog</a>
     <a href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>"<?php echo is_page( 'preguntas-frecuentes' ) ? ' class="active"' : ''; ?>>Preguntas frecuentes</a>
@@ -104,7 +104,7 @@ $comunidad_activa = is_page( 'comunidad-out2b' ) || is_page( 'comunidad-woman' )
     <?php foreach ( $mis_comunidades as $com ) : ?>
     <a href="<?php echo esc_url( home_url( '/' . $com['slug'] . '/' ) ); ?>" data-bs-dismiss="offcanvas"><?php echo esc_html( $com['label'] ); ?></a>
     <?php endforeach; ?>
-    <a href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>"       data-bs-dismiss="offcanvas">4Dinner</a>
+    <a href="<?php echo esc_url( home_url( '/4dinner/' ) ); ?>"       data-bs-dismiss="offcanvas">Vitrinexo 4Dinner</a>
     <a href="<?php echo esc_url( home_url( '/oportunidades/' ) ); ?>" data-bs-dismiss="offcanvas">Oportunidades</a>
     <a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"          data-bs-dismiss="offcanvas">Blog</a>
     <a href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>" data-bs-dismiss="offcanvas">Preguntas frecuentes</a>

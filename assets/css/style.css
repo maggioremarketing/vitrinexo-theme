@@ -99,6 +99,7 @@
   --color-warning-ink: var(--mantequilla-tinta);
   /* Remarcar una palabra dentro de una frase. No es un aviso: es un subrayado. */
   --color-remarcado: var(--mantequilla-suave);
+  --color-marcador: var(--mantequilla);
 
   /* Relieve */
   --shadow-sm: 0 2px 8px color-mix(in srgb, var(--tinta) 8%, transparent);
@@ -1770,6 +1771,21 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   color: var(--color-primary-ink);
 }
 
+/* El marcador del titular: la mantequilla entera, no la suave. Son dos oficios
+   distintos de la misma familia y por eso son dos tokens. El remarcado
+   acompaña una palabra dentro de la prosa y no interrumpe; el marcador es el
+   segundo golpe de un titular y sí interrumpe, que es lo que se le pide.
+   clone, no slice: si el titular parte en dos líneas, el fondo tiene que
+   repetirse entero en cada una y no abrirse por el medio. */
+.section-landing-title mark {
+  background: var(--color-marcador);
+  color: var(--color-text-primary);
+  padding: 0.06em 0.3em;
+  border-radius: 8px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 .section-landing-lead {
   color: var(--color-text-secondary);
   font-size: 1rem;
@@ -1790,9 +1806,6 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
     width: 100% !important;
   }
   .multiverse-card--main,
-  .multiverse-card--dinner {
-    grid-column: auto;
-  }
 }
 
 /* ── Steps grid (Cómo funciona) ── */
@@ -1913,8 +1926,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   row-gap: 2rem;
 }
 
-.multiverse-card--main,
-.multiverse-card--dinner {
+.multiverse-card--main {
   grid-column: 1 / -1;
 }
 
@@ -1969,15 +1981,6 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   --mv-label: var(--color-text-primary);
   --mv-title: var(--color-text-primary);
   --mv-desc:  var(--color-text-primary);
-}
-
-.multiverse-card--dinner {
-  background: var(--terracota-suave);
-  border-color: var(--terracota);
-  --mv-label: var(--color-text-primary);
-  --mv-title: var(--color-text-primary);
-  --mv-desc:  var(--color-text-primary);
-  grid-column: span 2;
 }
 
 .multiverse-card__label {
@@ -3793,10 +3796,15 @@ section#offers {
   font-size: 16px;
   font-weight: var(--peso-titulo);
 }
+/* El número va en el peldaño -tinta de su familia, que es el calculado para
+   leerse sobre el -suave que tiene detrás. Dos de los cuatro iban en el tono
+   pleno y daban 1,60:1 y 1,36:1; los otros dos ya estaban en su tinta. Nadie
+   los había medido porque la landing del evento no la recorría ninguna
+   comprobación. */
 .step-circle--green {
   background: var(--salvia-suave);
   border: 2px solid var(--salvia-suave);
-  color: var(--color-success);
+  color: var(--color-success-ink);
 }
 .step-circle--cyan {
   background: var(--coral-suave);
@@ -3806,7 +3814,7 @@ section#offers {
 .step-circle--purple {
   background: var(--lavanda-suave);
   border: 2px solid var(--lavanda-suave);
-  color: var(--color-secondary);
+  color: var(--color-secondary-ink);
 }
 .step-circle--golden {
   background: var(--terracota-suave);
@@ -4698,6 +4706,10 @@ a.pub-comment-author:hover {
   }
 }
 
+.vx-dinner-pie {
+  margin: 1.5rem 0 0;
+}
+
 .vx-nocturna-banner__img {
   width: 100%;
   height: 420px;
@@ -4754,6 +4766,44 @@ a.pub-comment-author:hover {
   #for-dinner .section-landing-lead {
     text-align: center;
   }
+}
+
+/* ════════════════════════════════════════
+   El mito tachado
+   ════════════════════════════════════════ */
+/* Se enuncia la creencia y se tacha, y el titular contesta. Son dos piezas de
+   una sola figura: sin el titular, el tachado es una frase negada que no dice
+   qué pasa en su lugar.
+   La raya va en coral-tinta y no en coral. El coral sobre hueso da 2,29 y la
+   norma pide 3 para lo que no es texto; una raya que no se ve convierte la
+   frase en lo contrario de lo que dice. skip-ink apagado porque una raya que
+   se abre en cada g y cada q deja de leerse como una sola raya. */
+.vx-mito {
+  font-size: clamp( 0.95rem, 1.6vw, 1.1rem );
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.85rem;
+}
+
+.vx-mito s {
+  text-decoration-line: line-through;
+  text-decoration-color: var(--coral-tinta);
+  text-decoration-thickness: 2px;
+  text-decoration-skip-ink: none;
+}
+
+/* El lector de pantalla no anuncia un tachado, así que sin esto la frase se
+   lee en voz alta como una afirmación nuestra, que es justo lo contrario. */
+.vx-solo-lectores {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset( 50% );
+  white-space: nowrap;
+  border: 0;
 }
 
 /* ════════════════════════════════════════

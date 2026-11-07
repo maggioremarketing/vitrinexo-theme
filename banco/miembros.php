@@ -38,8 +38,27 @@ foreach ( $gente as $i => [ $u, $nombre, $apellido, $empresa, $cargo, $industria
       'vx_anos_experiencia' => 8 + $i, 'vx_contacto_preferido' => 'email',
       'vx_consentimiento_contacto' => '1',
       'vx_onboarding_completo' => '1', 'vx_onboarding_paso' => 7,
+      // Sin slug no hay perfil. /perfil/ a secas devuelve «Perfil no
+      // encontrado»: el perfil de verdad vive en /perfil/<slug>/, y hasta que
+      // esto existió la suite medía esa frase de error creyendo que medía una
+      // de las catorce pantallas.
+      'vx_perfil_slug' => sanitize_title( "$nombre $apellido" ),
     ];
     foreach ( $meta as $k => $v ) update_user_meta( $id, $k, $v );
+    // La sesión del banco es la de ana, y pertenece a las tres comunidades.
+    // No es realismo: es la única forma de que las tres páginas de comunidad
+    // se dibujen enteras y de que el menú y el pie listen sus tres enlaces.
+    // Sin esto, /comunidad-woman/ devuelve la tarjeta de «comunidad privada» y
+    // el nombre de la pieza no aparece en ninguna parte que se pueda medir.
+    // Y además verificada, que es otra cosa: el distintivo del perfil solo se
+    // dibuja con vx_senior_verificado, así que sin esto el nombre de la pieza
+    // que lleva ese distintivo no aparece en ninguna pantalla medible.
+    if ( 0 === $i ) {
+        foreach ( [ 'vx_comunidad_out2b', 'vx_comunidad_woman', 'vx_comunidad_senior',
+                    'vx_senior_verificado' ] as $k ) {
+            update_user_meta( $id, $k, '1' );
+        }
+    }
     echo "  · $u ($id) $nombre $apellido — $empresa\n";
 }
 echo "listo\n";

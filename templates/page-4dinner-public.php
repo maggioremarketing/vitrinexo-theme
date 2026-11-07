@@ -1,6 +1,6 @@
 <?php
 /*
- * Template Name: 4Dinner Público
+ * Template Name: Vitrinexo 4Dinner Público
  */
 if ( ! defined( 'ABSPATH' ) ) exit;
 

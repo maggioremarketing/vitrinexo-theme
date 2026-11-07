@@ -10,6 +10,10 @@ Vitrinexo es una plataforma B2B de directorio de servicios profesionales. Empres
 ## Reglas no negociables
 
 - Siempre **Vitrinexo** — nunca "VitriNexo"
+- Las piezas de la línea llevan **la marca madre adelante**, sin excepción y también en conversación:
+  Vitrinexo 4Dinner, Vitrinexo Woman, Vitrinexo LGBTQ+, Vitrinexo Senior. Nunca "4Dinner" a secas.
+  Lo mide `pruebas/pantalla/vocabulario.mjs` sobre el texto renderizado, no sobre el código: los
+  identificadores (`vx_landing_4dinner`, `comunidad-card--woman`) siguen siendo cortos
 - Programa: **Miembro Pionero / Miembros Pioneros**
 - Siempre **"distintivo"** — nunca "badge"
 - Sin guiones largos (—) en copy

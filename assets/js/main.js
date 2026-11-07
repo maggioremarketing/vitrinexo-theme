@@ -205,11 +205,11 @@
           btnSenior.textContent = 'Solicitud enviada';
         } else {
           btnSenior.disabled = false;
-          btnSenior.textContent = 'Solicitar verificación Senior';
+          btnSenior.textContent = 'Solicitar verificación de Vitrinexo Senior';
         }
       } catch {
         btnSenior.disabled = false;
-        btnSenior.textContent = 'Solicitar verificación Senior';
+        btnSenior.textContent = 'Solicitar verificación de Vitrinexo Senior';
       }
     });
   }

@@ -39,7 +39,7 @@ function vx_marca_estrategia(): void {
     } );
 
     vx_marca_bloque( 'estrategia-linea-de-producto', function () {
-        vx_marca_p( 'Una plataforma y cinco piezas. <strong>Todas se nombran con la marca madre adelante</strong>, sin excepción y también en conversación: se escribe «Vitrinexo 4Dinner», nunca «4Dinner» a secas.' );
+        vx_marca_p( 'Una plataforma y cinco piezas. <strong>Todas se nombran con la marca madre adelante</strong>, sin excepción y también en conversación: se escribe «Vitrinexo 4Dinner», nunca «<span data-cita>4Dinner</span>» a secas.' );
         vx_marca_p( '<strong>Vitrinexo</strong> es el directorio B2B completo, y es el producto. Todo lo demás vive adentro.' );
         vx_marca_p( '<strong>Vitrinexo LGBTQ+</strong>, <strong>Vitrinexo Woman</strong> y <strong>Vitrinexo Senior</strong> son comunidades verticales, no productos aparte: mismo directorio, afinidad distinta. Un miembro puede estar en varias.' );
         vx_marca_p( '<strong>Vitrinexo 4Dinner</strong> es la experiencia presencial: cuatro personas, una mesa, los miércoles a las 8 de la tarde, hora local de cada ciudad.' );
@@ -72,7 +72,7 @@ function vx_marca_estrategia(): void {
         vx_marca_p( 'Tres, y el primero y el segundo suelen ser la misma persona en momentos distintos.' );
         vx_marca_valor( 'La empresa de servicios B2B en expansión', 'Dice «hago bien lo mío y necesito que lo sepan donde no tengo contactos». No dice «quiero hacer networking». El tamaño no la define: una consultora de tres personas y una de trescientas entran por la misma puerta.' );
         vx_marca_valor( 'El mismo miembro buscando proveedor', 'El que hoy pide recomendaciones por WhatsApp porque no le cree a un buscador. Llega con una necesidad concreta y poco tiempo.' );
-        vx_marca_valor( 'Las comunidades verticales', 'Entran por afinidad, con LGBTQ+, Woman o Senior, y se quedan por el directorio. La afinidad abre la puerta; lo que retiene es el negocio.' );
+        vx_marca_valor( 'Las comunidades verticales', 'Entran por afinidad, con Vitrinexo LGBTQ+, Vitrinexo Woman o Vitrinexo Senior, y se quedan por el directorio. La afinidad abre la puerta; lo que retiene es el negocio.' );
         vx_marca_p( 'Deja fuera, y conviene decirlo: quien vende a consumidor final, quien busca empleo y quien quiere una audiencia para publicar contenido.' );
     } );
 
@@ -235,10 +235,10 @@ function vx_marca_identidad(): void {
         <?php
         vx_marca_p( '<strong>El coral que se lee es un paso más oscuro que el del boceto.</strong> El valor propuesto daba 4,47 sobre la superficie hundida, y un papel que pasa en una superficie y falla en la de al lado no sirve. El que quedó da 4,80 en el peor caso de las tres.' );
         vx_marca_p( 'Y una consecuencia que conviene saber antes de diseñar: <strong>el foco va en tinta</strong>. Ningún pastel llega al 3:1 que la norma pide para un contorno, así que el contorno de foco no es de color de marca.' );
-        vx_marca_p( 'Tres familias enteras no seguían a ningún token y se remaparon: el ámbar del distintivo Pionero es mantequilla, el rosa de Woman es rosa y el púrpura de LGBTQ+ es lavanda.' );
+        vx_marca_p( 'Tres familias enteras no seguían a ningún token y se remaparon: el ámbar del distintivo Pionero es mantequilla, el rosa de Vitrinexo Woman es rosa y el púrpura de Vitrinexo LGBTQ+ es lavanda.' );
         vx_marca_declaracion( 'Cada familia tiene un oficio, y dos estaban cruzados.' );
-        vx_marca_p( 'La paleta de la propuesta le da a <strong>terracota</strong> los detalles cálidos y 4Dinner, y a <strong>mantequilla</strong> remarcar una palabra. El producto hacía lo contrario: 4Dinner era mantequilla entera y terracota era el botón de borrar.' );
-        vx_marca_p( 'Se corrigió, y de paso arregló algo que no se veía venir: mantequilla vestía <strong>4Dinner y la comunidad Senior a la vez</strong>, así que sus tarjetas eran indistinguibles. Con 4Dinner en terracota, Senior se queda con la mantequilla y las dos se separan solas.' );
+        vx_marca_p( 'La paleta de la propuesta le da a <strong>terracota</strong> los detalles cálidos y Vitrinexo 4Dinner, y a <strong>mantequilla</strong> remarcar una palabra. El producto hacía lo contrario: Vitrinexo 4Dinner era mantequilla entera y terracota era el botón de borrar.' );
+        vx_marca_p( 'Se corrigió, y de paso arregló algo que no se veía venir: mantequilla vestía <strong>Vitrinexo 4Dinner y Vitrinexo Senior a la vez</strong>, así que sus tarjetas eran indistinguibles. Con Vitrinexo 4Dinner en terracota, Vitrinexo Senior se queda con la mantequilla y las dos se separan solas.' );
         vx_marca_valor( 'El peligro pasa a rosa', 'Terracota era el botón de borrar, y un botón de borrar no puede compartir color con un evento. Rosa ya era el borde de error de los campos, así que error y peligro quedan en la misma familia, que es lo que debieron ser siempre. Tinta sobre rosa da 11,99:1.' );
         vx_marca_valor( 'Remarcar una palabra existe ahora', 'Era un oficio asignado a la mantequilla que ninguna pantalla implementaba. Es <code>--color-remarcado</code>, y viste <code>mark</code>. Para una palabra dentro de una frase, nunca para una frase entera: lo que se remarca todo deja de estar remarcado.' );
         vx_marca_valor( 'Ningún pastel hace de tinta', 'El paso <code>-presion</code> de una familia es un color, no una tinta. Había cuatro sitios escribiendo texto en mantequilla-presión sobre mantequilla-suave: <strong>1,13:1</strong>, invisible. Van en tinta, que da 16,50.' );
