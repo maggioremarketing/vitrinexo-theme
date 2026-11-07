@@ -60,3 +60,14 @@ Y en la segunda vuelta, después de arreglar lo de arriba:
   vacío el navegador vuelve a pedir la página entera.
 - `/mis-publicaciones/` daba 404 en el banco: esa página no la crea el plugin
   al activarse. La crea `banco/paginas.php`.
+
+## En el despliegue
+
+`banco/ci.sh` lo levanta y lo mide, y lo llaman los dos despliegues **antes**
+del rsync. Eso lo hace un portón de verdad y no un aviso: las comprobaciones
+de producción miden lo publicado y solo pueden avisar, el banco existe antes.
+
+En el plugin corre siempre, porque casi todo lo que el plugin renderiza es el
+área de miembros. En el tema, solo cuando el cambio toca estilos, plantillas,
+el PHP o las propias comprobaciones: un cambio en el manual no levanta
+WordPress.

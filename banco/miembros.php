@@ -24,6 +24,10 @@ foreach ( $gente as $i => [ $u, $nombre, $apellido, $empresa, $cargo, $industria
     $id = username_exists( $u ) ?: wp_create_user( $u, $clave, "$u@127.0.0.1" );
     if ( is_wp_error( $id ) ) { echo "  ! $u: " . $id->get_error_message() . "\n"; continue; }
     wp_update_user( [ 'ID' => $id, 'display_name' => "$nombre $apellido", 'first_name' => $nombre, 'last_name' => $apellido ] );
+    // La clave manda siempre: si el banco se vuelve a montar sobre una base que
+    // ya existía, el usuario tendría la clave del montaje anterior y la sesión
+    // no entraría, con el banco levantado y aparentemente sano.
+    wp_set_password( $clave, $id );
     $meta = [
       'vx_nombre' => $nombre, 'vx_apellido' => $apellido, 'vx_empresa' => $empresa, 'vx_cargo' => $cargo,
       'vx_industria' => $industria, 'vx_ciudad' => $ciudad, 'vx_pais' => $pais, 'vx_pais_codigo' => $cc,

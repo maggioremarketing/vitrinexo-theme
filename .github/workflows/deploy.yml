@@ -14,6 +14,25 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          # Dos commits para poder preguntar qué cambió.
+          fetch-depth: 2
+
+      - name: ¿Esto puede tocar el área de miembros?
+        id: miembros
+        # El banco tarda unos minutos, así que solo se levanta cuando el cambio
+        # puede llegar a esas pantallas: estilos, plantillas, el PHP del tema o
+        # las propias comprobaciones. Un cambio en el manual o en el README no
+        # las toca.
+        run: |
+          CAMBIOS=$(git diff --name-only HEAD^ HEAD 2>/dev/null || echo todo)
+          echo "$CAMBIOS"
+          if echo "$CAMBIOS" | grep -qE '^(assets/css/|assets/js/|templates/|partials/|inc/|pruebas/|banco/|functions\.php|page\.php|style\.css|\.github/)'; then
+            echo "corre=si" >> "$GITHUB_OUTPUT"
+          else
+            echo "corre=no" >> "$GITHUB_OUTPUT"
+            echo "el cambio no llega al área de miembros; el banco no se levanta"
+          fi
 
       - name: Pruebas de sistema
         # Si el sistema de diseño no se cumple, no se publica. Hasta hoy la
@@ -21,6 +40,17 @@ jobs:
         # que 62 colores de la paleta vieja sobrevivieron meses al repintado.
         # Solo las de sistema: las de pantalla piden navegador y servidor.
         run: node pruebas/verificar.mjs
+
+      - name: Dependencias
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      - name: Pruebas del área de miembros
+        if: steps.miembros.outputs.corre == 'si'
+        run: |
+          git clone --depth 1 https://github.com/maggioremarketing/vitrinexo-core.git ../vitrinexo-core
+          bash banco/ci.sh
 
       - name: Configurar SSH key
         run: |
@@ -95,9 +125,6 @@ jobs:
         # Se espera a que el CDN suelte la versión nueva antes de medir: el
         # caché sirve por URL y medir la anterior no dice nada.
         run: |
-          npm ci --ignore-scripts --no-audit --no-fund
-          npx playwright install --with-deps chromium
-
           ESPERADA=$(grep -m1 '^Version:' style.css | tr -d ' ' | cut -d: -f2)
           echo "esperando a que el sitio sirva la version $ESPERADA"
           for i in $(seq 1 12); do

@@ -12,7 +12,11 @@ if ( ! is_blog_installed() ) {
     $r = wp_install( 'Vitrinexo local', 'pruebas', 'pruebas@127.0.0.1', true, '', $clave );
     echo "instalado, usuario id {$r['user_id']}\n";
 } else {
-    echo "ya estaba instalado\n";
+    // Misma razón que en miembros.php: sobre una base que ya existía, la clave
+    // del administrador sería la del montaje anterior.
+    $admin = get_user_by( 'login', 'pruebas' );
+    if ( $admin ) wp_set_password( $clave, $admin->ID );
+    echo "ya estaba instalado, clave puesta al día\n";
 }
 
 switch_theme( 'vitrinexo-theme' );
