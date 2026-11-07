@@ -1275,16 +1275,6 @@ select.form-control-vx {
 /* ============================================================
    MODAL
    ============================================================ */
-.modal-vx-backdrop {
-  background: color-mix(in srgb, var(--tinta) 48%, transparent);
-  border-radius: var(--radius-lg);
-  padding: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 340px;
-}
-
 .modal-vx {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -2095,26 +2085,6 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   color: var(--color-text-secondary);
   font-size: clamp(1rem, 2vw, 1.25rem);
   line-height: 1.6;
-}
-
-.hero-button {
-  display: inline-flex;
-  margin-top: 2rem;
-  padding: 0.9rem 1.25rem;
-  border-radius: 999px;
-  color: var(--blanco);
-  background: var(--tinta);
-  text-decoration: none;
-  font-weight: 700;
-  box-shadow: 0 18px 45px color-mix(in srgb, var(--tinta) 18%, transparent);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.hero-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 22px 60px color-mix(in srgb, var(--tinta) 22%, transparent);
 }
 .description p {
   font-size: 21px !important;
@@ -4641,11 +4611,9 @@ section#offers {
 .vx-form__group   { margin-bottom: 1rem; }
 .vx-form__label   { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 5px; letter-spacing: var(--ls-caption); display: block; }
 .vx-form__input,
-.vx-form__textarea,
-.vx-form__select  { width: 100%; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text-primary); padding: 9px 14px; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 13px; transition: border-color 0.15s ease, box-shadow 0.15s ease; outline: none; }
+.vx-form__textarea { width: 100%; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text-primary); padding: 9px 14px; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 13px; transition: border-color 0.15s ease, box-shadow 0.15s ease; outline: none; }
 .vx-form__input:focus,
-.vx-form__textarea:focus,
-.vx-form__select:focus { border-color: var(--salvia); box-shadow: 0 0 0 3px color-mix(in srgb, var(--salvia) 45%, transparent); }
+.vx-form__textarea:focus { border-color: var(--salvia); box-shadow: 0 0 0 3px color-mix(in srgb, var(--salvia) 45%, transparent); }
 .vx-form__input::placeholder,
 .vx-form__textarea::placeholder { color: var(--tinta-2); }
 textarea.vx-form__input,
@@ -4686,16 +4654,6 @@ textarea.vx-form__input,
 .vx-img-upload          { width: 100%; aspect-ratio: 1; border: 2px dashed var(--color-border); border-radius: var(--radius-md); background: var(--hueso); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; cursor: pointer; }
 .vx-img-upload--banner  { aspect-ratio: 16 / 5; }
 .vx-img-upload__placeholder { font-size: 28px; color: var(--color-text-secondary); }
-
-/* ── Community card (step 5 of onboarding) ── */
-.vx-community-card      { display: flex; cursor: pointer; }
-.vx-community-card input[type="checkbox"] { position: absolute; opacity: 0; pointer-events: none; }
-.vx-community-card__body { flex: 1; border: 2px solid var(--color-border); border-radius: var(--radius-md); padding: 1.25rem 1rem; text-align: center; transition: border-color 0.15s ease, box-shadow 0.15s ease; background: var(--blanco); }
-.vx-community-card input:checked ~ .vx-community-card__body { border-color: var(--color-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 35%, transparent); }
-.vx-community-card__icon { font-size: 28px; color: var(--color-primary-ink); margin-bottom: 0.5rem; display: block; }
-.vx-community-card__name { font-size: 15px; font-weight: 600; color: var(--color-text-primary); margin: 0 0 4px; }
-.vx-community-card__desc { font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.4; }
-.vx-community-card__check { display: none; }
 
 /* ── Dashboard sections ── */
 .vx-dashboard           { }
