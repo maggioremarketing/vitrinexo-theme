@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
       <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-vx__brand" aria-label="Ir al inicio">
         <img src="<?php echo esc_url( vx_logo_url() ); ?>" alt="Vitrinexo">
       </a>
-      <a href="#afiliado-original" class="btn-vx btn-primary-vx btn-vx-sm">Inscríbete</a>
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>#afiliado-original" class="btn-vx btn-primary-vx btn-vx-sm">Inscríbete</a>
     </div>
     <div class="footer-vx__grid">
       <div>
@@ -18,21 +18,21 @@ if ( ! defined( 'ABSPATH' ) ) exit;
       </div>
       <nav class="footer-vx__nav" aria-label="Plataforma">
         <span class="footer-vx__label">La plataforma</span>
-        <a class="footer-vx__link" href="#el-problema">El problema</a>
-        <a class="footer-vx__link" href="#como-funciona">Cómo funciona</a>
-        <a class="footer-vx__link" href="#para-quien">Para quién es</a>
-        <a class="footer-vx__link" href="#for-dinner">Experiencia presencial</a>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/' ) ); ?>#el-problema">El problema</a>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/' ) ); ?>#como-funciona">Cómo funciona</a>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/' ) ); ?>#perfiles">Perfiles</a>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/' ) ); ?>#for-dinner">Experiencia presencial</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>">Preguntas frecuentes</a>
       </nav>
       <nav class="footer-vx__nav" aria-label="Comunidades">
         <span class="footer-vx__label">Comunidades</span>
-        <a class="footer-vx__link" href="#el-multiverso">Vitrinexo LGBTQ+</a>
-        <a class="footer-vx__link" href="#el-multiverso">Vitrinexo Woman</a>
-        <a class="footer-vx__link" href="#el-multiverso">Vitrinexo Senior</a>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/' ) ); ?>#comunidades">Vitrinexo LGBTQ+</a>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/' ) ); ?>#comunidades">Vitrinexo Woman</a>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/' ) ); ?>#comunidades">Vitrinexo Senior</a>
       </nav>
       <nav class="footer-vx__nav" aria-label="Cuenta">
         <span class="footer-vx__label">Cuenta</span>
-        <a class="footer-vx__link" href="#afiliado-original">Inscríbete como Miembro Pionero</a>
+        <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/' ) ); ?>#afiliado-original">Inscríbete como Miembro Pionero</a>
         <a class="footer-vx__link" href="<?php echo esc_url( home_url( '/login/' ) ); ?>">Ingresar</a>
       </nav>
     </div>

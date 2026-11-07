@@ -47,7 +47,7 @@ function vx_marca_partes(): array {
             'criterios' => [
                 [ 'Contexto', 'definido', 'La competencia no es otra plataforma: es la agenda. Directorio verificado, no red social ni marketplace.' ],
                 [ 'Qué significa la marca', 'definido', 'Vitrina y nexo. De ahí sale vitrinear, el verbo propio.' ],
-                [ 'Tagline', 'definido', 'Declarado una vez. El titular del sitio y el del manual salen de la misma función.' ],
+                [ 'Tagline', 'definido', 'Declarado una vez. La portada y el manual lo leen de la misma función; no es el titular de la portada.' ],
                 [ 'Línea de producto', 'definido', 'Cinco piezas, todas con la marca madre adelante. Se escribe Vitrinexo 4Dinner, nunca 4Dinner solo.' ],
                 [ 'Misión', 'definido', 'Lo que el producto hace hoy, con cada palabra respaldada por el sistema.' ],
                 [ 'Visión', 'definido', 'Lanzamiento en Hispanoamérica y en español; la visión incluye Brasil, Estados Unidos y Europa.' ],

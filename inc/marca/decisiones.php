@@ -27,6 +27,33 @@ function vx_marca_decisiones(): array {
     return [
         [
             'fecha'    => '2026-11-07',
+            'titulo'   => 'Los enlaces del menú y del pie apuntan a bloques que existen',
+            'eligio'   => 'Fragmento absoluto, con home_url(), en todo enlace del pie, y una comprobación de pantalla que recorre el sitio entero.',
+            'contra'   => 'Dejar los fragmentos pelados del pie, que funcionan en la portada y en ninguna otra parte.',
+            'medicion' => 'Nueve enlaces del pie eran fragmentos sin página: desde preguntas frecuentes, ingreso, privacidad y términos no llevaban a ningún lado, y llevaban meses así. Cuatro más, en el menú y en el pie, apuntaban a #para-quien y a #el-multiverso, dos bloques que la portada nueva ya no tiene. Había una comprobación de anclas y miraba solo el menú del manual, con .vx-menu: el menú del producto no lo medía nadie. La nueva mira todo enlace cuyo destino es la página donde está, en las cinco páginas públicas y en las catorce de miembro. Verificada rompiéndola tres veces: con un ancla inexistente, con un fragmento pelado y con un bloque renombrado.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-07',
+            'titulo'   => 'El titular de la portada deja de ser el tagline',
+            'eligio'   => 'Un titular que promete algo concreto, «Networking servido a tu mesa.», con el tagline debajo del logotipo y leído de vx_tagline_html() como siempre.',
+            'contra'   => 'Dejar el tagline de titular, que es lo que decía este manual, o sacarlo de la portada entero, que es lo que de hecho pasó durante la reescritura.',
+            'medicion' => 'El tagline dice qué es Vitrinexo y no cambia; el titular dice qué gana el que entra y cambia con la campaña. Pedirle las dos cosas a la misma frase dejó la portada abriendo con una definición. En la reescritura el tagline desapareció de la página sin que nada lo notara: vx_tagline_html() se quedó con cero llamadas y el manual siguió afirmando que la portada lo leía. Ahora hay una prueba de pantalla que lo mide, verificada rompiendo las tres cosas que afirma: borrando el tagline, escribiéndolo a mano y devolviéndolo al titular.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-07',
+            'titulo'   => 'El contador de Pioneros cuenta Pioneros',
+            'eligio'   => 'Contar los usuarios con el distintivo y la cuenta activa, en vx_pioneros_aprobados(), con el cupo en vx_pioneros_cupo().',
+            'contra'   => 'Seguir publicando count_users() menos dos administradores escritos a mano, o poner el «40 / 100» del boceto de la propuesta.',
+            'medicion' => 'La portada publicaba 44 y no era el número de Miembros Pioneros: contaba toda cuenta registrada, aprobada o no, menos dos. Al desplegar la cifra baja a la real, que es menor. Publicar un número de comunidad que no se sostiene es lo único que el criterio de Tono prohíbe con todas las letras.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-07',
             'titulo'   => 'Lo translúcido se escribe con color-mix sobre un token, no con rgba',
             'eligio'   => 'color-mix(in srgb, var(--token) N%, transparent) para toda sombra, veladura, degradado y halo de foco. Un borde de 1 px no es un velo: usa el token sólido.',
             'contra'   => 'Dejar rgba() con el valor copiado, o agregar una tabla paralela de canales (--tinta-rgb) que hay que mantener sincronizada a mano.', // primitivo a propósito: el registro nombra la alternativa que descartó.

@@ -58,6 +58,7 @@ ln -sfn "$PLUGIN" sitio/wp-content/plugins/vitrinexo-core
 php ../instalar.php
 cd ..
 php paginas.php
+php preguntas.php
 php miembros.php
 cd "$WP"
 echo "· listo. 'npm run banco:servir' lo levanta en 127.0.0.1:8910"

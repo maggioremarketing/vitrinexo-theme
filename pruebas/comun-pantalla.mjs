@@ -47,10 +47,15 @@ export const RUTAS_MIEMBRO = [
 
 export const SESION = process.env.VX_SESION || '';
 
-/** Las rutas a recorrer, con el origen de BASE y el propio camino de BASE. */
-export function rutas() {
+/**
+ * Las rutas a recorrer, con el origen de BASE y el propio camino de BASE.
+ *
+ * Con `sinSesion` se queda solo con las públicas: las de miembro sin sesión
+ * devuelven el login y medirlo no dice nada.
+ */
+export function rutas( { sinSesion = false } = {} ) {
   const u = new URL( BASE() );
-  const lista = [ u.pathname, ...RUTAS, ...( SESION ? RUTAS_MIEMBRO : [] ) ];
+  const lista = [ u.pathname, ...RUTAS, ...( SESION && ! sinSesion ? RUTAS_MIEMBRO : [] ) ];
   return [ ...new Set( lista ) ].map( ( r ) => u.origin + r );
 }
 
@@ -59,11 +64,19 @@ export function rutas() {
  * documento: elementFromPoint solo responde dentro de lo visible, y una página
  * larga medida en una ventana corta deja sin medir todo lo que no se ve. Esa
  * es la trampa que hizo que una suite midiera el 24% de la página.
+ *
+ * `sinSesion` abre las páginas como las ve cualquiera: sin el estado de sesión
+ * del banco, y solo las públicas. Hace falta porque media web cambia cuando
+ * hay sesión. La portada deja de ser la portada y pasa a ser el home del
+ * miembro, y el pie cambia sus enlaces de marketing por los del área privada.
+ * La suite corre siempre con la sesión puesta, así que sin esto las reglas
+ * sobre lo público no las medía nadie: dos comprobaciones pasaban en verde sin
+ * haber abierto nunca lo que afirmaban.
  */
-export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBase = false } = {} ) {
+export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBase = false, sinSesion = false } = {} ) {
   const navegador = await chromium.launch();
   const fallos = [], mudas = [];
-  const destinos = soloBase ? [ BASE() ] : rutas();
+  const destinos = soloBase ? [ BASE() ] : rutas( { sinSesion } );
 
   try {
     for ( const url of destinos ) {
@@ -71,7 +84,7 @@ export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBa
       for ( const ancho of anchos ) {
         const contexto = await navegador.newContext( {
           viewport: { width: ancho, height: alto },
-          ...( SESION ? { storageState: SESION } : {} ),
+          ...( SESION && ! sinSesion ? { storageState: SESION } : {} ),
         } );
         const pagina = await contexto.newPage();
         const r = await pagina.goto( url, { waitUntil: 'networkidle' } ).catch( () => null );

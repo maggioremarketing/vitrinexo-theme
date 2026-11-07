@@ -35,7 +35,7 @@ function vx_marca_estrategia(): void {
         vx_marca_declaracion( 'Tu vitrina para construir nexos de negocio.' );
         vx_marca_p( 'Se escribe entera y con punto final. Las dos mitades del nombre aparecen en ella en el mismo orden en que se leen, y por eso no se abrevia ni se parte en dos líneas por diseño.' );
         vx_marca_p( 'Vive declarado una sola vez, en <code>vx_tagline()</code>, y el titular de este manual sale de ahí: lo que estás leyendo arriba es el mismo texto que usaría cualquier plantilla.' );
-        vx_marca_p( 'La portada del sitio también lo lee de ahí. Sus dos mitades, vitrina y nexos, se destacan solas: <code>vx_tagline_html()</code> las marca a partir de la misma frase, así que el destacado es una regla y no una edición a mano que alguien tiene que repetir cuando el tagline cambie.' );
+        vx_marca_p( 'La portada también lo lee de ahí, debajo del logotipo. <strong>No es su titular</strong>: el titular de la portada es una promesa concreta y cambia con la campaña, mientras que el tagline dice qué es Vitrinexo y no cambia. Sus dos mitades, vitrina y nexos, se destacan solas: <code>vx_tagline_html()</code> las marca a partir de la misma frase, así que el destacado es una regla y no una edición a mano que alguien tiene que repetir cuando el tagline cambie.' );
     } );
 
     vx_marca_bloque( 'estrategia-linea-de-producto', function () {

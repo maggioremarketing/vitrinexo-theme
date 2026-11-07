@@ -10,8 +10,8 @@
   <nav class="vx-topbar__nav-desktop">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>#el-problema">El problema</a>
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>#como-funciona">Cómo funciona</a>
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#para-quien">Para quién es</a>
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#el-multiverso">El multiverso</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#perfiles">Perfiles</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#comunidades">Comunidades</a>
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>#for-dinner">Experiencia presencial</a>
     <a href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>">Preguntas frecuentes</a>
   </nav>
@@ -41,8 +41,8 @@
   <nav class="vx-drawer__nav">
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>#el-problema"   data-bs-dismiss="offcanvas">El problema</a>
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>#como-funciona" data-bs-dismiss="offcanvas">Cómo funciona</a>
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#para-quien"    data-bs-dismiss="offcanvas">Para quién es</a>
-    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#el-multiverso" data-bs-dismiss="offcanvas">El multiverso</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#perfiles"    data-bs-dismiss="offcanvas">Perfiles</a>
+    <a href="<?php echo esc_url( home_url( '/' ) ); ?>#comunidades" data-bs-dismiss="offcanvas">Comunidades</a>
     <a href="<?php echo esc_url( home_url( '/' ) ); ?>#for-dinner"    data-bs-dismiss="offcanvas">Experiencia presencial</a>
     <a href="<?php echo esc_url( home_url( '/preguntas-frecuentes/' ) ); ?>" data-bs-dismiss="offcanvas">Preguntas frecuentes</a>
   </nav>
