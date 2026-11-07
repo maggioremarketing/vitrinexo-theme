@@ -30,6 +30,18 @@ const fallos = await enLaPagina(
         // El enlace en medio de una frase queda exento por la propia norma.
         if ( estilo.display.startsWith( 'inline' ) && el.closest( 'p' ) ) continue;
 
+        // Una casilla dentro de su etiqueta no es el objetivo: lo es la
+        // etiqueta, porque al tocarla el navegador marca la casilla. Medir el
+        // cuadradito y no lo que de verdad se pulsa denuncia un formulario
+        // correcto y deja pasar uno con la etiqueta suelta.
+        if ( /^(checkbox|radio)$/.test( el.type || '' ) ) {
+          const etiqueta = el.closest( 'label' ) || document.querySelector( `label[for="${ CSS.escape( el.id || '\0' ) }"]` );
+          if ( etiqueta ) {
+            const e = etiqueta.getBoundingClientRect();
+            if ( e.width >= minimo && e.height >= minimo ) continue;
+          }
+        }
+
         const caja = el.getBoundingClientRect();
         if ( ! caja.width && ! caja.height ) continue;
 

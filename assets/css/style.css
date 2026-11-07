@@ -203,6 +203,11 @@ h2 strong {
   align-items: center;
   justify-content: center;
   gap: 7px;
+  /* El alto salia del texto y del relleno de cada tamano: btn-vx-lg daba 44
+     justo, btn-vx-md 37 y btn-vx-sm 27. Un boton pequeno puede ser pequeno a
+     la vista, pero no puede ser pequeno bajo el pulgar. El ancho ya pasa
+     siempre: lo que falla es el alto. */
+  min-height: 44px;
   font-family: var(--font-body);
   font-weight: 500;
   border: none;
@@ -1136,6 +1141,11 @@ select.form-control-vx {
   font-weight: 400;
   color: var(--color-text-secondary);
   text-decoration: none;
+  /* 44 de alto: el relleno los dejaba en 35. El fondo del hover ocupa el
+     area entera, asi que el enlace se ve mas alto y se pulsa donde se ve. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   padding: 0.4rem 0.85rem;
   border-radius: var(--radius-sm);
   transition: color 0.15s, background 0.15s;
@@ -1244,6 +1254,13 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   cursor: pointer;
   font-size: 1.25rem;
   color: var(--color-text-secondary);
+  /* 28 x 40 con el relleno viejo. Es el boton de cerrar del menu del telefono,
+     o sea exactamente el que se pulsa con el pulgar y a ciegas. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0.25rem;
   border-radius: var(--radius-sm);
   transition: color 0.15s;
@@ -1477,7 +1494,10 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
 .footer-vx__nav {
   display: grid;
   align-content: start;
-  gap: 0.45rem;
+  /* Sin hueco: el espacio entre enlaces lo da el area de pulsacion de cada
+     uno, que tiene que existir igual. Separarlos ademas con gap dejaba el
+     enlace en 22,4 px de alto y el pie el doble de largo sin ganar nada. */
+  gap: 0;
 }
 
 .footer-vx__link,
@@ -1486,6 +1506,9 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   align-items: center;
   gap: 0.4rem;
   width: fit-content;
+  /* 44 de alto. Un enlace de pie mide 22,4 con la linea sola, y en un telefono
+     eso se falla con el pulgar. El ancho ya pasa: el texto es largo. */
+  min-height: 44px;
   color: var(--color-text-secondary);
   font-size: 14px;
   text-decoration: none;
@@ -1506,6 +1529,13 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   padding-top: 1rem;
   border-top: 1px solid var(--color-border);
   font-size: 13px;
+}
+
+/* Privacidad y Terminos, que viven en la linea de abajo. */
+.footer-vx__bottom a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 @media (max-width: 768px) {
@@ -4717,4 +4747,38 @@ mark,
   font-style: italic;
   font-weight: 300;
   letter-spacing: var(--ls-body-l);
+}
+
+/* ════════════════════════════════════════
+   Área de pulsación
+   ════════════════════════════════════════ */
+/* 44 × 44 es la regla de la casa, y la norma pide 24. Veinticuatro no alcanza
+   para un teléfono en una mano, parado en la calle.
+   Acá viven los casos que no se resuelven en la regla del componente porque
+   el alto se lo daba el texto y no una medida. */
+
+/* Los dos enlaces que llevan un logotipo: el de la barra y el del pie. La
+   imagen mide lo que mide, así que el enlace tiene que poner el resto. */
+.vx-topbar__logo,
+.footer-vx__brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* Una casilla de 13 × 13 no se marca con el pulgar. La casilla se queda del
+   tamaño que el formulario necesita y el área la pone la etiqueta, que es lo
+   que de verdad se pulsa: al tocarla, el navegador marca la casilla. */
+label:has(> input[type="checkbox"]),
+label:has(> input[type="radio"]) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
