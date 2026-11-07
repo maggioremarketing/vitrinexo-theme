@@ -67,7 +67,7 @@ function vx_marca_partes(): array {
                 [ 'Tipografías', 'definido', 'Switzer Variable, servida localmente. Cuatro pesos en uso de los nueve disponibles.' ],
                 [ 'Jerarquía', 'definido', 'Tamaño, peso y tinta, en ese orden. El color nunca distingue solo.' ],
                 [ 'Escala tipográfica', 'definido', 'Ocho peldaños. Esta página los obedece, así que si alguien la rompe se nota leyendo.' ],
-                [ 'Paleta de color', 'parcial', 'Pasteles sobre blanco con el coral de acento único. En el tema no queda ningún color a mano; en el plugin quedan 399 hexadecimales.' ],
+                [ 'Paleta de color', 'definido', 'Pasteles sobre blanco con el coral de acento único. Ni un color a mano donde se pueda nombrar un papel; donde no, el valor existe en la paleta y una prueba lo mide.' ],
                 [ 'Iconografía', 'definido', 'Tabler Icons 3.19.0, trazo de 2 px sobre rejilla de 24. Una sola familia.' ],
                 [ 'Motivos', 'definido', 'El collage de perfiles, el lugar libre y la red de puntos, que baja a fondo.' ],
                 [ 'Dirección fotográfica', 'parcial', 'La marca ilustra, salvo las cenas. La portada y el tríptico ya son retratos; falta la foto del banner del problema.' ],

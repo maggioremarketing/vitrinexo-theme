@@ -15,6 +15,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Pruebas de sistema
+        # Si el sistema de diseño no se cumple, no se publica. Hasta hoy la
+        # suite solo corría cuando alguien se acordaba, que es la razón por la
+        # que 62 colores de la paleta vieja sobrevivieron meses al repintado.
+        # Solo las de sistema: las de pantalla piden navegador y servidor.
+        run: node pruebas/verificar.mjs
+
       - name: Configurar SSH key
         run: |
           mkdir -p ~/.ssh
