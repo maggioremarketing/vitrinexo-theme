@@ -124,5 +124,19 @@ writeFileSync( `${dir}/retratos-mosaico.svg`, rejilla( {
   alt: 'Una pared de treinta retratos ilustrados, todos distintos; uno es un lugar libre dibujado con línea punteada.',
 } ) );
 
+/* Banner del problema. La casilla de 400 x 485 da 0,82 contra los 0,80 del
+   retrato, y 1600 x 970 es 1,65, la proporcion que el hueco toma en casi todos
+   los anchos: solo en 992 px recorta, y de los lados.
+
+   Sin lugar libre a proposito. El banner dice «aqui todos estan para hacer
+   negocios»: un hueco punteado contradice la frase que ilustra, y seria la
+   tercera invitacion del mismo scroll, porque la portada y el mosaico ya
+   llevan la suya. El lugar libre va donde el texto invita, no en cada pieza. */
+writeFileSync( `${dir}/retratos-banner.svg`, rejilla( {
+  w: 1600, h: 970, cols: 4, filas: 2, libre: -1, pre: 'b',
+  alt: 'Ocho retratos ilustrados en dos filas de cuatro, todos distintos y todos presentes.',
+} ) );
+
 console.log( `  retratos-portada.svg  1600x900  10 retratos, lugar libre en el 4` );
 console.log( `  retratos-mosaico.svg  1600x674  30 retratos, lugar libre en el 15` );
+console.log( `  retratos-banner.svg   1600x970   8 retratos, sin lugar libre` );

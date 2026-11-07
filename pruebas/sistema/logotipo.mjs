@@ -118,11 +118,15 @@ for ( const nombre of citadas ) {
 }
 
 /**
- * Las dos piezas anchas del motivo, que el producto publica en la portada y en
- * la franja del directorio. No son material citado: son marca en pantalla, y
- * por eso sus colores se miden igual que los del logotipo.
+ * Las tres piezas anchas del motivo, que el producto publica en la portada, en
+ * el banner del problema y en la franja del directorio. No son material
+ * citado: son marca en pantalla, y sus colores se miden como los del logotipo.
  */
-const ANCHAS = [ 'assets/img/marca/retratos-portada.svg', 'assets/img/marca/retratos-mosaico.svg' ];
+const ANCHAS = [
+  'assets/img/marca/retratos-portada.svg',
+  'assets/img/marca/retratos-banner.svg',
+  'assets/img/marca/retratos-mosaico.svg',
+];
 for ( const ruta of ANCHAS ) {
   if ( ! existsSync( join( TEMA, ruta ) ) ) fallos.push( `falta ${ ruta }, que el producto publica` );
   if ( ! citadas.includes( ruta.replace( 'assets/img/marca/', '' ) ) ) {

@@ -54,6 +54,15 @@ function vx_marca_decisiones(): array {
         ],
         [
             'fecha'    => '2026-11-07',
+            'titulo'   => 'El banner del problema va sin lugar libre',
+            'eligio'   => 'Ocho retratos en dos filas de cuatro, todos presentes. 1600 × 970.',
+            'contra'   => 'La misma rejilla con un lugar libre, que es lo que llevan las otras dos piezas.',
+            'medicion' => 'Se armaron las dos y se miraron en el hueco real. La de arriba lee bien, pero el banner dice «aquí todos están para hacer negocios»: el hueco punteado contradice la frase que ilustra, y sería la tercera invitación del mismo scroll. El hueco mide 1,65 de ancho por alto en todos los anchos salvo 992 px, así que la pieza se dibuja en esa proporción y no se recorta casi nunca; la casilla queda en 0,82 contra los 0,80 del retrato.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-07',
             'titulo'   => 'La excepción del literal vale solo donde la hoja no está cargada',
             'eligio'   => 'Que la prueba del plugin separe los dos casos: donde no hay hoja del tema comprueba que el valor exista en la paleta, y donde sí la hay exige var(--token). Y que la paleta se lea del :root del tema en vez de una copia, fallando si las dos dejan de coincidir.',
             'contra'   => 'Barrer los 362 hexadecimales del plugin, que es lo que este registro decía ayer que faltaba.',
