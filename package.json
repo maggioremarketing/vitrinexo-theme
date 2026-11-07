@@ -6,7 +6,8 @@
     "verificar": "node pruebas/verificar.mjs",
     "accesibilidad": "node pruebas/accesibilidad.mjs",
     "avance": "node pruebas/avance.mjs",
-    "retratos": "node herramientas/retratos.mjs assets/img/marca"
+    "retratos": "node herramientas/retratos.mjs assets/img/marca",
+    "clases-sin-uso": "node herramientas/clases-sin-uso.mjs"
   },
   "repository": {
     "type": "git",
