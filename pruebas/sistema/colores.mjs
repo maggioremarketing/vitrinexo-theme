@@ -22,7 +22,10 @@ const DE_LA_PALETA = new Set(
   Object.values( mapa ).filter( ( v ) => /^#[0-9a-fA-F]{3,8}$/.test( v.trim() ) ).map( ( v ) => v.trim().toUpperCase() )
 );
 
-const EXTENSIONES = [ '.php', '.css' ];
+// El .js entra desde que se encontro que network.js pintaba los puntos de la
+// portada con el azul, el cian y el verde de la paleta vieja, meses despues
+// del repintado: el barrido de entonces solo miraba hojas de estilo.
+const EXTENSIONES = [ '.php', '.css', '.js' ];
 const FUERA = [ 'node_modules', '.git', 'pruebas', 'assets/img' ];
 
 function archivos( carpeta = '' ) {
@@ -47,6 +50,19 @@ for ( const archivo of archivos() ) {
 
   fuente.split( '\n' ).forEach( ( linea, i ) => {
     if ( linea.includes( 'color ajeno' ) ) return;
+
+    // Un color tambien se escribe a mano en rgba() y en hsl(), y por ahi
+    // sobrevivio la paleta vieja al repintado: 62 valores en sombras,
+    // degradados y veladuras, donde esta regla no estaba mirando. Lo
+    // translucido se escribe con color-mix() sobre un token, que lee el valor
+    // en vez de copiarlo.
+    const fn = linea.match( /\b(?:rgba?|hsla?)\(\s*[0-9.]/ );
+    if ( fn ) {
+      const nombre = fn[ 0 ].match( /[a-z]+/ )[ 0 ];
+      fallos.push( `${ relative( '.', archivo ) }:${ i + 1 } escribe un color en ${ nombre }(): lo translúcido se escribe con color-mix() sobre un token` );
+      return;
+    }
+
     const m = linea.match( /#[0-9a-fA-F]{3,8}\b/ );
     if ( ! m ) return;
     const valor = m[ 0 ].toUpperCase();

@@ -42,15 +42,15 @@
 
         var overlay = document.createElement( 'div' );
         overlay.className = 'vx-crop-overlay';
-        overlay.style.cssText = 'position:fixed;inset:0;z-index:100000;background:rgba(15,23,42,.75);display:flex;align-items:center;justify-content:center;padding:16px';
+        overlay.style.cssText = 'position:fixed;inset:0;z-index:100000;background:color-mix(in srgb, var(--tinta) 75%, transparent);display:flex;align-items:center;justify-content:center;padding:16px';
 
         var box = document.createElement( 'div' );
-        box.style.cssText = 'background:#fff;border-radius:14px;max-width:460px;width:100%;padding:18px;box-shadow:0 20px 60px rgba(0,0,0,.35)';
+        box.style.cssText = 'background:var(--blanco);border-radius:14px;max-width:460px;width:100%;padding:18px;box-shadow:0 20px 60px color-mix(in srgb, var(--tinta) 35%, transparent)';
         box.innerHTML =
           '<h3 style="margin:0 0 4px;font-size:17px;font-weight:700">Recorta tu imagen</h3>' +
-          '<p style="margin:0 0 12px;font-size:13px;color:#6b7280">Arrastra para mover y usa la rueda o el control para acercar. Se guardará cuadrada.</p>' +
-          '<div style="max-height:52vh;background:#f1f5f9;border-radius:10px;overflow:hidden"><img id="vx-crop-img" style="max-width:100%;display:block"></div>' +
-          '<div style="display:flex;align-items:center;gap:8px;margin:12px 0 4px"><span style="font-size:12px;color:#6b7280">Zoom</span>' +
+          '<p style="margin:0 0 12px;font-size:13px;color:var(--tinta-2)">Arrastra para mover y usa la rueda o el control para acercar. Se guardará cuadrada.</p>' +
+          '<div style="max-height:52vh;background:var(--hueso);border-radius:10px;overflow:hidden"><img id="vx-crop-img" style="max-width:100%;display:block"></div>' +
+          '<div style="display:flex;align-items:center;gap:8px;margin:12px 0 4px"><span style="font-size:12px;color:var(--tinta-2)">Zoom</span>' +
           '<input id="vx-crop-zoom" type="range" min="0" max="1" step="0.01" value="0" style="flex:1"></div>' +
           '<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px">' +
           '<button type="button" id="vx-crop-cancel" class="btn-vx btn-ghost-vx btn-vx-sm">Cancelar</button>' +

@@ -2,7 +2,11 @@ class NetworkCanvas {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
-    this.colors = ["#2563eb", "#0891b2", "#16a34a"];
+    // El canvas no entiende var(--lavanda), asi que los colores se leen del
+    // :root al arrancar. Antes estaban escritos aca: azul, cian y verde de la
+    // paleta vieja, pintandose detras de toda la portada mucho despues del
+    // repintado, porque aquel barrido solo miro el CSS.
+    this.colors = NetworkCanvas.paleta();
     this.width = 0;
     this.height = 0;
     this.particles = [];
@@ -28,6 +32,14 @@ class NetworkCanvas {
 
     this.resizeCanvas();
     this.animate();
+  }
+
+  /** Los pasteles de apoyo, leidos del sistema. Vacio si el CSS no cargo. */
+  static paleta() {
+    const raiz = getComputedStyle(document.documentElement);
+    return ["lavanda", "celeste", "salvia"]
+      .map(n => raiz.getPropertyValue("--" + n).trim())
+      .filter(Boolean);
   }
 
   getSimulationBounds() {
@@ -183,7 +195,11 @@ class NetworkCanvas {
 }
 
 // Inyectar el canvas de fondo directamente en el body
-const pageCanvas = document.createElement("canvas");
-pageCanvas.id = "networkPageCanvas";
-document.body.prepend(pageCanvas);
-new NetworkCanvas(pageCanvas);
+// Si el :root no resolvio, el sistema de diseno no cargo: antes que inventar
+// tres colores aca, la animacion no se dibuja.
+if (NetworkCanvas.paleta().length) {
+  const pageCanvas = document.createElement("canvas");
+  pageCanvas.id = "networkPageCanvas";
+  document.body.prepend(pageCanvas);
+  new NetworkCanvas(pageCanvas);
+}

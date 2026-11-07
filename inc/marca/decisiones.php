@@ -26,6 +26,42 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function vx_marca_decisiones(): array {
     return [
         [
+            'fecha'    => '2026-11-07',
+            'titulo'   => 'Lo translúcido se escribe con color-mix sobre un token, no con rgba',
+            'eligio'   => 'color-mix(in srgb, var(--token) N%, transparent) para toda sombra, veladura, degradado y halo de foco. Un borde de 1 px no es un velo: usa el token sólido.',
+            'contra'   => 'Dejar rgba() con el valor copiado, o agregar una tabla paralela de canales (--tinta-rgb) que hay que mantener sincronizada a mano.', // primitivo a propósito: el registro nombra la alternativa que descartó.
+            'medicion' => 'Quedaban 62 rgba() en el tema y 3 en el plugin, con trece colores de la paleta vieja: el turquesa, el púrpura, el rosa fucsia, el ámbar, el azul, el verde, el navy frío y el blanco azulado. Ahora quedan cero en los dos repositorios. color-mix lee el token en vez de copiarlo, así que si la tinta cambia, la sombra la sigue.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-07',
+            'titulo'   => 'La prueba de colores mira rgba, hsl y JavaScript',
+            'eligio'   => 'Que falle ante cualquier rgba() o hsl() con números, y que recorra también los .js del tema.',
+            'contra'   => 'Dejarla mirando solo hexadecimales en .php y .css, que es como estaba.',
+            'medicion' => 'Por los dos huecos pasaron 62 colores en el CSS y los tres con los que network.js pintaba los puntos del fondo de la portada: azul, cian y verde de la paleta vieja, meses después del repintado. Verificada rompiéndola con un rgba, con un hsl y con un hexadecimal en un .js.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-07',
+            'titulo'   => 'Tres botones tenían tinta blanca sobre un relleno pastel',
+            'eligio'   => 'Tinta oscura, con --color-on-fill, en el botón de peligro, su estado hover y los dos botones de 4Dinner.',
+            'contra'   => 'Dejar el blanco que venía del relleno saturado anterior.',
+            'medicion' => 'Blanco sobre terracota 2,82:1, sobre terracota-presión 3,98:1 y sobre mantequilla-presión 1,87:1, contra el mínimo de 4,5:1. Con tinta dan 6,40, 4,53 y 9,64. Son el mismo error que el botón primario de septiembre: el relleno se repintó a pastel y la tinta encima se quedó blanca.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-07',
+            'titulo'   => 'Los colores a mano del plugin siguen sin medirse',
+            'eligio'   => 'Nada todavía. Queda anotado con su número.',
+            'contra'   => 'Barrerlos en la misma pasada, o hacer que la suite del tema recorra el repositorio vecino.',
+            'medicion' => 'Quedan 399 hexadecimales escritos a mano en el plugin. Ninguna prueba los mira, porque la suite vive en el tema y solo recorre el tema: por eso esta página llegó a afirmar que no quedaba ni uno. Hacer que la suite dependa de un repositorio vecino la rompe en el servidor de integración, donde ese repositorio no está.',
+            'estado'   => 'abierta',
+            'tokens'   => [],
+        ],
+        [
             'fecha'    => '2026-11-06',
             'titulo'   => 'A lo ancho el motivo es una rejilla de retratos, no el collage',
             'eligio'   => 'Dos piezas nuevas: diez retratos en dos filas para la portada y treinta en tres filas para la franja del directorio. Mismas coordenadas de rasgos, misma paleta, un solo lugar libre.',

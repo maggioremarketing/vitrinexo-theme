@@ -88,9 +88,9 @@
   --color-warning-bg: var(--mantequilla-suave);
 
   /* Relieve */
-  --shadow-sm: 0 2px 8px rgba(20, 32, 51, 0.08);
-  --shadow-md: 0 8px 24px rgba(20, 32, 51, 0.12);
-  --shadow-lg: 0 16px 48px rgba(20, 32, 51, 0.16);
+  --shadow-sm: 0 2px 8px color-mix(in srgb, var(--tinta) 8%, transparent);
+  --shadow-md: 0 8px 24px color-mix(in srgb, var(--tinta) 12%, transparent);
+  --shadow-lg: 0 16px 48px color-mix(in srgb, var(--tinta) 16%, transparent);
 
   /* Forma */
   --radius-sm: 8px;
@@ -405,12 +405,13 @@ h2 strong {
 
 .btn-danger-vx {
   background: var(--terracota);
-  color: var(--blanco);
+  /* Blanco sobre terracota da 2,82:1. La tinta da 6,40:1. */
+  color: var(--color-on-fill);
 }
 
 .btn-danger-vx:hover {
   background: var(--terracota-presion);
-  color: var(--blanco);
+  color: var(--color-on-fill);
 }
 
 .btn-soft-danger-vx {
@@ -683,7 +684,7 @@ a.profile-company:hover {
   flex-wrap: wrap;
   gap: 0.4rem;
   padding: 0.25rem;
-  background: rgba(255, 255, 255, 0.68);
+  background: color-mix(in srgb, var(--blanco) 68%, transparent);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-pill);
   width: fit-content;
@@ -1000,8 +1001,8 @@ a.profile-company:hover {
 
   background: linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.5) 0%,
-    rgba(255, 255, 255, 0) 40%
+    color-mix(in srgb, var(--tinta) 50%, transparent) 0%,
+    transparent 40%
   );
 
   mask-image: linear-gradient(0deg, black 0%, black 10%, transparent 60%);
@@ -1150,7 +1151,7 @@ a.profile-company:hover {
 
 .form-control-vx:focus {
   border-color: var(--salvia);
-  box-shadow: 0 0 0 3px rgba(46, 173, 110, 0.12);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--salvia) 45%, transparent);
 }
 
 .form-control-vx::placeholder {
@@ -1162,7 +1163,7 @@ a.profile-company:hover {
 }
 
 .form-control-vx.error:focus {
-  box-shadow: 0 0 0 3px rgba(255, 115, 77, 0.12);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--rosa) 55%, transparent);
 }
 
 .form-error-msg {
@@ -1191,7 +1192,7 @@ a.profile-company:hover {
 
 .input-group-vx:focus-within {
   border-color: var(--salvia);
-  box-shadow: 0 0 0 3px rgba(46, 173, 110, 0.12);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--salvia) 45%, transparent);
 }
 
 .input-group-vx .input-icon {
@@ -1275,7 +1276,7 @@ select.form-control-vx {
    MODAL
    ============================================================ */
 .modal-vx-backdrop {
-  background: rgba(20, 32, 51, 0.48);
+  background: color-mix(in srgb, var(--tinta) 48%, transparent);
   border-radius: var(--radius-lg);
   padding: 2rem;
   display: flex;
@@ -1327,7 +1328,8 @@ select.form-control-vx {
   align-items: center;
   justify-content: space-between;
   padding: 0 1.5rem;
-  background: rgba(250, 252, 255, 0.90);
+  background: var(--blanco); /* respaldo si el navegador no tiene color-mix */
+  background: color-mix(in srgb, var(--blanco) 90%, transparent);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--color-border);
@@ -2010,7 +2012,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   width: 100%;
   border-radius: 16px;
   /* La sombra era turquesa: el único resto del color viejo en la portada. */
-  box-shadow: 0 24px 64px rgba(20, 22, 31, 0.10), 0 4px 16px rgba(20, 22, 31, 0.06);
+  box-shadow: 0 24px 64px color-mix(in srgb, var(--tinta) 10%, transparent), 0 4px 16px color-mix(in srgb, var(--tinta) 6%, transparent);
 }
 
 .network-hero::after {
@@ -2019,8 +2021,8 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   inset: 0;
   z-index: 2;
   background: linear-gradient(
-    rgba(255, 255, 255, 0.1),
-    rgba(243, 249, 253, 0.3)
+    color-mix(in srgb, var(--blanco) 10%, transparent),
+    color-mix(in srgb, var(--hueso) 30%, transparent)
   );
   pointer-events: none;
 }
@@ -2041,7 +2043,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   inset: 0;
   z-index: -1;
   transform: scale(1.6);
-  background: rgba(250, 252, 255, 0.75);
+  background: color-mix(in srgb, var(--blanco) 75%, transparent);
   border-radius: 1000px;
   filter: blur(60px);
   pointer-events: none;
@@ -2062,13 +2064,13 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   display: inline-block;
   margin-bottom: 1rem;
   padding: 0.45rem 0.8rem;
-  border: 1px solid rgba(15, 23, 42, 0.12);
+  border: 1px solid var(--color-border);
   border-radius: 999px;
   color: var(--celeste-presion);
-  background: rgba(255, 255, 255, 0.72);
+  background: color-mix(in srgb, var(--blanco) 72%, transparent);
   backdrop-filter: blur(10px);
   font-size: 0.9rem;
-  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--tinta) 8%, transparent);
 }
 
 .main-phrase {
@@ -2090,7 +2092,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
 .hero-content p {
   max-width: 640px;
   margin: 1.4rem auto 0;
-  color: rgba(15, 23, 42, 0.72);
+  color: var(--color-text-secondary);
   font-size: clamp(1rem, 2vw, 1.25rem);
   line-height: 1.6;
 }
@@ -2104,7 +2106,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   background: var(--tinta);
   text-decoration: none;
   font-weight: 700;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.18);
+  box-shadow: 0 18px 45px color-mix(in srgb, var(--tinta) 18%, transparent);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -2112,7 +2114,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
 
 .hero-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.22);
+  box-shadow: 0 22px 60px color-mix(in srgb, var(--tinta) 22%, transparent);
 }
 .description p {
   font-size: 21px !important;
@@ -2149,7 +2151,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
 }
 
 .section-landing--alt {
-  background: rgba(250, 252, 255, 0.55);
+  background: color-mix(in srgb, var(--blanco) 55%, transparent);
   border-top: 1px solid var(--color-border);
   border-bottom: 1px solid var(--color-border);
 }
@@ -2166,7 +2168,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   position: absolute;
   inset: -1.5rem -2rem;
   z-index: -1;
-  background: rgba(250, 252, 255, 0.75);
+  background: color-mix(in srgb, var(--blanco) 75%, transparent);
   border-radius: 1000px;
   filter: blur(60px);
   pointer-events: none;
@@ -2325,7 +2327,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
 
 /* ── Steps grid (Cómo funciona) ── */
 .step-card {
-  background: rgba(250, 252, 255, 0.82);
+  background: color-mix(in srgb, var(--blanco) 82%, transparent);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 2rem 1.75rem;
@@ -2454,8 +2456,8 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   justify-content: flex-start;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  background: rgba(250, 252, 255, 0.82);
+  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--blanco) 82%, transparent);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -2468,7 +2470,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
 
 .multiverse-card--main {
   background: var(--coral-suave);
-  border-color: rgba(0,174,184,0.22);
+  border-color: var(--coral);
   --mv-label: var(--color-text-primary);
   --mv-title: var(--color-text-primary);
   --mv-desc:  var(--color-text-secondary);
@@ -2477,7 +2479,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
 /* Comunidades y 4Dinner — paleta pastel plana */
 .multiverse-card--out2b {
   background: var(--lavanda-suave);
-  border-color: rgba(124,58,237,0.18);
+  border-color: var(--lavanda);
   --mv-label: var(--color-text-primary);
   --mv-title: var(--color-text-primary);
   --mv-desc:  var(--color-text-primary);
@@ -2485,7 +2487,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
 
 .multiverse-card--woman {
   background: var(--rosa-suave);
-  border-color: rgba(190,24,93,0.18);
+  border-color: var(--rosa);
   --mv-label: var(--color-text-primary);
   --mv-title: var(--color-text-primary);
   --mv-desc:  var(--color-text-primary);
@@ -2493,7 +2495,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
 
 .multiverse-card--senior {
   background: var(--mantequilla-suave);
-  border-color: rgba(180,83,9,0.18);
+  border-color: var(--mantequilla);
   --mv-label: var(--color-text-primary);
   --mv-title: var(--color-text-primary);
   --mv-desc:  var(--color-text-primary);
@@ -2501,7 +2503,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
 
 .multiverse-card--dinner {
   background: var(--mantequilla-suave);
-  border-color: rgba(245,158,11,0.22);
+  border-color: var(--mantequilla);
   --mv-label: var(--color-text-primary);
   --mv-title: var(--color-text-primary);
   --mv-desc:  var(--color-text-primary);
@@ -2512,7 +2514,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   font-size: 10px;
   letter-spacing: var(--ls-sobretitulo-xs);
   text-transform: uppercase;
-  color: var(--mv-label, rgba(255,255,255,0.6));
+  color: var(--mv-label, color-mix(in srgb, var(--blanco) 60%, transparent));
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
@@ -2529,20 +2531,20 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
 
 .multiverse-card__title em {
   font-style: italic;
-  color: var(--mv-title, rgba(255,255,255,0.85));
+  color: var(--mv-title, color-mix(in srgb, var(--blanco) 85%, transparent));
   opacity: 0.8;
 }
 
 .multiverse-card__desc {
   font-size: 0.88rem;
-  color: var(--mv-desc, rgba(255,255,255,0.75));
+  color: var(--mv-desc, color-mix(in srgb, var(--blanco) 75%, transparent));
   line-height: 1.5;
   margin: 0;
 }
 
 /* ── Miembro Original ── */
 .founder-block {
-  background: rgba(250, 252, 255, 0.82);
+  background: color-mix(in srgb, var(--blanco) 82%, transparent);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 3rem;
@@ -2756,7 +2758,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, var(--blanco) 20%, transparent);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
@@ -2806,7 +2808,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
 .community-header-vx__count {
   flex-shrink: 0;
   align-self: flex-start;
-  background: var(--community-count-bg, rgba(0,0,0,0.07));
+  background: var(--community-count-bg, var(--color-surface-muted));
   color: var(--community-title-color, var(--color-text-primary));
   padding: 4px 14px;
   border-radius: var(--radius-pill);
@@ -2821,7 +2823,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   --community-title-color: var(--color-text-primary);
   --community-label-color: var(--color-text-primary);
   --community-desc-color:  var(--color-text-primary);
-  --community-count-bg:    rgba(109, 40, 217, 0.10);
+  --community-count-bg:    var(--lavanda);
 }
 
 /* ── Woman — rosa pastel ── */
@@ -2830,7 +2832,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   --community-title-color: var(--color-text-primary);
   --community-label-color: var(--color-text-primary);
   --community-desc-color:  var(--color-text-primary);
-  --community-count-bg:    rgba(190, 24, 93, 0.10);
+  --community-count-bg:    var(--rosa);
 }
 
 /* ── Senior — ámbar pastel ── */
@@ -2839,7 +2841,7 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   --community-title-color: var(--color-text-primary);
   --community-label-color: var(--color-text-primary);
   --community-desc-color:  var(--color-text-primary);
-  --community-count-bg:    rgba(180, 83, 9, 0.10);
+  --community-count-bg:    var(--mantequilla);
 }
 
 /* ============================================================
@@ -3074,7 +3076,7 @@ section#offers {
   justify-content: space-between;
   gap: 1.5rem;
   flex-wrap: wrap;
-  box-shadow: 0 4px 16px -4px rgba(180, 83, 9, 0.12);
+  box-shadow: 0 4px 16px -4px color-mix(in srgb, var(--tinta) 12%, transparent);
   position: relative;
   overflow: hidden;
 }
@@ -3090,7 +3092,7 @@ section#offers {
   top: -40px;
   width: 180px;
   height: 180px;
-  background: rgba(180, 83, 9, 0.05);
+  background: color-mix(in srgb, var(--mantequilla-presion) 13%, transparent);
 }
 
 .banner-4dinner__deco--2 {
@@ -3098,7 +3100,7 @@ section#offers {
   bottom: -60px;
   width: 140px;
   height: 140px;
-  background: rgba(180, 83, 9, 0.04);
+  background: color-mix(in srgb, var(--mantequilla-presion) 10%, transparent);
 }
 
 .banner-4dinner__body {
@@ -3151,12 +3153,13 @@ section#offers {
 
 .banner-4dinner__cta {
   background: var(--mantequilla-presion);
-  color: var(--blanco);
+  /* Blanco sobre mantequilla-presion da 1,87:1. La tinta da 9,64:1. */
+  color: var(--color-on-fill);
   font-weight: 700;
   white-space: nowrap;
   position: relative;
   z-index: 1;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--tinta) 15%, transparent);
 }
 
 /* ── Mi tarjeta preview ── */
@@ -3511,7 +3514,7 @@ section#offers {
 .logo-upload-zone .logo-upload-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: color-mix(in srgb, var(--tinta) 35%, transparent);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -4052,7 +4055,7 @@ section#offers {
   background: var(--blanco);
   border-radius: 50%;
   transition: transform 0.2s ease;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--tinta) 15%, transparent);
 }
 
 .config-toggle input:checked + .config-toggle-slider {
@@ -4409,7 +4412,7 @@ section#offers {
   position: absolute;
   top: 8px;
   right: 10px;
-  background: rgba(255, 255, 255, 0.2);
+  background: color-mix(in srgb, var(--blanco) 20%, transparent);
   color: var(--blanco);
   font-size: 10px;
   font-weight: 600;
@@ -4425,7 +4428,7 @@ section#offers {
 }
 .event-past-header__month {
   font-size: 10px;
-  color: rgba(255, 255, 255, 0.8);
+  color: color-mix(in srgb, var(--blanco) 80%, transparent);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: var(--ls-sobretitulo-xs);
@@ -4480,25 +4483,27 @@ section#offers {
 
 /* Buttons / badges para fondo claro 4Dinner */
 .btn-4dinner-ghost {
-  background: rgba(180, 83, 9, 0.08);
+  background: var(--mantequilla);
   color: var(--color-text-primary);
-  border: 1px solid rgba(180, 83, 9, 0.25);
+  border: 1px solid var(--mantequilla-presion);
 }
 .btn-4dinner-ghost:hover {
-  background: rgba(180, 83, 9, 0.14);
+  background: var(--mantequilla-hover);
 }
 .btn-4dinner-cta {
   background: var(--mantequilla-presion);
-  color: var(--blanco);
+  /* Era blanco: 1,87:1 sobre mantequilla-presion, el mismo error que el boton
+     primario. Sobre un relleno de marca la tinta es oscura y da 9,64:1. */
+  color: var(--color-on-fill);
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(180, 83, 9, 0.25);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--tinta) 20%, transparent);
 }
 .btn-4dinner-cta:hover {
   background: var(--color-text-primary);
   color: var(--blanco);
 }
 .badge-4dinner-light {
-  background: rgba(180, 83, 9, 0.12);
+  background: var(--mantequilla);
   color: var(--color-text-primary);
 }
 
@@ -4640,7 +4645,7 @@ section#offers {
 .vx-form__select  { width: 100%; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text-primary); padding: 9px 14px; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 13px; transition: border-color 0.15s ease, box-shadow 0.15s ease; outline: none; }
 .vx-form__input:focus,
 .vx-form__textarea:focus,
-.vx-form__select:focus { border-color: var(--salvia); box-shadow: 0 0 0 3px rgba(46,173,110,0.12); }
+.vx-form__select:focus { border-color: var(--salvia); box-shadow: 0 0 0 3px color-mix(in srgb, var(--salvia) 45%, transparent); }
 .vx-form__input::placeholder,
 .vx-form__textarea::placeholder { color: var(--tinta-2); }
 textarea.vx-form__input,
@@ -4686,7 +4691,7 @@ textarea.vx-form__input,
 .vx-community-card      { display: flex; cursor: pointer; }
 .vx-community-card input[type="checkbox"] { position: absolute; opacity: 0; pointer-events: none; }
 .vx-community-card__body { flex: 1; border: 2px solid var(--color-border); border-radius: var(--radius-md); padding: 1.25rem 1rem; text-align: center; transition: border-color 0.15s ease, box-shadow 0.15s ease; background: var(--blanco); }
-.vx-community-card input:checked ~ .vx-community-card__body { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(0,174,184,0.12); }
+.vx-community-card input:checked ~ .vx-community-card__body { border-color: var(--color-primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 35%, transparent); }
 .vx-community-card__icon { font-size: 28px; color: var(--color-primary-ink); margin-bottom: 0.5rem; display: block; }
 .vx-community-card__name { font-size: 15px; font-weight: 600; color: var(--color-text-primary); margin: 0 0 4px; }
 .vx-community-card__desc { font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.4; }
@@ -4850,7 +4855,7 @@ textarea.vx-form__input,
 
 /* Hero "Evento presencial" badge */
 .badge-hero-4dinner {
-  background: rgba(180, 83, 9, 0.12);
+  background: var(--mantequilla);
   color: var(--color-text-primary);
   font-size: 11px;
   font-weight: 700;
@@ -5111,7 +5116,7 @@ textarea.vx-form__input,
   text-transform: uppercase;
   letter-spacing: var(--ls-sobretitulo-xs);
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.8);
+  color: color-mix(in srgb, var(--blanco) 80%, transparent);
 }
 .blog-card-body {
   padding: 1.25rem;
@@ -5734,8 +5739,8 @@ a.pub-comment-author:hover {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to right, rgba(255,255,255,0.18) 0%, transparent 12%, transparent 88%, rgba(255,255,255,0.18) 100%),
-    linear-gradient(to top, rgba(255,255,255,0.12) 0%, transparent 20%);
+    linear-gradient(to right, color-mix(in srgb, var(--blanco) 18%, transparent) 0%, transparent 12%, transparent 88%, color-mix(in srgb, var(--blanco) 18%, transparent) 100%),
+    linear-gradient(to top, color-mix(in srgb, var(--blanco) 12%, transparent) 0%, transparent 20%);
   pointer-events: none;
 }
 @media (max-width: 768px) {
@@ -5787,9 +5792,9 @@ a.pub-comment-author:hover {
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(0, 0, 0, 0.2) 50%,
-    rgba(0, 0, 0, 0.0) 100%
+    color-mix(in srgb, var(--tinta) 60%, transparent) 0%,
+    color-mix(in srgb, var(--tinta) 20%, transparent) 50%,
+    transparent 100%
   );
   pointer-events: none;
 }
