@@ -144,11 +144,11 @@ function vx_marca_decisiones(): array {
         ],
         [
             'fecha'    => '2026-11-07',
-            'titulo'   => 'Las páginas legales tienen un nombre desviado',
-            'eligio'   => 'Dejar las reglas .vx-legal-body y .vx-legal-container donde están, sin borrarlas.',
-            'contra'   => 'Podarlas con el resto, que es lo que la medición decía.',
-            'medicion' => 'El markup de page.php escribe vx-legal-content y vx-legal-wrap; el CSS estiliza vx-legal-body y vx-legal-container. Son nueve reglas que nunca se aplicaron. No es código muerto: es trabajo que alguien hizo y que dejó de tener efecto cuando el nombre cambió en un lado y no en el otro. Borrarlas lo tira; renombrarlas cambia cómo se ve una página publicada. Ninguna de las dos cosas es una poda.',
-            'estado'   => 'abierta',
+            'titulo'   => 'Las páginas legales tenían dos copias de sus estilos',
+            'eligio'   => 'Una sola, la del sistema: se renombró a los nombres que el markup usa y se borró el bloque <style> del head de page.php.',
+            'contra'   => 'Borrar las reglas renombradas, que es lo que la poda proponía, o dejar las dos copias conviviendo.',
+            'medicion' => 'No era un nombre desviado: eran dos copias enteras. page.php llevaba los estilos legales en un <style> del head, con la fuente y cuatro tracking escritos a mano, y esa era la que pintaba la página. En style.css había una segunda copia, más nueva, con los papeles del sistema —var(--font-display), var(--ls-hero), var(--peso-titulo)— renombrada y sin aplicarse desde entonces. Al activarla: el título pasa de peso 700 a 600, el tracking a sus peldaños y el h2 de 19,2 a 22,5 px. La copia sistematizada había perdido el fondo transparente y el z-index, así que activarla sin corregirlo habría tapado la animación de red de las dos páginas.',
+            'estado'   => 'aplicada',
             'tokens'   => [],
         ],
         [

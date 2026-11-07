@@ -4417,14 +4417,20 @@ a.pub-comment-author:hover {
    ============================================================ */
 
 .vx-legal-main {
-  background: var(--blanco);
+  /* Transparente y por encima: la página legal va sobre la animación de red,
+     y el contenido necesita z-index propio para quedar encima del canvas.
+     La copia sistematizada lo había perdido, y activarla sin esto habría
+     tapado el fondo de las dos páginas legales. */
+  background: transparent;
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
 }
 
-.vx-legal-container {
+.vx-legal-wrap {
   max-width: 760px;
   margin: 0 auto;
-  padding: 4rem 1.5rem 6rem;
+  padding: 4rem 2rem 6rem;
 }
 
 .vx-legal-eyebrow {
@@ -4449,14 +4455,14 @@ a.pub-comment-author:hover {
   border-bottom: 2px solid var(--color-primary);
 }
 
-.vx-legal-body {
+.vx-legal-content {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.8;
   color: var(--color-text-secondary);
 }
 
-.vx-legal-body h2 {
+.vx-legal-content h2 {
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 2.5vw, 1.6rem);
   font-weight: var(--peso-titulo);
@@ -4467,7 +4473,7 @@ a.pub-comment-author:hover {
   border-bottom: 1px solid var(--color-border);
 }
 
-.vx-legal-body h3 {
+.vx-legal-content h3 {
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-weight: 600;
@@ -4476,33 +4482,33 @@ a.pub-comment-author:hover {
   letter-spacing: var(--ls-h4);
 }
 
-.vx-legal-body p {
+.vx-legal-content p {
   margin-bottom: 1.25rem;
 }
 
-.vx-legal-body ul {
+.vx-legal-content ul {
   padding-left: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
-.vx-legal-body ul li {
+.vx-legal-content ul li {
   margin-bottom: 0.5rem;
   padding-left: 0.25rem;
 }
 
-.vx-legal-body strong {
+.vx-legal-content strong {
   font-weight: 600;
   color: var(--color-text-primary);
 }
 
-.vx-legal-body a {
+.vx-legal-content a {
   color: var(--color-primary-ink);
   text-decoration: none;
   border-bottom: 1px solid var(--color-primary);
   transition: opacity 0.15s;
 }
 
-.vx-legal-body a:hover {
+.vx-legal-content a:hover {
   opacity: 0.75;
 }
 
