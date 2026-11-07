@@ -52,7 +52,7 @@ function vx_marca_estrategia(): void {
 
     vx_marca_bloque( 'estrategia-vision', function () {
         vx_marca_declaracion( 'Ser el primer lugar donde una empresa de servicios busca cuando necesita un aliado.' );
-        vx_marca_p( '<strong>El lanzamiento es en Hispanoamérica y en español.</strong> La visión no se queda ahí: incluye el mundo hispanohablante completo, Brasil, Estados Unidos y Europa. Esa diferencia se sostiene al escribir, y en los dos sentidos: no se promete presencia donde todavía no la hay, y no se dice que Vitrinexo sea una plataforma latinoamericana.' );
+        vx_marca_p( '<strong>El lanzamiento es en Hispanoamérica y en español.</strong> La visión no se queda ahí: incluye el mundo hispanohablante completo, Brasil, Estados Unidos y Europa. Esa diferencia se sostiene al escribir, y en los dos sentidos: no se promete presencia donde todavía no la hay, y no se dice que Vitrinexo sea una <span data-cita>plataforma latinoamericana</span>.' );
     } );
 
     vx_marca_bloque( 'estrategia-valores', function () {
@@ -81,7 +81,10 @@ function vx_marca_estrategia(): void {
         vx_marca_declaracion( '100 miembros aprobados antes de que termine 2026, para empezar a cobrar en 2027.' );
         vx_marca_p( 'De ahí sale el programa de lanzamiento entero, y por eso el sistema lo hace cumplir en vez de confiarlo al copy: los <strong>primeros 100 miembros aprobados</strong> reciben el distintivo de Miembro Pionero, que es permanente, y la membresía vence a los <strong>90 días</strong> de la aprobación.' );
         vx_marca_p( 'La consecuencia al escribir es que el programa no se anuncia como una promoción sino como una fecha de corte. Cuando se llegue a 100, cierra.' );
-        vx_marca_pendiente( 'El modelo de suscripción de 2027 no está definido, y el sitio ya promete que los Miembros Pioneros tendrán condiciones preferenciales. Esa promesa hay que poder cumplirla.' );
+        vx_marca_declaracion( 'Lo que el sitio ya prometió.' );
+        vx_marca_p( 'Está publicado en las preguntas frecuentes y es lo que hay que poder cumplir: <strong>acceso gratuito durante tres meses</strong>, <strong>el modelo de suscripción se comunica al término de ese período</strong>, y <strong>los Miembros Pioneros tendrán condiciones preferenciales respecto a los nuevos</strong>. Nada de eso es reversible: está dicho a quien ya se inscribió.' );
+        vx_marca_p( 'Y el código no está en blanco. El panel trae tres planes con precios por defecto (mensual, anual y preferencial) en la moneda del sistema. <strong>Son valores que alguien escribió, no una decisión que alguien tomó</strong>, y esa diferencia importa: están a un clic de publicarse.' );
+        vx_marca_pendiente( 'Tres cosas sin decidir, y la primera tiene reloj. Una: cuándo vence el período gratuito de los primeros inscritos, porque la promesa dice «al término de los tres meses se comunicará el modelo» y esa fecha no espera. Dos: qué significa «condiciones preferenciales» (precio más bajo para siempre, precio congelado o un año gratis), que son tres promesas distintas y solo una está dicha. Tres: si los precios que el código trae por defecto son la decisión o un marcador de posición.' );
     } );
 
     vx_marca_bloque( 'estrategia-propuesta-de-valor', function () {
@@ -330,9 +333,16 @@ function vx_marca_identidad(): void {
 function vx_marca_voz(): void {
 
     vx_marca_bloque( 'voz-idioma', function () {
-        vx_marca_p( '<strong>Español, y se trata de tú.</strong> Nunca voseo: «tienes» y «puedes», no «tenés» ni «podés».' );
-        vx_marca_p( 'El lanzamiento y la comunidad inicial son de Hispanoamérica, así que el español es el de la región y no el peninsular. La visión incluye Brasil, Estados Unidos y Europa, y eso obliga a una regla al escribir: <strong>no se dice que Vitrinexo sea una plataforma latinoamericana</strong>, aunque hoy sus miembros lo sean. Lo que se dice es dónde hay comunidad hoy.' );
-        vx_marca_pendiente( 'Portugués e inglés no existen todavía. Cuando entren, hay que decidir si son el mismo texto traducido o se escriben aparte, y qué pasa con «vitrinear», que no se traduce.' );
+        vx_marca_p( '<strong>Español, y se trata de tú.</strong> Nunca voseo: «tienes» y «puedes», no <span data-cita>«tenés» ni «podés»</span>.' );
+        vx_marca_p( 'El lanzamiento y la comunidad inicial son de Hispanoamérica, así que el español es el de la región y no el peninsular. La visión incluye Brasil, Estados Unidos y Europa, y eso obliga a una regla al escribir: <strong>no se dice que Vitrinexo sea una <span data-cita>plataforma latinoamericana</span></strong>, aunque hoy sus miembros lo sean. Lo que se dice es dónde hay comunidad hoy.' );
+        vx_marca_p( 'Las dos reglas se miden sobre el texto que la persona ve, en el sitio público y dentro del área de miembros: el voseo no se cuela en una portada que alguien revisó diez veces, se cuela en un saludo o en un aviso.' );
+
+        vx_marca_declaracion( 'Portugués e inglés todavía no existen, y ya tienen regla.' );
+        vx_marca_p( 'Escribirla antes vale la pena porque la decisión se toma mal con prisa, el día que haga falta el idioma. <strong>No se traduce: se vuelve a escribir.</strong> Un texto traducido conserva el ritmo del español y suena a manual de instrucciones; lo que viaja es el argumento, no la frase.' );
+        vx_marca_valor( 'Lo que no cambia', 'El nombre, <span data-cita>Vitrinexo</span>, y <strong>nexo</strong>, que es la palabra que la marca inventó y no tiene equivalente. En portugués y en inglés se usan tal cual, porque traducirlas sería renunciar a lo único que no se puede copiar.' );
+        vx_marca_valor( 'Lo que se vuelve a escribir', '<strong>Vitrinear</strong> no se traduce ni se translitera: es un verbo que solo funciona en español. En los otros idiomas la idea se dice con otra construcción, y esa construcción hay que encontrarla, no calcarla.' );
+        vx_marca_valor( 'Lo que se decide una vez', '<strong>Miembro Pionero</strong> necesita su nombre propio en cada idioma, y ese nombre es una decisión de marca, no de traducción: una vez elegido, no se vuelve a discutir por pieza.' );
+        vx_marca_p( 'Y la regla de la que se habló arriba vale igual en los tres idiomas: se dice dónde hay comunidad hoy, nunca de qué región es la marca.' );
     } );
 
     vx_marca_bloque( 'voz-tono', function () {
@@ -347,8 +357,8 @@ function vx_marca_voz(): void {
     vx_marca_bloque( 'voz-mayusculas-y-minusculas', function () {
         vx_marca_p( '<strong>Tipo oración en todas partes</strong>: en títulos, botones, etiquetas y avisos. Solo va mayúscula la primera letra y lo que sea nombre propio.' );
         vx_marca_p( 'La caja alta se reserva para los sobretítulos, que son rótulos de sección y no texto para leer. Nunca se usa para dar énfasis: para eso está el peso.' );
-        vx_marca_p( 'El nombre de la marca se escribe siempre <strong>Vitrinexo</strong>, con una sola mayúscula. Nunca «VitriNexo» ni «VITRINEXO», tampoco en logotipos de terceros ni en firmas de correo.' );
-        vx_marca_p( 'De ahí sale una regla que no es obvia hasta que choca: <strong>el nombre nunca va dentro de un sobretítulo</strong>. El sobretítulo es caja alta por definición, así que meter la marca ahí la grita aunque en el código esté bien escrita. Pasó en las páginas legales, donde el sobretítulo decía la marca y se leía VITRINEXO.' );
+        vx_marca_p( 'El nombre de la marca se escribe siempre <strong>Vitrinexo</strong>, con una sola mayúscula. Nunca <span data-cita>«VitriNexo» ni «VITRINEXO»</span>, tampoco en logotipos de terceros ni en firmas de correo.' );
+        vx_marca_p( 'De ahí sale una regla que no es obvia hasta que choca: <strong>el nombre nunca va dentro de un sobretítulo</strong>. El sobretítulo es caja alta por definición, así que meter la marca ahí la grita aunque en el código esté bien escrita. Pasó en las páginas legales, donde el sobretítulo decía la marca y se leía <span data-cita>VITRINEXO</span>.' );
     } );
 
     vx_marca_bloque( 'voz-vocabulario', function () {
@@ -363,10 +373,10 @@ function vx_marca_voz(): void {
             [ 'directorio', 'listado, catálogo, base de datos' ],
             [ 'membresía', 'suscripción, plan de pago' ],
         ] );
-        vx_marca_p( 'Hay además siete palabras que no se dicen de ninguna forma: <strong>ecosistema</strong>, <strong>sinergia</strong>, <strong>solución</strong>, <strong>partner</strong>, <strong>match</strong>, <strong>early adopter</strong> y <strong>VITRINEXO</strong> en mayúsculas. Las cuatro primeras no significan nada y se nota. Las tres siguientes significan otra cosa: <em>match</em> es de las aplicaciones de citas y acá nadie busca pareja, <em>early adopter</em> ya tiene nombre en español y es Miembro Pionero, y el nombre en caja alta grita.' );
+        vx_marca_p( 'Hay además siete palabras que no se dicen de ninguna forma: <span data-cita><strong>ecosistema</strong>, <strong>sinergia</strong>, <strong>solución</strong>, <strong>partner</strong>, <strong>match</strong>, <strong>early adopter</strong> y <strong>VITRINEXO</strong></span> en mayúsculas. Las cuatro primeras no significan nada y se nota. Las tres siguientes significan otra cosa: <span data-cita><em>match</em></span> es de las aplicaciones de citas y acá nadie busca pareja, <span data-cita><em>early adopter</em></span> ya tiene nombre en español y es Miembro Pionero, y el nombre en caja alta grita.' );
         vx_marca_p( 'Y una regla de puntuación: <strong>no se usan guiones largos</strong> en ningún texto de la marca. Donde aparezca uno va una coma, un punto o dos puntos.' );
         vx_marca_p( 'El verbo propio, <strong>vitrinear</strong>, se conjuga normal y no se pone entre comillas. Está en el diccionario de la marca, no es una gracia.' );
-        vx_marca_p( 'El producto contradecía la prohibición de «match» en tres direcciones vivas. Ya no: la sección se llama <strong>Nexos</strong> y sus dos caras son <strong>lo que busco</strong> y <strong>lo que ofrezco</strong>, que es como la portada lo dice desde siempre. Las direcciones viejas redirigen permanente, porque son enlaces que los miembros pueden tener guardados y a los que apuntan correos ya enviados.' );
+        vx_marca_p( 'El producto contradecía la prohibición de <span data-cita>«match»</span> en tres direcciones vivas. Ya no: la sección se llama <strong>Nexos</strong> y sus dos caras son <strong>lo que busco</strong> y <strong>lo que ofrezco</strong>, que es como la portada lo dice desde siempre. Las direcciones viejas redirigen permanente, porque son enlaces que los miembros pueden tener guardados y a los que apuntan correos ya enviados.' );
     } );
 
     vx_marca_bloque( 'voz-patrones-de-copy', function () {
@@ -386,8 +396,10 @@ function vx_marca_voz(): void {
         vx_marca_valor( 'Hora', 'En formato de 24 horas y con dos puntos: 20:00. Cuando algo pasa a la vez en varias ciudades, la hora va siempre seguida de «hora local», porque sin eso la mitad de los invitados calcula mal.' );
         vx_marca_valor( 'Miles y decimales', 'Punto para los miles y coma para los decimales: 1.234,56. Es la convención del español, y mezclarla con la inglesa en la misma pantalla es la forma más rápida de que alguien lea mil veces de más.' );
         vx_marca_valor( 'Porcentaje', 'Pegado al número: 35%.' );
-        vx_marca_p( 'El sitio anunciaba las cenas como «miércoles 8pm» mientras el código guardaba 20:00. Ya no: manda el formato de 24 horas en los dos lados, que es el que no se lee mal en ningún país donde la marca quiere estar.' );
-        vx_marca_pendiente( 'Cuando entre Estados Unidos, la fecha corta d/m/Y se va a leer al revés. Esa revisión queda anotada para entonces y no antes: cambiarla ahora rompería la lectura de todos los miembros de hoy.' );
+        vx_marca_p( 'El sitio anunciaba las cenas como <span data-cita>«miércoles 8pm»</span> mientras el código guardaba 20:00. Ya no: manda el formato de 24 horas en los dos lados, que es el que no se lee mal en ningún país donde la marca quiere estar.' );
+        vx_marca_p( 'Las seis reglas se miden sobre el texto que la persona ve, en todas las páginas y en las cuatro anchuras. No sobre el código: ahí <code>strtotime</code> necesita «8:00 AM» en inglés para entender la frase, y eso no es copy.' );
+        vx_marca_p( 'El día que se escribió esa comprobación había <strong>tres violaciones</strong>, y una era la que este mismo párrafo daba por corregida: la ficha del evento seguía anunciando «8:00 pm». Las otras dos, un correo que decía «9 AM» y las instrucciones del repositorio, que seguían describiendo las cenas como «8pm» y por tanto se lo enseñaban a quien las leyera.' );
+        vx_marca_p( 'Lo que entre Estados Unidos sigue abierto, y queda anotado para entonces y no antes: la fecha corta d/m/Y se va a leer al revés, y cambiarla hoy rompería la lectura de todos los miembros de ahora.' );
     } );
 
     vx_marca_bloque( 'voz-emojis', function () {

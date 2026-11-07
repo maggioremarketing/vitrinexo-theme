@@ -16,7 +16,11 @@ function vx_marca_portada(): void {
     $definidos = count( array_filter( $criterios, fn( $c ) => $c['estado'] === 'definido' ) );
     ?>
     <header class="vx-portada">
-        <p class="vx-sobretitulo">Vitrinexo · Manual de marca</p>
+        <?php /* Sin el nombre: el sobretítulo es caja alta por definición y meterlo
+           ahí lo convierte en VITRINEXO, que es justo lo que el criterio de
+           Mayúsculas prohíbe. La portada lo rompía en su propia cabecera, y
+           el logotipo está dos líneas más abajo. */ ?>
+        <p class="vx-sobretitulo">Manual de marca</p>
         <h1 class="vx-display"><?php echo esc_html( function_exists( 'vx_tagline' ) ? vx_tagline() : '' ); ?></h1>
         <p class="vx-bajada">
             Directorio B2B de empresas de servicios profesionales. Este documento dice cómo se ve,
@@ -75,6 +79,11 @@ function vx_marca_kses(): array {
     return [
         'strong' => [], 'em' => [], 'code' => [], 'br' => [],
         'a' => [ 'href' => [], 'rel' => [], 'target' => [] ],
+        // Un valor citado, no usado: «miércoles 8pm» se nombra para contar qué
+        // se corrigió. Las comprobaciones que miden la página lo saltan, y sin
+        // esta marca la única forma de pasar en verde sería que el manual no
+        // pudiera nombrar lo que arregló.
+        'span' => [ 'data-cita' => [] ],
     ];
 }
 
@@ -300,7 +309,13 @@ function vx_marca_peldano_texto( string $token, string $uso, string $como ): voi
     <?php
 }
 
-/** Dos columnas: lo que decimos y lo que no. */
+/**
+ * Dos columnas: lo que decimos y lo que no.
+ *
+ * La columna de la derecha es, entera, una lista de citas: nombra las palabras
+ * para prohibirlas. Va con data-cita, porque si no la comprobación de
+ * vocabulario denuncia al manual por nombrar lo que prohíbe.
+ */
 function vx_marca_vocabulario( array $pares ): void {
     ?>
     <div class="vx-vocabulario">
@@ -311,7 +326,7 @@ function vx_marca_vocabulario( array $pares ): void {
         <?php foreach ( $pares as [ $si, $no ] ) : ?>
             <div class="vx-vocabulario-fila">
                 <span class="vx-si"><?php echo esc_html( $si ); ?></span>
-                <span class="vx-no"><?php echo esc_html( $no ); ?></span>
+                <span class="vx-no" data-cita><?php echo esc_html( $no ); ?></span>
             </div>
         <?php endforeach; ?>
     </div>

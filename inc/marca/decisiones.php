@@ -72,6 +72,15 @@ function vx_marca_decisiones(): array {
         ],
         [
             'fecha'    => '2026-11-07',
+            'titulo'   => 'El modelo de suscripción tiene valores en el código y ninguna decisión detrás',
+            'eligio'   => 'Nada. Queda escrito con lo que de verdad hay, que no es lo que esta página decía.',
+            'contra'   => 'Seguir anotándolo como «no está definido», que hacía pensar que el campo estaba en blanco.',
+            'medicion' => 'El panel trae mensual, anual y preferencial con precios por defecto en el código. Son valores escritos, no decididos, y están a un clic de publicarse. Lo publicado promete tres meses gratis, que el modelo se comunica al terminar ese plazo, y que los Pioneros tendrán condiciones preferenciales: tres promesas que no se pueden deshacer. Lo que falta decidir es cuándo vence el plazo de los primeros inscritos, qué significa «preferencial» (más barato para siempre, congelado o un año gratis, que son tres cosas distintas) y si esos precios por defecto son la decisión.',
+            'estado'   => 'abierta',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-07',
             'titulo'   => 'Cada familia gana su peldaño de tinta',
             'eligio'   => 'Un paso oscuro por familia: --lavanda-tinta, --rosa-tinta, --celeste-tinta, --salvia-tinta, --mantequilla-tinta, --terracota-tinta, y sus papeles --color-*-ink. Coral ya tenía el suyo.', // primitivo a propósito: el registro nombra los peldaños que creó.
             'contra'   => 'Escribir esos textos en tinta normal, que pasa el contraste pero pierde el color, y el color ahí lleva el significado: verde es lo que ofreces, rosa es lo que buscas.',
