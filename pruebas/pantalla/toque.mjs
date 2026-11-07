@@ -27,8 +27,15 @@ const fallos = await enLaPagina(
         const estilo = getComputedStyle( el );
         if ( estilo.display === 'none' || estilo.visibility === 'hidden' ) continue;
 
-        // El enlace en medio de una frase queda exento por la propia norma.
-        if ( estilo.display.startsWith( 'inline' ) && el.closest( 'p' ) ) continue;
+        // El enlace en medio de una frase queda exento por la propia norma: su
+        // tamaño no es suyo, es el de la línea de texto donde vive.
+        //
+        // La norma dice «en una frase o en un bloque de texto», y acá solo se
+        // miraba <p>. Un enlace dentro de un titular —«Hola, Ana»— es el mismo
+        // caso y se denunciaba igual, así que la lista es la de los elementos
+        // que de verdad son texto corrido.
+        const TEXTO = 'p, h1, h2, h3, h4, h5, h6, li, blockquote, figcaption, dd, dt, label, td, th';
+        if ( estilo.display.startsWith( 'inline' ) && el.closest( TEXTO ) ) continue;
 
         // Una casilla dentro de su etiqueta no es el objetivo: lo es la
         // etiqueta, porque al tocarla el navegador marca la casilla. Medir el

@@ -63,6 +63,15 @@ function vx_marca_decisiones(): array {
         ],
         [
             'fecha'    => '2026-11-07',
+            'titulo'   => 'La excepción del enlace en texto vale para cualquier bloque, no solo para un párrafo',
+            'eligio'   => 'Que la comprobación exima al enlace en línea que vive dentro de un titular, una lista, una celda o una etiqueta, además del párrafo.',
+            'contra'   => 'Dejarla mirando solo <p>, que es como estaba.',
+            'medicion' => 'La norma dice «en una frase o en un bloque de texto». El enlace del nombre en «Hola, Ana» vive en un titular y es exactamente el mismo caso: su tamaño no es suyo, es el de la línea. Se denunciaba igual, y agrandarlo habría empujado el titular.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-07',
             'titulo'   => 'Cada familia gana su peldaño de tinta',
             'eligio'   => 'Un paso oscuro por familia: --lavanda-tinta, --rosa-tinta, --celeste-tinta, --salvia-tinta, --mantequilla-tinta, --terracota-tinta, y sus papeles --color-*-ink. Coral ya tenía el suyo.', // primitivo a propósito: el registro nombra los peldaños que creó.
             'contra'   => 'Escribir esos textos en tinta normal, que pasa el contraste pero pierde el color, y el color ahí lleva el significado: verde es lo que ofreces, rosa es lo que buscas.',

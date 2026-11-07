@@ -214,11 +214,13 @@ h2 strong {
   align-items: center;
   justify-content: center;
   gap: 7px;
-  /* El alto salia del texto y del relleno de cada tamano: btn-vx-lg daba 44
-     justo, btn-vx-md 37 y btn-vx-sm 27. Un boton pequeno puede ser pequeno a
-     la vista, pero no puede ser pequeno bajo el pulgar. El ancho ya pasa
-     siempre: lo que falla es el alto. */
+  /* El alto salía del texto y del relleno de cada tamaño: btn-vx-lg daba 44
+     justo, btn-vx-md 37 y btn-vx-sm 27. Un botón pequeño puede ser pequeño a
+     la vista, pero no puede ser pequeño bajo el pulgar.
+     El ancho se dio por bueno porque el texto siempre pasa de 44, y eso era
+     cierto salvo para los botones que solo llevan un ícono: 29 px. */
   min-height: 44px;
+  min-width: 44px;
   font-family: var(--font-body);
   font-weight: 500;
   border: none;
@@ -3597,6 +3599,13 @@ section#offers {
   font-size: 13px;
   color: var(--color-text-secondary);
   line-height: 1;
+  /* Medía 8 × 13: el tamaño del carácter ×. Era el control más pequeño del
+     producto, y es el que borra una etiqueta del perfil. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 /* Page background variant (logged-in pages use ice-500) */
@@ -3835,6 +3844,13 @@ section#offers {
   margin-left: auto;
   font-size: 16px;
   color: inherit;
+  /* Medía 7,8 × 13: el tamaño del carácter ×, sin relleno. Era el control más
+     pequeño del producto, y cierra un aviso. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
   padding: 0;
 }
 
@@ -4831,6 +4847,29 @@ input[type="radio"] {
 }
 
 .vx-form__label-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* Un campo también se toca, y los hay de varias familias. Este es el piso para
+   todos, incluidos los que no llevan ninguna de las clases del sistema. */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]),
+select,
+textarea {
+  min-height: 44px;
+}
+
+/* El nombre de una ficha es un enlace, y medía 20 de alto: el de la línea de
+   texto. Se le da su área sin moverlo de sitio. */
+.vx-card-name-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* El logotipo del menú del teléfono, que es el tercer enlace con imagen. */
+.vx-drawer__header > a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
