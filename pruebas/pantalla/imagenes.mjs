@@ -15,10 +15,25 @@ const fallos = await enLaPagina(
     // por no cargada a la que todavía está pidiéndose. Se espera a que cada una
     // resuelva, para bien o para mal: lo que se quiere saber es cuál falló, no
     // cuál iba lenta.
+    //
+    // Pero una imagen lazy que nunca entra en pantalla no empieza a cargar, así
+    // que no dispara load ni error, y su promesa no resuelve nunca. Esta prueba
+    // se colgaba para siempre por eso, y solo hizo falta que la página creciera
+    // lo suficiente como para dejar una imagen abajo del todo.
+    //
+    // No se arregla recorriendo la página: eso depende de que el barrido sea
+    // más lento que la red, y cuando no lo es la prueba acusa de no cargar a
+    // una imagen que estaba cargando. Se les quita el lazy, que empieza la
+    // descarga en el acto y no depende de dónde esté el scroll.
+    await pagina.evaluate( () => {
+      for ( const img of document.images ) if ( img.loading === 'lazy' ) img.loading = 'eager';
+    } );
+
     await pagina.evaluate( () => Promise.all(
       [ ...document.images ].map( ( img ) => img.complete ? null : new Promise( ( listo ) => {
         img.addEventListener( 'load', listo, { once: true } );
         img.addEventListener( 'error', listo, { once: true } );
+        setTimeout( listo, 10000 ); // y un plazo, para que una sola imagen no cuelgue la suite
       } ) )
     ) );
 
