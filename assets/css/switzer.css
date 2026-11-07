@@ -16,3 +16,25 @@
   font-style: italic;
   font-display: swap;
 }
+
+/* ── JetBrains Mono ────────────────────────────────────────────────────────
+   La fuente de los datos: etiquetas en caja alta, fechas y horas. Se sirve
+   desde este servidor, con licencia OFL (assets/fonts/JetBrainsMono-OFL.txt).
+
+   Va subconjuntada a lo que el producto escribe de verdad —latín con acentos,
+   dígitos y puntuación—, así que los dos pesos juntos pesan 7,8 kB. Enteros
+   pesaban 184, cuatro veces Switzer completa, para vestir unas etiquetas. */
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../fonts/JetBrainsMono-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}

@@ -76,6 +76,7 @@ function vx_marca_familias(): array {
                 '--color-info-bg'    => 'El fondo del aviso informativo.',
                 '--color-warning'    => 'Hay que mirar esto: vencimiento cerca, dato incompleto.',
                 '--color-warning-bg' => 'El fondo del aviso de atención.',
+                '--color-remarcado'  => 'El subrayado de una palabra dentro de una frase. Es el otro oficio de la mantequilla, y no es un aviso: un aviso interrumpe, un remarcado acompaña.',
             ],
         ],
         [
@@ -145,6 +146,10 @@ function vx_marca_familias(): array {
             'papeles' => [
                 '--font-display' => 'Titulares y cualquier texto que se lea antes que el resto.',
                 '--font-body'    => 'El cuerpo: prosa, campos, tablas.',
+                '--font-mono'    => 'El dato: etiquetas en caja alta, fechas, horas y cifras que se leen de un vistazo. JetBrains Mono, subconjuntada. Nunca para prosa: una frase en mono se lee como un error del sistema.',
+                '--peso-prosa'   => '400. El cuerpo y todo lo que se lee seguido.',
+                '--peso-apoyo'   => '500. Lo que acompaña sin mandar: etiquetas, pies, metadatos.',
+                '--peso-titulo'  => '600. Nombres y títulos, y el peso más alto que la identidad admite. El 700 que había en diecisiete reglas se migró acá.',
             ],
         ],
     ];

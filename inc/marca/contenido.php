@@ -132,11 +132,16 @@ function vx_marca_identidad(): void {
     vx_marca_bloque( 'identidad-isotipo', function () {
         vx_marca_declaracion( 'La vitrina, con los nexos en sus aberturas.' );
         vx_marca_p( 'El isotipo sale del marco del logotipo, no de otra idea. En el logotipo el marco se abre a los lados y <strong>los dos puntos están centrados justo sobre esas aberturas</strong>: la vitrina se abre y los nexos la ocupan. El isotipo conserva eso y nada más.' );
-        vx_marca_tamanos( 'isotipo.svg', 'Isotipo de Vitrinexo: un marco coral abierto a los lados, con un punto salvia y uno lavanda ocupando las aberturas.', [ 128, 64, 48, 32 ], 'La versión de marca. Se usa de 48 px para arriba: más abajo el trazo baja de 2 px y las aberturas se cierran.' );
-        vx_marca_declaracion( 'De 32 para abajo, la versión llena.' );
-        vx_marca_p( 'El trazo del marco mide 1,6 px cuando el isotipo se dibuja a 16, y a ese tamaño un contorno desaparece. La versión llena invierte el problema: la vitrina se rellena y <strong>los dos nexos quedan calados</strong>, así que lo que se ve es la forma y no la línea.' );
-        vx_marca_tamanos( 'isotipo-lleno.svg', 'Isotipo lleno de Vitrinexo: un cuadrado coral redondeado con dos círculos calados.', [ 64, 48, 32, 24, 16 ], 'Es la misma idea resuelta al revés, y es la que vive en el favicon.' );
-        vx_marca_p( 'No se mezclan: la abierta nunca baja de 48 y la llena nunca sube de 32. Entre medio manda el soporte, y si hay duda se usa la llena.' );
+        vx_marca_tamanos( 'isotipo.svg', 'Isotipo de Vitrinexo: un marco coral abierto a los lados, con un punto salvia y uno lavanda ocupando las aberturas.', [ 128, 64, 48, 32, 24, 16 ], 'Esta página afirmaba que se usaba de 48 px para arriba. Se midió: a 32 se lee entero y a 24 todavía. Lo que se pierde a 16 no es el marco, son los dos puntos.' );
+
+        vx_marca_declaracion( 'Hubo una versión llena, y se retiró.' );
+        vx_marca_p( 'Era un cuadrado coral con los dos nexos calados, y resolvía el tamaño chico a costa de la idea: sin las aberturas el marco deja de ser una vitrina y <strong>lo que queda son dos puntos dentro de una caja, que se lee como una cara</strong>. Un isotipo que a 16 px es legible y a 128 px es otra marca no sirve.' );
+        vx_marca_p( 'Sus tres archivos se borraron del repositorio. No hay una resolución para arriba y otra para abajo: hay un isotipo.' );
+
+        vx_marca_declaracion( 'Para el favicon, el mismo marco sobre una baldosa.' );
+        vx_marca_p( 'Lo que el tamaño chico necesita no es rellenar el marco, es <strong>una silueta que lo sostenga</strong>. La baldosa pone el marco calado en blanco sobre un cuadrado coral: la forma de la vitrina intacta, y un bloque de color que la pestaña del navegador sí puede dibujar a 16 px.' );
+        vx_marca_tamanos( 'isotipo-baldosa.svg', 'Isotipo de Vitrinexo calado en blanco sobre una baldosa coral redondeada.', [ 64, 48, 32, 24, 16 ], 'Vive en el favicon y en el ícono de pantalla de inicio, y en ningún otro sitio: dentro de una página el isotipo va suelto, sin baldosa.' );
+
         vx_marca_declaracion( 'Dos monocromas, y cada una tiene su fondo.' );
         vx_marca_p( 'Existen para donde el color no puede ir: un fondo saturado, una impresión a un color, un sello. No son un filtro sobre la versión de color, son archivos aparte, y <strong>la elección no es de gusto sino de fondo</strong>: la de tinta va sobre claro y la blanca sobre oscuro. Nunca al revés, y nunca la de color sobre un fondo que compita con el coral.' );
         vx_marca_variantes( [
@@ -144,20 +149,23 @@ function vx_marca_identidad(): void {
             [ 'isotipo-tinta.svg', '--color-surface', 'tinta · sobre claro', 'Isotipo monocromo en tinta sobre fondo claro.' ],
             [ 'isotipo-blanco.svg', '--color-text-primary', 'blanco · sobre tinta', 'Isotipo monocromo en blanco sobre fondo de tinta.' ],
             [ 'isotipo-blanco.svg', '--color-primary', 'blanco · sobre coral', 'Isotipo monocromo en blanco sobre fondo coral.' ],
-        ], 'La abierta. Sobre coral va la blanca y no la de color: el marco coral sobre coral desaparece.' );
-        vx_marca_p( 'La llena tiene las mismas dos, y en ella la monocroma hace algo que la de color no puede: <strong>los nexos dejan pasar el fondo</strong>. Calados sobre tinta, la vitrina se recorta y se lee a cualquier tamaño.' );
-        vx_marca_variantes( [
-            [ 'isotipo-lleno.svg', '--color-background', 'color · sobre claro', 'Isotipo lleno en color sobre fondo claro.' ],
-            [ 'isotipo-lleno-tinta.svg', '--color-surface', 'tinta · sobre claro', 'Isotipo lleno monocromo en tinta sobre fondo claro.' ],
-            [ 'isotipo-lleno-blanco.svg', '--color-text-primary', 'blanco · sobre tinta', 'Isotipo lleno monocromo en blanco sobre fondo de tinta.' ],
-            [ 'isotipo-lleno-blanco.svg', '--color-primary', 'blanco · sobre coral', 'Isotipo lleno monocromo en blanco sobre fondo coral.' ],
-        ], 'Seis archivos en total entre las dos resoluciones, y ninguno se genera desde el CSS.' );
+        ], 'Sobre coral va la blanca y no la de color: el marco coral sobre coral desaparece.' );
+        vx_marca_p( 'Cuatro archivos en total, y ninguno se genera desde el CSS.' );
     } );
 
     vx_marca_bloque( 'identidad-tipografias', function () {
-        vx_marca_p( '<strong>Switzer Variable</strong>, y nada más. Se sirve desde el propio servidor en <code>assets/fonts/</code>, en eje de peso continuo de 100 a 900, con romana e itálica.' );
+        vx_marca_p( '<strong>Switzer Variable</strong> para todo lo que se lee, y <strong>JetBrains Mono</strong> para el dato. Las dos se sirven desde el propio servidor en <code>assets/fonts/</code>. Switzer trae eje de peso continuo de 100 a 900, con romana e itálica.' );
         vx_marca_p( 'Una sola familia en dos papeles: <code>--font-display</code> para lo que se lee antes y <code>--font-body</code> para el cuerpo. Hoy las dos apuntan a Switzer, y tenerlas separadas es lo que permite cambiar una sin tocar la otra.' );
-        vx_marca_p( 'De los nueve pesos disponibles se usan cuatro: <strong>400</strong> para prosa, <strong>500</strong> para lo que acompaña, <strong>600</strong> para nombres y títulos, y <strong>700</strong> para el énfasis fuerte. Los demás existen y no se usan.' );
+        vx_marca_p( 'Se usan <strong>tres pesos</strong> y están en el sistema: <code>--peso-prosa</code> 400 para el cuerpo, <code>--peso-apoyo</code> 500 para lo que acompaña, <code>--peso-titulo</code> 600 para nombres y títulos. <strong>El 600 es el peso más alto que la identidad admite.</strong>' );
+        vx_marca_p( 'Había diecisiete reglas en 700 y se migraron al 600. El 700 no estaba decidido: estaba escrito a mano, regla por regla, cada vez que algo tenía que verse más fuerte. Y el 640 del logotipo no entra en esta escala, porque el logotipo es un archivo SVG y no texto vivo: ese peso ya está dibujado.' );
+
+        vx_marca_declaracion( 'El dato va en mono.' );
+        vx_marca_p( '<strong>JetBrains Mono</strong> viste lo que se lee de un vistazo y no se lee seguido: etiquetas en caja alta, fechas, horas y cifras. «OFRECE · LEGAL», «VERIFICADO · 24/09/2026», «MIÉRCOLES · 20:00 HORA LOCAL». La mono los alinea en columna y los separa de la prosa sin necesitar un color.' );
+        vx_marca_p( 'No va nunca en una frase. En mono, una frase parece un mensaje de error del sistema, que es exactamente el tono contrario al de una mesa entre colegas.' );
+        vx_marca_p( 'Se sirve subconjuntada a lo que el producto escribe de verdad: latín con acentos, dígitos y puntuación. Los dos pesos juntos pesan <strong>7,8 kB</strong>. Enteros pesaban 184, cuatro veces Switzer completa, para vestir unas etiquetas.' );
+
+        vx_marca_declaracion( 'El segundo golpe va en itálica.' );
+        vx_marca_p( 'Switzer <strong>itálica 300</strong>, en <code>.vx-remate</code>: <strong>una sola frase corta por pieza</strong>, para el remate. Es lo contrario de un destacado, porque pesa menos que la prosa y no más. Si hay dos en la misma pieza, ninguna remata nada.' );
     } );
 
     vx_marca_bloque( 'identidad-jerarquia', function () {
@@ -225,6 +233,13 @@ function vx_marca_identidad(): void {
         vx_marca_p( '<strong>El coral que se lee es un paso más oscuro que el del boceto.</strong> El valor propuesto daba 4,47 sobre la superficie hundida, y un papel que pasa en una superficie y falla en la de al lado no sirve. El que quedó da 4,80 en el peor caso de las tres.' );
         vx_marca_p( 'Y una consecuencia que conviene saber antes de diseñar: <strong>el foco va en tinta</strong>. Ningún pastel llega al 3:1 que la norma pide para un contorno, así que el contorno de foco no es de color de marca.' );
         vx_marca_p( 'Tres familias enteras no seguían a ningún token y se remaparon: el ámbar del distintivo Pionero es mantequilla, el rosa de Woman es rosa y el púrpura de LGBTQ+ es lavanda.' );
+        vx_marca_declaracion( 'Cada familia tiene un oficio, y dos estaban cruzados.' );
+        vx_marca_p( 'La paleta de la propuesta le da a <strong>terracota</strong> los detalles cálidos y 4Dinner, y a <strong>mantequilla</strong> remarcar una palabra. El producto hacía lo contrario: 4Dinner era mantequilla entera y terracota era el botón de borrar.' );
+        vx_marca_p( 'Se corrigió, y de paso arregló algo que no se veía venir: mantequilla vestía <strong>4Dinner y la comunidad Senior a la vez</strong>, así que sus tarjetas eran indistinguibles. Con 4Dinner en terracota, Senior se queda con la mantequilla y las dos se separan solas.' );
+        vx_marca_valor( 'El peligro pasa a rosa', 'Terracota era el botón de borrar, y un botón de borrar no puede compartir color con un evento. Rosa ya era el borde de error de los campos, así que error y peligro quedan en la misma familia, que es lo que debieron ser siempre. Tinta sobre rosa da 11,99:1.' );
+        vx_marca_valor( 'Remarcar una palabra existe ahora', 'Era un oficio asignado a la mantequilla que ninguna pantalla implementaba. Es <code>--color-remarcado</code>, y viste <code>mark</code>. Para una palabra dentro de una frase, nunca para una frase entera: lo que se remarca todo deja de estar remarcado.' );
+        vx_marca_valor( 'Ningún pastel hace de tinta', 'El paso <code>-presion</code> de una familia es un color, no una tinta. Había cuatro sitios escribiendo texto en mantequilla-presión sobre mantequilla-suave: <strong>1,13:1</strong>, invisible. Van en tinta, que da 16,50.' );
+        vx_marca_p( 'Y una lectura que conviene dejar dicha: la propuesta le da a lavanda «avisos y comunidades». Acá se leyó <strong>avisos como notificaciones</strong>, no como advertencias: la advertencia sigue siendo mantequilla, que es el amarillo de precaución de siempre, y lavanda viste las comunidades y el sistema de notificaciones.' );
         vx_marca_p( '<strong>En el tema no queda un solo color escrito a mano: ni en hexadecimal, ni en <code>rgba()</code>, ni en <code>hsl()</code>, ni en CSS, ni en PHP, ni en JavaScript.</strong> Esta página lo afirmaba antes de que fuera cierto. El barrido de la paleta miró <code>color:</code> y <code>background:</code> en hexadecimal dentro de hojas de estilo, y por los dos huecos que dejó sobrevivieron 62 colores de la paleta vieja en sombras, degradados y veladuras, más el azul, el cian y el verde con los que <code>network.js</code> seguía pintando los puntos del fondo de la portada.' );
         vx_marca_p( 'Lo translúcido ya no se escribe con <code>rgba()</code> y una copia del color, sino con <code>color-mix()</code> sobre el token: <code>color-mix(in srgb, var(--tinta) 12%, transparent)</code>. La diferencia no es de estilo. <code>rgba()</code> copia el valor y se queda donde estaba; <code>color-mix()</code> lo lee, así que si la tinta cambia, la sombra la sigue. La prueba de colores ahora falla ante cualquier <code>rgba()</code> o <code>hsl()</code> con números.' ); // primitivo a propósito: el ejemplo tiene que mostrar la forma exacta que se escribe.
         vx_marca_p( 'En el plugin quedan <strong>362 hexadecimales escritos</strong>, y están todos dentro de esa excepción: 154 en plantillas de correo, 103 en pantallas de wp-admin, 100 en páginas de opciones y en el documento imprimible, 3 en páginas de <code>wp_die()</code> y 2 en un SVG que se arma en el servidor. En los shortcodes, que es todo lo que el sitio público renderiza con la hoja del tema cargada, <strong>no hay ninguno</strong>.' );

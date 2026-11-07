@@ -14,12 +14,11 @@ import { TEMA, informar, leer, resolver, tokensDelSistema } from '../comun.mjs';
 const OFICIAL = 'assets/img/vitrinexo.svg';
 /** Las otras piezas de marca que el manual sí puede mostrar. */
 const DE_MARCA = [
-  'assets/img/isotipo.svg', 'assets/img/isotipo-lleno.svg', 'assets/img/compartir.png',
+  'assets/img/isotipo.svg', 'assets/img/isotipo-baldosa.svg', 'assets/img/compartir.png',
   'assets/img/favicon-16.png', 'assets/img/favicon-32.png', 'assets/img/favicon-180.png',
   'assets/img/favicon-192.png', 'assets/img/favicon-512.png', 'assets/img/isotipo-512.png',
   'assets/img/vitrinexo-tinta.svg', 'assets/img/vitrinexo-blanco.svg',
   'assets/img/isotipo-tinta.svg', 'assets/img/isotipo-blanco.svg',
-  'assets/img/isotipo-lleno-tinta.svg', 'assets/img/isotipo-lleno-blanco.svg',
 ];
 const fallos = [];
 

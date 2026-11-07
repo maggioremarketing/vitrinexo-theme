@@ -170,7 +170,7 @@ function vx_asset_url( string $archivo ): string {
 }
 
 add_action( 'wp_head', function () {
-    printf( '<link rel="icon" type="image/svg+xml" href="%s">' . "\n", esc_url( vx_asset_url( 'isotipo-lleno.svg' ) ) );
+    printf( '<link rel="icon" type="image/svg+xml" href="%s">' . "\n", esc_url( vx_asset_url( 'isotipo-baldosa.svg' ) ) );
     printf( '<link rel="icon" type="image/png" sizes="32x32" href="%s">' . "\n", esc_url( vx_asset_url( 'favicon-32.png' ) ) );
     printf( '<link rel="icon" type="image/png" sizes="16x16" href="%s">' . "\n", esc_url( vx_asset_url( 'favicon-16.png' ) ) );
     printf( '<link rel="apple-touch-icon" sizes="180x180" href="%s">' . "\n", esc_url( vx_asset_url( 'favicon-180.png' ) ) );

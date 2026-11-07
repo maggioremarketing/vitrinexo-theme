@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- El favicon. Es el mismo marco abierto del isotipo, calado en blanco sobre
+     una baldosa coral: a 16 px el marco solo pierde los puntos y la silueta
+     sólida es lo que lo hace legible en una pestaña. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Isotipo de Vitrinexo sobre baldosa coral">
+  <rect width="120" height="120" rx="26" fill="#ff7a4d"/>
+  <g fill="#ffffff"><path d="M26,50 v-7 a14,14 0 0 1 14,-14 h40 a14,14 0 0 1 14,14 v7 h-10 v-7 a4,4 0 0 0 -4,-4 h-40 a4,4 0 0 0 -4,4 v7 Z"/><path d="M26,70 v7 a14,14 0 0 0 14,14 h40 a14,14 0 0 0 14,-14 v-7 h-10 v7 a4,4 0 0 1 -4,4 h-40 a4,4 0 0 1 -4,-4 v-7 Z"/></g>
+  <circle cx="31" cy="60" r="9.5" fill="#ffffff"/><circle cx="89" cy="60" r="9.5" fill="#ffffff"/>
+</svg>
