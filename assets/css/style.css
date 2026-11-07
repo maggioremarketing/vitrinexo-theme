@@ -931,6 +931,8 @@ a.profile-company:hover {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   color: var(--color-text-primary);
+  /* 40,8 de alto con el relleno solo. Un campo tambien se toca. */
+  min-height: 44px;
   padding: 9px 14px;
   border-radius: var(--radius-sm);
   font-family: var(--font-body);
@@ -4781,4 +4783,21 @@ input[type="radio"] {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
+}
+
+/* El ojo que muestra la contraseña y el enlace de recuperarla: el primero vive
+   dentro del campo y el segundo junto a su etiqueta, así que los dos sacaban
+   su alto del ícono y de la línea de texto. */
+.vx-pass-eye {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.vx-form__label-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
