@@ -20,6 +20,10 @@ $paginas = [
   'login'            => [ 'Ingresar',           'vx_login' ],
   'home'             => [ 'Inicio',             'vx_landing' ],
   'preguntas-frecuentes' => [ 'Preguntas frecuentes', 'vx_faq' ],
+  // El blog entra ahora porque entro en RUTAS. Hasta hoy no estaba en ninguna
+  // de las dos, y por eso su cabecera sirvio «ecosistema» en produccion
+  // durante meses con la suite en verde.
+  'blog'             => [ 'Blog',               'vx_blog' ],
   /* El evento y las tres comunidades, que el banco no creaba y nadie medía.
      Los títulos son los mismos que pone el plugin al activarse. */
   '4dinner'          => [ 'Vitrinexo 4Dinner',  'vx_4dinner' ],

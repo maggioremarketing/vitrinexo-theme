@@ -13,7 +13,7 @@
 
 import { chromium } from 'playwright';
 import { informar } from '../comun.mjs';
-import { visitas, estaDentro, receta } from '../comun-pantalla.mjs';
+import { visitas, visitasAdmin, estaDentro, receta } from '../comun-pantalla.mjs';
 
 /** De la propuesta de identidad. Cada una con por qué no se dice. */
 const PROHIBIDAS = [
@@ -38,6 +38,33 @@ const PROHIBIDAS = [
   // sola.
   [ /\bplataforma\s+(latinoamericana|latina)\b/i, 'no se dice que la marca sea de una región: se dice dónde hay comunidad hoy' ],
   [ /\b(red|directorio|comunidad)\s+latinoamericana\b/i, 'no se dice que la marca sea de una región: se dice dónde hay comunidad hoy' ],
+
+  // «continental» va sola, sin sustantivo al lado, al revés que las dos de
+  // arriba: no aparece nunca para otra cosa que para decir de qué región es la
+  // marca, y de hecho hoy no aparece en ninguna parte.
+  [ /\bcontinental(es)?\b/i, 'no se dice que la marca sea de una región: se dice en qué ciudades hay mesa hoy' ],
+
+  // «Hispanoamérica» sí lleva sustantivo, y la razón la dio el propio manual.
+  // Nació sola, como «continental», y al medirla salió roja en cinco frases
+  // que dicen exactamente lo que el criterio permite decir: «el lanzamiento es
+  // en Hispanoamérica y en español», «el español es el de la región», «en
+  // Hispanoamérica ese signo nombra siete monedas distintas». Eso no es
+  // declarar de qué región es la marca: es decir dónde hay comunidad hoy, que
+  // es la mitad permitida de la regla. Prohibir el nombre de la región entero
+  // obligaba a reescribir cinco frases correctas para esquivar una palabra, y
+  // eso es lo que enseña a ignorar la prueba. Lo que no se dice es que
+  // Vitrinexo sea de ahí, y eso es lo que se mide.
+  //
+  // Y la mitad que hay que decir en voz alta: esta regla NO caza ninguna de
+  // las tres frases que la hicieron nacer. «una ciudad de Hispanoamérica» en
+  // el hero del evento, «servicios B2B en Hispanoamérica» en el blog y
+  // «directivas hispanoamericanas» en Vitrinexo Woman pasan las tres en verde,
+  // y pasan bien: medidas contra el criterio, ninguna declaraba que Vitrinexo
+  // sea de una región. Se cambiaron por cómo se leen, que es una decisión de
+  // redacción, y las decisiones de redacción no las toma una prueba. Queda
+  // escrito porque quien lea esto en seis meses va a saber que nació de esas
+  // frases y va a suponer que están protegidas. No lo están.
+  [ /\b(plataforma|red|directorio|comunidad)\s+hispanoamericanas?\b/i, 'no se dice que la marca sea de una región: se dice dónde hay comunidad hoy' ],
 ];
 
 /**
@@ -95,8 +122,10 @@ const pendientes = [];
 // home del miembro son dos textos distintos en la misma ruta. Y la tercera,
 // la de quien no terminó el onboarding, es la única que puede abrir esa
 // pantalla: con la sesión de miembro el plugin redirige al panel.
+const paradas = [ ...visitas(), ...visitasAdmin() ];
+
 const pestana = {};
-for ( const { sesion } of visitas() ) {
+for ( const { sesion } of paradas ) {
   if ( sesion in pestana ) continue;
   const contexto = await navegador.newContext( {
     viewport: { width: 1280, height: 900 },
@@ -105,13 +134,12 @@ for ( const { sesion } of visitas() ) {
   pestana[ sesion ] = await contexto.newPage();
 }
 
-for ( const { url, sesion, etiqueta } of visitas() ) {
-  const ruta = new URL( url ).pathname + etiqueta;
+for ( const { url, sesion, camino: ruta, escritorio } of paradas ) {
   pendientes.push( ruta );
   const pagina = pestana[ sesion ];
   const r = await pagina.goto( url, { waitUntil: 'domcontentloaded' } ).catch( () => null );
   if ( ! r || ! r.ok() ) continue;
-  if ( sesion && false === await estaDentro( pagina ) ) afuera.push( ruta );
+  if ( sesion && ! escritorio && false === await estaDentro( pagina ) ) afuera.push( ruta );
   medidas.push( ruta );
 
   const medida = await pagina.evaluate( () => {

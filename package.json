@@ -11,7 +11,7 @@
     "banco": "bash banco/montar.sh",
     "banco:servir": "PHP_CLI_SERVER_WORKERS=8 php -d opcache.enable=0 -S 127.0.0.1:8910 -t banco/wp/sitio",
     "banco:sesion": "node banco/sesion.mjs",
-    "miembros": "VX_SESION=banco/wp/sesion.json VX_SESION_NUEVA=banco/wp/sesion-onboarding.json npm run accesibilidad -- http://127.0.0.1:8910/marca"
+    "miembros": "VX_SESION=banco/wp/sesion.json VX_SESION_NUEVA=banco/wp/sesion-onboarding.json VX_SESION_ADMIN=banco/wp/sesion-admin.json npm run accesibilidad -- http://127.0.0.1:8910/marca"
   },
   "repository": {
     "type": "git",

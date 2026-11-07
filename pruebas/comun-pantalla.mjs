@@ -26,7 +26,14 @@ export const BASE = () => process.argv[ 2 ] ?? 'https://vitrinexo.com/marca';
  * /marca, y dar por buena una página que no se abrió es la peor forma de
  * pasar en verde.
  */
-export const RUTAS = [ '/', '/preguntas-frecuentes/', '/login/', '/privacidad/', '/terminos/', '/landing-4dinner/' ];
+export const RUTAS = [
+  '/', '/preguntas-frecuentes/', '/login/', '/privacidad/', '/terminos/', '/landing-4dinner/',
+  // El blog faltaba, y la falta se vio en produccion: la cabecera y el estado
+  // vacio decian «ecosistema», primera palabra de la lista de prohibidas, y la
+  // suite pasaba en verde desde hacia meses porque nadie pedia esta ruta.
+  // Responde 200 sin sesion, igual que las otras seis.
+  '/blog/',
+];
 
 /**
  * El área de miembros, que solo existe detrás de una sesión.
@@ -67,8 +74,32 @@ export const RUTAS_MIEMBRO = [
  */
 export const RUTAS_ONBOARDING = [ '/onboarding/' ];
 
+/**
+ * El escritorio de WordPress, donde el plugin también escribe.
+ *
+ * No son pantallas del producto: son las que ve quien administra. Pero la copia
+ * es nuestra —los nombres de las columnas, las cabeceras del CSV, los avisos,
+ * las etiquetas del menú lateral— y hasta acá no la medía nadie. Se revisaba a
+ * ojo, que es justo lo que este proyecto decidió no hacer.
+ *
+ * Solo las mide la comprobación de vocabulario. Las de geometría no: el
+ * escritorio es la interfaz de WordPress, no la nuestra, y pedirle la paleta,
+ * la tipografía o los 44 píxeles de la casa sería medir a WordPress y llamarlo
+ * un fallo de Vitrinexo.
+ */
+export const RUTAS_ADMIN = [
+  '/wp-admin/admin.php?page=vitrinexo-core',
+  '/wp-admin/admin.php?page=vx-planes',
+  '/wp-admin/admin.php?page=vx-validaciones',
+  '/wp-admin/admin.php?page=vx-tags',
+  '/wp-admin/admin.php?page=vx-email-templates',
+  '/wp-admin/users.php',
+  '/wp-admin/edit.php?post_type=vx_faq',
+];
+
 export const SESION = process.env.VX_SESION || '';
 export const SESION_NUEVA = process.env.VX_SESION_NUEVA || '';
+export const SESION_ADMIN = process.env.VX_SESION_ADMIN || '';
 
 /**
  * Que la sesión siga viva, y que se note cuando no.
@@ -125,17 +156,37 @@ export function rutas() {
  * verde y los encontró producción. Una comprobación que no abre lo que afirma
  * medir es peor que no tenerla.
  */
+const visita = ( url, sesion, sufijo ) => {
+  const u = new URL( url );
+  return { url, sesion, camino: u.pathname + u.search + sufijo };
+};
+
 export function visitas() {
   const origen = new URL( BASE() ).origin;
   const publicas = rutas();
   const miembro  = RUTAS_MIEMBRO.map( ( r ) => origen + r );
   const sinTerminar = RUTAS_ONBOARDING.map( ( r ) => origen + r );
   return [
-    ...publicas.map( ( url ) => ( { url, sesion: '', etiqueta: '' } ) ),
-    ...( SESION ? publicas.map( ( url ) => ( { url, sesion: SESION, etiqueta: ' · con sesión' } ) ) : [] ),
-    ...( SESION ? miembro.map( ( url ) => ( { url, sesion: SESION, etiqueta: ' · con sesión' } ) ) : [] ),
-    ...( SESION_NUEVA ? sinTerminar.map( ( url ) => ( { url, sesion: SESION_NUEVA, etiqueta: ' · sin onboarding' } ) ) : [] ),
+    ...publicas.map( ( url ) => visita( url, '', '' ) ),
+    ...( SESION ? publicas.map( ( url ) => visita( url, SESION, ' · con sesión' ) ) : [] ),
+    ...( SESION ? miembro.map( ( url ) => visita( url, SESION, ' · con sesión' ) ) : [] ),
+    ...( SESION_NUEVA ? sinTerminar.map( ( url ) => visita( url, SESION_NUEVA, ' · sin onboarding' ) ) : [] ),
   ];
+}
+
+/**
+ * Las del escritorio, aparte, porque solo una comprobación las quiere.
+ *
+ * Se piden con la sesión del administrador del banco. Sin ella no se piden:
+ * en producción el despliegue corre sin sesión y wp-admin devuelve el login.
+ */
+export function visitasAdmin() {
+  if ( ! SESION_ADMIN ) return [];
+  const origen = new URL( BASE() ).origin;
+  // escritorio: true porque el centinela de sesión no sirve acá. body_class()
+  // es del tema y le pone «logged-in» al cuerpo; wp-admin no lo usa, así que
+  // preguntarle daría que la sesión se cayó en las siete pantallas.
+  return RUTAS_ADMIN.map( ( r ) => ( { ...visita( origen + r, SESION_ADMIN, ' · escritorio' ), escritorio: true } ) );
 }
 
 /**
@@ -153,12 +204,11 @@ export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBa
   const fallos = [], mudas = [];
   const afuera = [];
   const destinos = soloBase
-    ? [ { url: BASE(), sesion: SESION, etiqueta: SESION ? ' · con sesión' : '' } ]
+    ? [ visita( BASE(), SESION, SESION ? ' · con sesión' : '' ) ]
     : visitas();
 
   try {
-    for ( const { url, sesion, etiqueta } of destinos ) {
-      const camino = new URL( url ).pathname + etiqueta;
+    for ( const { url, sesion, camino } of destinos ) {
       for ( const ancho of anchos ) {
         const contexto = await navegador.newContext( {
           viewport: { width: ancho, height: alto },

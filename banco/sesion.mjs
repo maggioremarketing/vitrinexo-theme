@@ -3,10 +3,10 @@
  *
  *   npm run banco:sesion
  *
- * Son dos, y no por gusto. La de ana abre las diecisiete pantallas del área de
- * miembros. La de gabriela abre una sola, /onboarding/, porque el plugin
- * retiene ahí a quien no lo terminó y manda al panel a quien sí. Con una sola
- * sesión, esa pantalla no se podía medir.
+ * Son tres, y ninguna sobra. La de ana abre las diecisiete pantallas del área
+ * de miembros. La de gabriela abre una sola, /onboarding/, porque el plugin
+ * retiene ahí a quien no lo terminó y manda al panel a quien sí. La de pruebas
+ * abre el escritorio de WordPress, donde la copia también es nuestra.
  *
  * Es 127.0.0.1 y los usuarios son inventados, con una clave que generó
  * banco/montar.sh y que vive solo en banco/wp/clave.txt.
@@ -44,6 +44,9 @@ async function entrar( usuario, archivo ) {
 
 const ana = await entrar( 'ana', 'sesion.json' );
 const nueva = await entrar( 'gabriela', 'sesion-onboarding.json' );
+// Y la del escritorio, que es otra interfaz y otro permiso: ana es miembro y
+// wp-admin le devuelve el panel del producto, no el de WordPress.
+const admin = await entrar( 'pruebas', 'sesion-admin.json' );
 
 await navegador.close();
-process.exit( ana && nueva ? 0 : 1 );
+process.exit( ana && nueva && admin ? 0 : 1 );

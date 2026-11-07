@@ -36,6 +36,7 @@ sirve y se está midiendo el pie público. Se vuelve a hacer con
 Y después, las comprobaciones de pantalla sobre el área de miembros:
 
     VX_SESION=banco/wp/sesion.json VX_SESION_NUEVA=banco/wp/sesion-onboarding.json \
+      VX_SESION_ADMIN=banco/wp/sesion-admin.json \
       npm run accesibilidad -- http://127.0.0.1:8910/marca
 
 Sin `VX_SESION` las rutas de miembro no se piden, porque en producción
@@ -48,6 +49,14 @@ que está a mitad del suyo, y es la única que ve esa pantalla. Importa porque s
 paso 5 es donde se eligen las tres comunidades, o sea donde más veces se
 nombran las piezas de la línea. Sin esa segunda sesión la comprobación de
 vocabulario pasaba en verde sin haberla abierto nunca.
+
+Y hay una tercera, `VX_SESION_ADMIN`, que es la del administrador del banco y
+abre siete pantallas del escritorio de WordPress: las cinco del plugin, el
+listado de usuarios y el de preguntas frecuentes. Ahí la copia también es
+nuestra —los nombres de las columnas, las cabeceras del CSV, los avisos, las
+etiquetas del menú— y antes se revisaba a ojo. Solo las mide la comprobación de
+vocabulario: pedirle al escritorio la paleta, la tipografía o los 44 píxeles de
+la casa sería medir a WordPress y llamarlo un fallo de Vitrinexo.
 
 ## Lo que no es
 
