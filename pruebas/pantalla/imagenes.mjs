@@ -38,6 +38,7 @@ const fallos = await enLaPagina(
     ) );
 
     return pagina.evaluate( () => {
+      const estiloDe = ( el ) => getComputedStyle( el );
       const malos = [];
       for ( const img of document.images ) {
         // El nombre sale del atributo y no de currentSrc: cuando la imagen no
@@ -50,6 +51,14 @@ const fallos = await enLaPagina(
         } else if ( ! decorativa && alt.trim().length < 3 ) {
           malos.push( `${ nombre } tiene un alt que no describe nada: «${ alt }»` );
         }
+
+        // Un hueco que el JavaScript rellena luego no es una imagen rota: va sin
+        // atributo src y oculto, y así es inerte. Lo que sí es un error es
+        // src="" —el navegador vuelve a pedir la página entera— y una imagen
+        // sin src que además se está viendo.
+        const sinSrc = img.getAttribute( 'src' ) === null;
+        const oculta = estiloDe( img ).display === 'none' || ! img.getClientRects().length;
+        if ( sinSrc && oculta ) continue;
 
         if ( ! img.complete || ! img.naturalWidth ) {
           malos.push( `${ nombre } no cargó` );

@@ -51,3 +51,12 @@ había medido nunca:
   enlace que no puede costar leer.
 - Conexiones medía 635 px de ancho en un teléfono de 390: sus pestañas ni
   envolvían ni se deslizaban, así que empujaban la página entera de lado.
+
+Y en la segunda vuelta, después de arreglar lo de arriba:
+
+- Los enlaces del pie llegaban a 44 de alto pero no de ancho. «Blog» mide 28 y
+  «Ayuda» 40, y son justo los cortos los que se fallan.
+- `editar-perfil` traía un `<img src="">`. Sin src no pasa nada, pero con src
+  vacío el navegador vuelve a pedir la página entera.
+- `/mis-publicaciones/` daba 404 en el banco: esa página no la crea el plugin
+  al activarse. La crea `banco/paginas.php`.

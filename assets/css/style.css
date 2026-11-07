@@ -1519,9 +1519,12 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   align-items: center;
   gap: 0.4rem;
   width: fit-content;
-  /* 44 de alto. Un enlace de pie mide 22,4 con la linea sola, y en un telefono
-     eso se falla con el pulgar. El ancho ya pasa: el texto es largo. */
+  /* 44 por los dos lados. El alto se arregló primero y el ancho se dio por
+     bueno porque «Experiencia presencial» mide 144; pero «Blog» mide 28 y
+     «Ayuda» 40, y esos son los que se fallan. */
   min-height: 44px;
+  min-width: 44px;
+  justify-content: flex-start;
   color: var(--color-text-secondary);
   font-size: 14px;
   text-decoration: none;
