@@ -130,6 +130,15 @@ for ( const { url, conSesion } of visitas() ) {
     // mientras no se destapó, cambiarlos por la forma prohibida pasaba en
     // verde. Un texto que la persona ve con un clic es texto que alguien
     // escribió y que alguien lee.
+    // Un <details> cerrado no se destapa con CSS: lo pliega el navegador, no
+    // una regla, y ningún display:block lo abre. Las preguntas frecuentes son
+    // justo eso, un <details> por pregunta, así que el título se leía y la
+    // respuesta no. Las respuestas del sitio no las había medido nunca
+    // ninguna comprobación de pantalla: eran la mitad del texto de la página
+    // y estaban fuera de todo, incluida la palabra «badge» que la propia
+    // respuesta usaba para explicar que no se dice.
+    for ( const d of copia.querySelectorAll( 'details' ) ) d.open = true;
+
     for ( const n of copia.querySelectorAll( '*' ) ) {
       const s = getComputedStyle( n );
       if ( 'none' === s.display )      n.style.setProperty( 'display', 'block', 'important' );
