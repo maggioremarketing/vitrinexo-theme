@@ -133,10 +133,20 @@ for ( const { url, conSesion } of visitas() ) {
     // Un <details> cerrado no se destapa con CSS: lo pliega el navegador, no
     // una regla, y ningún display:block lo abre. Las preguntas frecuentes son
     // justo eso, un <details> por pregunta, así que el título se leía y la
-    // respuesta no. Las respuestas del sitio no las había medido nunca
-    // ninguna comprobación de pantalla: eran la mitad del texto de la página
-    // y estaban fuera de todo, incluida la palabra «badge» que la propia
-    // respuesta usaba para explicar que no se dice.
+    // respuesta no, incluida la palabra «badge» que la propia respuesta usaba
+    // para explicar que no se dice.
+    //
+    // Esto le pasa a esta comprobación y no a las demás, y vale saber por qué.
+    // El <details> cerrado sí compone caja: la recorta con overflow:hidden,
+    // pero la caja está y tiene color, ancho y posición. Las comprobaciones
+    // que miden geometría —contraste, desborde, toque, tipografía— lo venían
+    // viendo todo este tiempo. La que no lo veía es esta, porque innerText
+    // devuelve lo que el navegador compone a la vista y el contenido recortado
+    // no entra. Lo comprobé rompiendo el contraste y el desborde dentro de una
+    // respuesta plegada: salen en rojo igual con esto y sin esto.
+    //
+    // Por eso abrirlos vive acá y no en el embudo de comun-pantalla.mjs,
+    // donde no cambiaría nada.
     for ( const d of copia.querySelectorAll( 'details' ) ) d.open = true;
 
     for ( const n of copia.querySelectorAll( '*' ) ) {
