@@ -44,6 +44,10 @@ for ( const [ regla ] of css.matchAll( /^[^@{}]*:hover[^{]*\{/gm ) ) {
   if ( ! enMedia.includes( regla.trim() ) ) fallos.push( `«${ regla.trim() }» no está dentro de @media (hover: hover)` );
 }
 
+// Esta comprobación mide la página del manual y solo esa: lo que busca
+// —las muestras de color, el menú lateral, las clases .vx-*— no existe en
+// las pantallas del producto. Abrirla al sitio entero no la hacía más
+// estricta, la hacía gritar «no hay ninguna muestra» en cinco páginas.
 for ( const f of await enLaPagina( async ( pagina ) => {
   const malos = [];
 
@@ -75,6 +79,6 @@ for ( const f of await enLaPagina( async ( pagina ) => {
   if ( hover ) malos.push( 'pasar el puntero por un enlace del menú le cambia el tamaño' );
 
   return malos;
-} ) ) fallos.push( f );
+}, { soloBase: true } ) ) fallos.push( f );
 
 informar( 'estados-interaccion', fallos );

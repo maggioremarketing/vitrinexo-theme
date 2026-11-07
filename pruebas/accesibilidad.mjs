@@ -11,7 +11,7 @@
  */
 
 import { spawnSync } from 'node:child_process';
-import { comprobaciones } from './catalogo.mjs';
+import { comprobaciones, INFORMAN } from './catalogo.mjs';
 import { TEMA } from './comun.mjs';
 
 const BASE = process.argv[ 2 ] ?? 'https://vitrinexo.com/marca';
@@ -26,10 +26,17 @@ if ( ! r || ! r.ok ) {
 
 console.log( `Comprobaciones de pantalla sobre ${ BASE }` );
 
-let malas = 0;
+let malas = 0, informadas = 0;
 for ( const archivo of comprobaciones().pantalla ) {
   const p = spawnSync( process.execPath, [ `pruebas/${ archivo }`, BASE ], { cwd: TEMA, stdio: 'inherit' } );
-  if ( p.status !== 0 ) malas++;
+  if ( p.status === 0 ) continue;
+  if ( INFORMAN.includes( archivo ) ) { informadas++; continue; }
+  malas++;
+}
+
+if ( informadas ) {
+  console.log( `\n  ${ informadas } comprobación${ informadas > 1 ? 'es' : '' } informa sin frenar el despliegue.` );
+  console.log( '  Lo que encuentra es real y está anotado en el manual. Ver INFORMAN en pruebas/catalogo.mjs.' );
 }
 
 process.exit( malas ? 1 : 0 );

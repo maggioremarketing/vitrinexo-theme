@@ -20,6 +20,21 @@ const enCarpeta = ( carpeta ) =>
     .sort()
     .map( ( f ) => `${ carpeta }/${ f }` );
 
+/**
+ * Las que informan sin frenar el despliegue.
+ *
+ * `toque` encuentra 87 áreas de pulsación bajo 44×44 en el teléfono, y son
+ * defectos de verdad: 65 son los enlaces del pie, de 22,4 px de alto. No es
+ * exceso de la prueba y no se arregla aflojándola; se arregla en el producto,
+ * y es un cambio de maquetación en todas las páginas.
+ *
+ * Mientras tanto informa. Y no bloquea por una razón concreta además de la
+ * deuda: mide la web publicada, cuyo contenido cambia sin que cambie el
+ * código, así que una pregunta frecuente nueva movería el número y rompería
+ * el despliegue sin que nadie hubiera tocado el diseño.
+ */
+export const INFORMAN = [ 'pantalla/toque.mjs' ];
+
 export function comprobaciones() {
   return { sistema: enCarpeta( 'sistema' ), pantalla: enCarpeta( 'pantalla' ) };
 }

@@ -58,6 +58,14 @@ const fallos = await enLaPagina(
 
         const caja = img.getBoundingClientRect();
         if ( ! caja.width || ! caja.height ) continue;
+
+        // object-fit cover y contain no deforman: recortan o dejan aire, y en
+        // los dos casos la proporción de la imagen se respeta. Comparar la
+        // caja con el archivo ahí es medir el hueco, no la imagen, y acusaba
+        // de deformadas a las tres rejillas de retratos y a la foto nocturna.
+        const ajuste = getComputedStyle( img ).objectFit;
+        if ( ajuste === 'cover' || ajuste === 'contain' || ajuste === 'scale-down' || ajuste === 'none' ) continue;
+
         const propia = img.naturalWidth / img.naturalHeight;
         const puesta = caja.width / caja.height;
         if ( Math.abs( propia - puesta ) / propia > 0.02 ) {

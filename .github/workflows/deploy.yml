@@ -85,4 +85,29 @@ jobs:
           SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
           SSH_TARGET: ${{ secrets.SSH_TARGET }}
 
+      - name: Pruebas de pantalla
+        # Miden la web renderizada, así que solo pueden correr después de
+        # publicar: para gobernarlas antes haría falta un WordPress con el
+        # plugin dentro del CI, que es otra obra. Correrlas acá no impide que
+        # un fallo llegue al servidor, pero lo deja dicho en voz alta en el
+        # mismo minuto, en vez de esperar a que alguien se acuerde de mirar.
+        #
+        # Se espera a que el CDN suelte la versión nueva antes de medir: el
+        # caché sirve por URL y medir la anterior no dice nada.
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+          ESPERADA=$(grep -m1 '^Version:' style.css | tr -d ' ' | cut -d: -f2)
+          echo "esperando a que el sitio sirva la version $ESPERADA"
+          for i in $(seq 1 12); do
+            SERVIDA=$(curl -s https://vitrinexo.com/ | grep -o 'style\.css?ver=[0-9.]*' | head -1 | cut -d= -f2)
+            if [ "$SERVIDA" = "$ESPERADA" ]; then echo "lista tras $((i*10))s"; break; fi
+            echo "  intento $i: sirve ${SERVIDA:-nada}"
+            sleep 10
+          done
+          [ "$SERVIDA" = "$ESPERADA" ] || echo "AVISO: se mide $SERVIDA y no $ESPERADA"
+
+          npm run accesibilidad -- https://vitrinexo.com/marca
+
 # SSH step endurecido: ssh-keyscan best-effort con reintento (no bloquea el deploy)

@@ -79,11 +79,15 @@ export function resolver( valor, mapa, saltos = 8 ) {
 
 /** El informe de una comprobación. Sale 1 si algo falló, para la cadena. */
 export function informar( nombre, fallos ) {
+  // La nota dice qué no se pudo medir. Va siempre, en verde y en rojo: una
+  // comprobación que pasó sin abrir media web pasó a medias, y hay que verlo.
+  const nota = fallos.nota ? `\n      (${ fallos.nota })` : '';
   if ( ! fallos.length ) {
-    console.log( `  ✓ ${ nombre }` );
+    console.log( `  ✓ ${ nombre }${ nota }` );
     process.exit( 0 );
   }
   console.log( `  ✕ ${ nombre }` );
   for ( const f of fallos ) console.log( `      ${ f }` );
+  if ( nota ) console.log( nota.trimStart() );
   process.exit( 1 );
 }

@@ -10,6 +10,10 @@
 import { informar } from '../comun.mjs';
 import { enLaPagina } from '../comun-pantalla.mjs';
 
+// Esta comprobación mide la página del manual y solo esa: lo que busca
+// —las muestras de color, el menú lateral, las clases .vx-*— no existe en
+// las pantallas del producto. Abrirla al sitio entero no la hacía más
+// estricta, la hacía gritar «no hay ninguna muestra» en cinco páginas.
 const fallos = await enLaPagina( async ( pagina ) => {
   const rotos = await pagina.evaluate( () => {
     const malos = [];
@@ -54,6 +58,6 @@ const fallos = await enLaPagina( async ( pagina ) => {
   }
 
   return rotos;
-} );
+}, { soloBase: true } );
 
 informar( 'navegacion', fallos );

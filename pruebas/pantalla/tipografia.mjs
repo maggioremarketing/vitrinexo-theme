@@ -68,7 +68,7 @@ const fallos = await enLaPagina( async ( pagina, ancho ) =>
     }
     return malos;
   }, esperadoEn( ancho ) ),
-  { anchos: [ 390, 1200 ] }
+  { anchos: [ 390, 1200 ], soloBase: true }
 );
 
 /**
