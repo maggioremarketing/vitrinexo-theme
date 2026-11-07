@@ -66,7 +66,7 @@ function vx_marca_decisiones(): array {
             'titulo'   => 'Todos los botones miden 44 de alto, y las sillas se diferencian a lo ancho',
             'eligio'   => 'min-height de 44 px en .btn-vx, en los enlaces del pie, en los del nav, en los dos enlaces con logotipo y en el botón de cerrar del menú del teléfono. La casilla se queda en 18 y el área la pone su etiqueta.',
             'contra'   => 'Aflojar la regla a los 24 × 24 de la norma, que es lo que habría hecho desaparecer el número sin arreglar nada.',
-            'medicion' => 'De 324 fallos a 4 sobre las páginas que se pueden medir, y los 4 que quedan son el ojo de la contraseña, arreglado en el plugin y todavía sin publicar cuando se midió. El pie solo se llevó 208: sus enlaces medían 22,4 de alto. El alto de los botones salía del texto y del relleno de cada tamaño —44 justos en lg, 37 en md, 27 en sm—, así que un botón pequeño era pequeño bajo el pulgar. Ahora los tres comparten alto y se diferencian a lo ancho y en el cuerpo de letra. El pie crece un 26% en el teléfono, y se lee mejor.',
+            'medicion' => 'De 324 fallos a cero, medido sobre las cinco páginas públicas ya publicadas. El pie solo se llevó 208: sus enlaces medían 22,4 de alto. El alto de los botones salía del texto y del relleno de cada tamaño —44 justos en lg, 37 en md, 27 en sm—, así que un botón pequeño era pequeño bajo el pulgar. Ahora los tres comparten alto y se diferencian a lo ancho y en el cuerpo de letra. El pie crece un 26% en el teléfono, y se lee mejor.',
             'estado'   => 'aplicada',
             'tokens'   => [],
         ],

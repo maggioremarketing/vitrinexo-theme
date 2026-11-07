@@ -23,17 +23,16 @@ const enCarpeta = ( carpeta ) =>
 /**
  * Las que informan sin frenar el despliegue.
  *
- * `toque` encuentra 87 áreas de pulsación bajo 44×44 en el teléfono, y son
- * defectos de verdad: 65 son los enlaces del pie, de 22,4 px de alto. No es
- * exceso de la prueba y no se arregla aflojándola; se arregla en el producto,
- * y es un cambio de maquetación en todas las páginas.
+ * Está vacía, y conviene que siga estándolo. La escribió el día que `toque`
+ * encontró 324 áreas de pulsación bajo 44×44 y hubo que decidir si bloquear
+ * el despliegue, aflojar la regla o anotar la deuda. Se anotó, se arreglaron
+ * las 324 en el mismo día, y la lista se quedó sin nadie.
  *
- * Mientras tanto informa. Y no bloquea por una razón concreta además de la
- * deuda: mide la web publicada, cuyo contenido cambia sin que cambie el
- * código, así que una pregunta frecuente nueva movería el número y rompería
- * el despliegue sin que nadie hubiera tocado el diseño.
+ * Si algo vuelve a entrar acá, que sea con su número escrito en el registro
+ * de decisiones y con fecha para salir. Una comprobación que informa sin
+ * frenar es una deuda, no una categoría.
  */
-export const INFORMAN = [ 'pantalla/toque.mjs' ];
+export const INFORMAN = [];
 
 export function comprobaciones() {
   return { sistema: enCarpeta( 'sistema' ), pantalla: enCarpeta( 'pantalla' ) };
