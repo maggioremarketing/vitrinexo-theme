@@ -88,6 +88,14 @@ En el panel de WordPress el tracking sigue escrito a mano a propósito: wp-admin
 
 Push a `main` → GitHub Actions → rsync SSH → Hostinger.
 
+**Si un cambio toca los dos repos, se empuja primero `vitrinexo-core` y se espera a que su
+deploy termine.** El CI del tema clona `vitrinexo-core` de `main` para levantar el banco, así
+que un tema empujado antes mide la copia vieja del plugin y sale rojo por una copia que ya
+está arreglada. Pasó dos veces el 7 de noviembre de 2026: la regla de la marca madre midiendo
+el onboarding sin corregir, y las dos reglas de región midiendo el blog sin corregir. El arreglo
+no es relanzar a ciegas: es empujar el plugin, esperar su verde y relanzar el run del tema,
+que vuelve a clonar.
+
 ```yaml
 # Secrets requeridos en el repo
 SSH_HOST: 195.200.3.42
