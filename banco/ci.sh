@@ -31,5 +31,5 @@ done
 echo "── sesión"
 npm run banco:sesion
 
-echo "── midiendo las catorce pantallas"
+echo "── midiendo el área de miembros"
 npm run miembros

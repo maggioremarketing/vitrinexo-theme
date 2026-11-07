@@ -1,7 +1,7 @@
 # El banco local
 
 Un WordPress de verdad en `127.0.0.1`, con SQLite en vez de MySQL, el tema y el
-plugin enlazados desde sus repositorios, y seis miembros inventados. Sirve para
+plugin enlazados desde sus repositorios, y siete miembros inventados. Sirve para
 una sola cosa que no se podía hacer de ninguna otra forma: **medir el área de
 miembros**, que solo existe detrás de una sesión iniciada.
 
@@ -12,14 +12,14 @@ comprobaciones siempre miraron desde fuera.
 ## Por qué no se usa la web publicada
 
 Porque para entrar al área de miembros de `vitrinexo.com` haría falta una
-cuenta real en producción. Acá el usuario, la clave y los seis miembros son
+cuenta real en producción. Acá los usuarios, la clave y los siete miembros son
 inventados, viven en un archivo SQLite de esta máquina y no salen de ella.
 
 ## Levantarlo
 
     npm run banco           descarga WordPress, lo instala y crea los miembros
     npm run banco:servir    lo deja escuchando en 127.0.0.1:8910
-    npm run banco:sesion    inicia sesión y guarda el estado en sesion.json
+    npm run banco:sesion    inicia las dos sesiones y guarda sus estados
 
 `banco:servir` levanta PHP con **opcache apagado**, y eso no es un detalle de
 rendimiento. La regla del proyecto dice que una comprobación no vale hasta que
@@ -35,15 +35,24 @@ sirve y se está midiendo el pie público. Se vuelve a hacer con
 
 Y después, las comprobaciones de pantalla sobre el área de miembros:
 
-    VX_SESION=banco/wp/sesion.json npm run accesibilidad -- http://127.0.0.1:8910/marca
+    VX_SESION=banco/wp/sesion.json VX_SESION_NUEVA=banco/wp/sesion-onboarding.json \
+      npm run accesibilidad -- http://127.0.0.1:8910/marca
 
 Sin `VX_SESION` las rutas de miembro no se piden, porque en producción
 devuelven el login y medirlo no dice nada.
 
+Son dos sesiones porque hay una pantalla que la primera no puede abrir.
+`VX_SESION` es la de ana, que ya terminó su onboarding, y por eso el plugin la
+manda al panel cuando pide `/onboarding/`. `VX_SESION_NUEVA` es la de gabriela,
+que está a mitad del suyo, y es la única que ve esa pantalla. Importa porque su
+paso 5 es donde se eligen las tres comunidades, o sea donde más veces se
+nombran las piezas de la línea. Sin esa segunda sesión la comprobación de
+vocabulario pasaba en verde sin haberla abierto nunca.
+
 ## Lo que no es
 
 No es un entorno de desarrollo del producto ni una copia de la base de datos.
-Los seis miembros son de mentira y los datos no se parecen a los reales más que
+Los siete miembros son de mentira y los datos no se parecen a los reales más que
 en la forma. Para ver un error que solo ocurre con datos de verdad, esto no
 sirve.
 
@@ -97,3 +106,13 @@ Por eso la compuerta puede estar verde acá y roja después del deploy, cuando l
 misma comprobación corre contra vitrinexo.com. No es un falso positivo: es la
 única mirada que alcanza esa copia. Lo que se arregla ahí se arregla en
 wp-admin, no en el repo.
+
+## Por qué el servidor va con ocho procesos
+
+`banco:servir` lleva `PHP_CLI_SERVER_WORKERS=8`. El servidor de PHP por
+defecto atiende una petición a la vez, y Playwright abre la página y sus
+recursos a la vez y espera a `networkidle`. Con un solo proceso eso se
+atasca: la carga no termina, la prueba cuenta la ruta como que no respondió y
+—antes de que eso fuera una falla— la comprobación salía en verde sin haber
+abierto la pantalla. Pasó: una corrida dio verde en las catorce pantallas sin
+medir ni una sola ruta con sesión.

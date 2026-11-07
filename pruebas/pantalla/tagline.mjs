@@ -41,7 +41,10 @@ try {
   const r = await pagina.goto( PORTADA, { waitUntil: 'networkidle' } ).catch( () => null );
 
   if ( ! r || ! r.ok() ) {
-    fallos.nota = `la portada no respondió en ${ PORTADA }, no se midió`;
+    // Falla, no anota. La portada es la única pantalla que esta comprobación
+    // mira: si no cargó, no se midió nada, y decirlo en verde es decir que el
+    // tagline está bien sin haberlo leído.
+    fallos.push( `la portada no respondió en ${ PORTADA }, así que no se midió` );
   } else {
     const altoDoc = await pagina.evaluate( () => document.documentElement.scrollHeight );
     await pagina.setViewportSize( { width: 1200, height: Math.min( altoDoc, 30000 ) } );

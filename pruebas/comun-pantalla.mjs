@@ -50,13 +50,25 @@ export const RUTAS_MIEMBRO = [
   // regla de la marca madre se podía medir en verde sin abrir ni una sola
   // pantalla que la rompiera.
   '/4dinner/', '/comunidad-out2b/', '/comunidad-woman/', '/comunidad-senior/',
-  // /onboarding/ no está, y conviene decir por qué: la sesión del banco ya
-  // terminó el onboarding, así que esa ruta redirige al panel y medirla sería
-  // medir el panel dos veces con otro nombre. El paso 5, donde se eligen las
-  // comunidades, hoy no lo mide nadie.
 ];
 
+/**
+ * La pantalla que ninguna sesión de miembro puede abrir.
+ *
+ * /onboarding/ no entra en la lista de arriba porque el plugin manda al panel
+ * a quien ya lo terminó, y la sesión de miembro del banco lo terminó. Medirla
+ * con esa sesión sería medir el panel dos veces con otro nombre: verde, y sin
+ * haber abierto nada.
+ *
+ * Por eso el banco tiene una segunda sesión, de alguien que está a mitad del
+ * onboarding, y esta ruta se abre con ella. Importa porque el paso 5 es donde
+ * se eligen las tres comunidades, o sea la pantalla que más veces nombra las
+ * piezas de la línea, y hasta acá no la había abierto ninguna prueba.
+ */
+export const RUTAS_ONBOARDING = [ '/onboarding/' ];
+
 export const SESION = process.env.VX_SESION || '';
+export const SESION_NUEVA = process.env.VX_SESION_NUEVA || '';
 
 /**
  * Que la sesión siga viva, y que se note cuando no.
@@ -92,11 +104,10 @@ export const estaDentro = ( pagina ) => pagina.evaluate( () => {
   return clases.split( /\s+/ ).includes( 'logged-in' );
 } );
 
-/** Las rutas a recorrer, con el origen de BASE y el propio camino de BASE. */
+/** Las rutas públicas a recorrer, con el origen de BASE y el propio camino de BASE. */
 export function rutas() {
   const u = new URL( BASE() );
-  const lista = [ u.pathname, ...RUTAS, ...( SESION ? RUTAS_MIEMBRO : [] ) ];
-  return [ ...new Set( lista ) ].map( ( r ) => u.origin + r );
+  return [ ...new Set( [ u.pathname, ...RUTAS ] ) ].map( ( r ) => u.origin + r );
 }
 
 /**
@@ -115,12 +126,15 @@ export function rutas() {
  * medir es peor que no tenerla.
  */
 export function visitas() {
-  const publicas = rutas().filter( ( u ) => ! RUTAS_MIEMBRO.includes( new URL( u ).pathname ) );
-  const miembro  = rutas().filter( ( u ) => RUTAS_MIEMBRO.includes( new URL( u ).pathname ) );
+  const origen = new URL( BASE() ).origin;
+  const publicas = rutas();
+  const miembro  = RUTAS_MIEMBRO.map( ( r ) => origen + r );
+  const sinTerminar = RUTAS_ONBOARDING.map( ( r ) => origen + r );
   return [
-    ...publicas.map( ( url ) => ( { url, conSesion: false } ) ),
-    ...( SESION ? publicas.map( ( url ) => ( { url, conSesion: true } ) ) : [] ),
-    ...miembro.map( ( url ) => ( { url, conSesion: true } ) ),
+    ...publicas.map( ( url ) => ( { url, sesion: '', etiqueta: '' } ) ),
+    ...( SESION ? publicas.map( ( url ) => ( { url, sesion: SESION, etiqueta: ' · con sesión' } ) ) : [] ),
+    ...( SESION ? miembro.map( ( url ) => ( { url, sesion: SESION, etiqueta: ' · con sesión' } ) ) : [] ),
+    ...( SESION_NUEVA ? sinTerminar.map( ( url ) => ( { url, sesion: SESION_NUEVA, etiqueta: ' · sin onboarding' } ) ) : [] ),
   ];
 }
 
@@ -138,15 +152,17 @@ export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBa
   const navegador = await chromium.launch();
   const fallos = [], mudas = [];
   const afuera = [];
-  const destinos = soloBase ? [ { url: BASE(), conSesion: !! SESION } ] : visitas();
+  const destinos = soloBase
+    ? [ { url: BASE(), sesion: SESION, etiqueta: SESION ? ' · con sesión' : '' } ]
+    : visitas();
 
   try {
-    for ( const { url, conSesion } of destinos ) {
-      const camino = new URL( url ).pathname + ( conSesion && SESION ? ' · con sesión' : '' );
+    for ( const { url, sesion, etiqueta } of destinos ) {
+      const camino = new URL( url ).pathname + etiqueta;
       for ( const ancho of anchos ) {
         const contexto = await navegador.newContext( {
           viewport: { width: ancho, height: alto },
-          ...( SESION && conSesion ? { storageState: SESION } : {} ),
+          ...( sesion ? { storageState: sesion } : {} ),
         } );
         const pagina = await contexto.newPage();
         const r = await pagina.goto( url, { waitUntil: 'networkidle' } ).catch( () => null );
@@ -156,7 +172,7 @@ export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBa
           continue;
         }
 
-        if ( SESION && conSesion && false === await estaDentro( pagina ) && ! afuera.includes( camino ) ) afuera.push( camino );
+        if ( sesion && false === await estaDentro( pagina ) && ! afuera.includes( camino ) ) afuera.push( camino );
 
         const altoDoc = await pagina.evaluate( () => document.documentElement.scrollHeight );
         await pagina.setViewportSize( { width: ancho, height: Math.min( altoDoc, 30000 ) } );
@@ -170,7 +186,22 @@ export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBa
   }
 
   if ( afuera.length ) fallos.unshift( receta( afuera ) );
-  if ( mudas.length ) fallos.nota = `no respondieron, no se midieron: ${ mudas.join( ', ' ) }`;
+  // Una ruta que no cargó es una pantalla sin medir, y eso no es una nota al
+  // pie: es la prueba diciendo que no sabe. Antes iba en `nota`, que se imprime
+  // en verde y en rojo pero no cambia el código de salida, así que el
+  // despliegue pasaba igual.
+  //
+  // Pasó de verdad, y por eso está acá: con el banco caído, las veintitrés
+  // visitas con sesión se saltaron enteras y las catorce comprobaciones
+  // salieron en verde sin haber abierto una sola pantalla de miembro. No fue
+  // un 302 —Playwright sigue la redirección y llega a /login/ con un 200, que
+  // es justo lo que caza estaDentro()— sino que la carga ni siquiera terminó.
+  // Da igual el motivo: el agujero es dar por buena una pantalla que no se
+  // abrió, y lo tapa fallar, no anotarlo.
+  //
+  // Si una ruta no tiene que existir, se saca de la lista. Mientras esté en la
+  // lista, no cargar es fallar.
+  if ( mudas.length ) fallos.unshift( `no respondieron, así que no se midieron: ${ mudas.join( ', ' ) }` );
   return fallos;
 }
 

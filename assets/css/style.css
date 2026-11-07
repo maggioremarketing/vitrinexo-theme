@@ -3046,6 +3046,16 @@ section#offers {
   gap: 1rem;
 }
 
+/* Los dos enlaces de la barra se tocan con el dedo, y medían 30,6 y 19,2 de
+   alto. La regla de la casa es 44. Nadie lo había visto porque esta pantalla
+   no la abría ninguna prueba: la sesión del banco ya tenía el onboarding
+   terminado y el plugin la mandaba al panel. */
+.ob-nav > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 /* ── Progress bar (mobile) ── */
 .ob-progress {
   flex: 1;

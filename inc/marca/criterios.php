@@ -53,7 +53,7 @@ function vx_marca_partes(): array {
                 [ 'Visión', 'definido', 'Lanzamiento en Hispanoamérica y en español; la visión incluye Brasil, Estados Unidos y Europa.' ],
                 [ 'Valores', 'definido', 'Rigor, franqueza, reciprocidad, paridad y sobriedad, cada uno con lo que cambia por tenerlo.' ],
                 [ 'Públicos objetivos', 'definido', 'Tres, y los dos primeros son la misma persona en momentos distintos.' ],
-                [ 'Objetivos estratégicos', 'parcial', '100 miembros antes de que termine 2026 para cobrar en 2027. El modelo de suscripción tiene valores en el código y ninguna decisión detrás.' ],
+                [ 'Objetivos estratégicos', 'definido', '100 miembros antes de que termine 2026 para cobrar en 2027. El período gratuito vence al llegar a 100, con aviso y plazo; los Pioneros pagan 19 en vez de 29 para siempre. Falta construir el disparador.' ],
                 [ 'Propuesta de valor', 'definido', 'Te muestras ante un directorio verificado y a cambio te dejas verificar. La verificación es el producto.' ],
             ],
         ],

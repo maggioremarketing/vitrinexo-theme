@@ -13,7 +13,7 @@
 
 import { chromium } from 'playwright';
 import { informar } from '../comun.mjs';
-import { SESION, visitas, estaDentro, receta } from '../comun-pantalla.mjs';
+import { visitas, estaDentro, receta } from '../comun-pantalla.mjs';
 
 /** De la propuesta de identidad. Cada una con por qué no se dice. */
 const PROHIBIDAS = [
@@ -91,25 +91,27 @@ const afuera = [];
 const medidas = [];
 const pendientes = [];
 
-// Una pestaña por modo, no una sola: el copy de la portada pública y el del
-// home del miembro son dos textos distintos en la misma ruta.
+// Una pestaña por sesión, no una sola: el copy de la portada pública y el del
+// home del miembro son dos textos distintos en la misma ruta. Y la tercera,
+// la de quien no terminó el onboarding, es la única que puede abrir esa
+// pantalla: con la sesión de miembro el plugin redirige al panel.
 const pestana = {};
-for ( const conSesion of [ false, true ] ) {
-  if ( conSesion && ! SESION ) continue;
+for ( const { sesion } of visitas() ) {
+  if ( sesion in pestana ) continue;
   const contexto = await navegador.newContext( {
     viewport: { width: 1280, height: 900 },
-    ...( conSesion && SESION ? { storageState: SESION } : {} ),
+    ...( sesion ? { storageState: sesion } : {} ),
   } );
-  pestana[ conSesion ] = await contexto.newPage();
+  pestana[ sesion ] = await contexto.newPage();
 }
 
-for ( const { url, conSesion } of visitas() ) {
-  const ruta = new URL( url ).pathname + ( conSesion && SESION ? ' · con sesión' : '' );
+for ( const { url, sesion, etiqueta } of visitas() ) {
+  const ruta = new URL( url ).pathname + etiqueta;
   pendientes.push( ruta );
-  const pagina = pestana[ conSesion ];
+  const pagina = pestana[ sesion ];
   const r = await pagina.goto( url, { waitUntil: 'domcontentloaded' } ).catch( () => null );
   if ( ! r || ! r.ok() ) continue;
-  if ( conSesion && SESION && false === await estaDentro( pagina ) ) afuera.push( ruta );
+  if ( sesion && false === await estaDentro( pagina ) ) afuera.push( ruta );
   medidas.push( ruta );
 
   const medida = await pagina.evaluate( () => {

@@ -61,4 +61,32 @@ foreach ( $gente as $i => [ $u, $nombre, $apellido, $empresa, $cargo, $industria
     }
     echo "  · $u ($id) $nombre $apellido — $empresa\n";
 }
+
+/* El séptimo no es como los otros seis: está a mitad del onboarding, y existe
+   por una sola razón que conviene decir.
+
+   La sesión del banco es la de ana, que ya terminó el suyo, así que
+   /onboarding/ la manda al panel. Mientras esa fue la única sesión, la
+   pantalla donde se eligen las tres comunidades —la que más veces nombra las
+   piezas de la línea— no la podía abrir ninguna prueba. Con esta sesión sí:
+   las comprobaciones de pantalla abren /onboarding/ con la suya, no con la de
+   ana, porque es la única a la que el plugin se la deja ver. */
+$id = username_exists( 'gabriela' ) ?: wp_create_user( 'gabriela', $clave, 'gabriela@127.0.0.1' );
+if ( is_wp_error( $id ) ) {
+    echo "  ! gabriela: " . $id->get_error_message() . "\n";
+} else {
+    wp_update_user( [ 'ID' => $id, 'display_name' => 'Gabriela Soto', 'first_name' => 'Gabriela', 'last_name' => 'Soto' ] );
+    wp_set_password( $clave, $id );
+    $meta = [
+      'vx_nombre' => 'Gabriela', 'vx_apellido' => 'Soto',
+      'vx_ciudad' => 'Valparaíso', 'vx_pais' => 'Chile', 'vx_pais_codigo' => 'CL',
+      'vx_estado' => 'activo', 'vx_account_activated' => '1',
+      // Lo único que la distingue, y es todo el punto: activa, dentro, y sin
+      // terminar. Con esto el plugin la retiene en /onboarding/ y la deja ver
+      // el paso 5; con onboarding_completo en 1 vería el panel, como ana.
+      'vx_onboarding_completo' => '', 'vx_onboarding_paso' => 5,
+    ];
+    foreach ( $meta as $k => $v ) update_user_meta( $id, $k, $v );
+    echo "  · gabriela ($id) Gabriela Soto — a mitad del onboarding\n";
+}
 echo "listo\n";
