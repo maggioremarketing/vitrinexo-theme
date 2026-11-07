@@ -12,7 +12,7 @@
 
 import { chromium } from 'playwright';
 import { informar } from '../comun.mjs';
-import { BASE, SESION, rutas } from '../comun-pantalla.mjs';
+import { SESION, visitas } from '../comun-pantalla.mjs';
 
 /** De la propuesta de identidad. Cada una con por qué no se dice. */
 const PROHIBIDAS = [
@@ -41,17 +41,27 @@ const PROHIBIDAS = [
 // La lista común, que incluye el área de miembros cuando hay sesión: el voseo
 // se cuela en un saludo o en un aviso, y esos viven dentro.
 const navegador = await chromium.launch();
-const contexto = await navegador.newContext( {
-  viewport: { width: 1280, height: 900 },
-  ...( SESION ? { storageState: SESION } : {} ),
-} );
-const pagina = await contexto.newPage();
 
 const fallos = [];
 const medidas = [];
+const pendientes = [];
 
-for ( const url of rutas() ) {
-  const ruta = new URL( url ).pathname;
+// Una pestaña por modo, no una sola: el copy de la portada pública y el del
+// home del miembro son dos textos distintos en la misma ruta.
+const pestana = {};
+for ( const conSesion of [ false, true ] ) {
+  if ( conSesion && ! SESION ) continue;
+  const contexto = await navegador.newContext( {
+    viewport: { width: 1280, height: 900 },
+    ...( conSesion && SESION ? { storageState: SESION } : {} ),
+  } );
+  pestana[ conSesion ] = await contexto.newPage();
+}
+
+for ( const { url, conSesion } of visitas() ) {
+  const ruta = new URL( url ).pathname + ( conSesion && SESION ? ' · con sesión' : '' );
+  pendientes.push( ruta );
+  const pagina = pestana[ conSesion ];
   const r = await pagina.goto( url, { waitUntil: 'domcontentloaded' } ).catch( () => null );
   if ( ! r || ! r.ok() ) continue;
   medidas.push( ruta );
@@ -75,7 +85,7 @@ for ( const url of rutas() ) {
 
 await navegador.close();
 
-const sinMedir = rutas().map( ( u ) => new URL( u ).pathname ).filter( ( r ) => ! medidas.includes( r ) );
+const sinMedir = pendientes.filter( ( r ) => ! medidas.includes( r ) );
 if ( sinMedir.length ) console.log( `      (no respondieron, no se midieron: ${ sinMedir.join( ', ' ) })` );
 
 informar( 'vocabulario', fallos );

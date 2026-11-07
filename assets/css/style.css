@@ -4924,7 +4924,11 @@ textarea {
 
 .vx-mesa-nexo span {
   display: block;
-  color: var(--color-text-secondary);
+  /* La tinta quieta que la propia tarjeta declara, no un gris fijo. Cada mesa
+     es un papel distinto: --tinta-2 se midió contra hueso y sobre la terracota
+     de 4Dinner cae a 4,36. Las tarjetas ya habían resuelto esto para su
+     descripción, y escribir el gris a mano acá fue deshacerlo. */
+  color: var( --mv-desc, var( --color-text-secondary ) );
   font-weight: var(--peso-prosa);
 }
 

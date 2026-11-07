@@ -47,16 +47,36 @@ export const RUTAS_MIEMBRO = [
 
 export const SESION = process.env.VX_SESION || '';
 
-/**
- * Las rutas a recorrer, con el origen de BASE y el propio camino de BASE.
- *
- * Con `sinSesion` se queda solo con las públicas: las de miembro sin sesión
- * devuelven el login y medirlo no dice nada.
- */
-export function rutas( { sinSesion = false } = {} ) {
+/** Las rutas a recorrer, con el origen de BASE y el propio camino de BASE. */
+export function rutas() {
   const u = new URL( BASE() );
-  const lista = [ u.pathname, ...RUTAS, ...( SESION && ! sinSesion ? RUTAS_MIEMBRO : [] ) ];
+  const lista = [ u.pathname, ...RUTAS, ...( SESION ? RUTAS_MIEMBRO : [] ) ];
   return [ ...new Set( lista ) ].map( ( r ) => u.origin + r );
+}
+
+/**
+ * Cada visita a hacer: una ruta y si se abre con la sesión puesta o sin ella.
+ *
+ * Las públicas se abren SIEMPRE sin sesión, porque así las ve cualquiera, y
+ * además con sesión cuando la hay, porque varias cambian por completo: la
+ * portada deja de ser la portada y pasa a ser el home del miembro, y el pie
+ * cambia sus enlaces de marketing por los del área privada. Las de miembro
+ * solo con sesión: sin ella devuelven el login y medirlo no dice nada.
+ *
+ * Esto estaba al revés y costó caro. La suite corre siempre con la sesión del
+ * banco puesta, así que durante toda su vida no abrió ni una sola vez la
+ * portada pública: trece enlaces rotos y un texto a 4,36:1 pasaron el banco en
+ * verde y los encontró producción. Una comprobación que no abre lo que afirma
+ * medir es peor que no tenerla.
+ */
+export function visitas() {
+  const publicas = rutas().filter( ( u ) => ! RUTAS_MIEMBRO.includes( new URL( u ).pathname ) );
+  const miembro  = rutas().filter( ( u ) => RUTAS_MIEMBRO.includes( new URL( u ).pathname ) );
+  return [
+    ...publicas.map( ( url ) => ( { url, conSesion: false } ) ),
+    ...( SESION ? publicas.map( ( url ) => ( { url, conSesion: true } ) ) : [] ),
+    ...miembro.map( ( url ) => ( { url, conSesion: true } ) ),
+  ];
 }
 
 /**
@@ -65,26 +85,22 @@ export function rutas( { sinSesion = false } = {} ) {
  * larga medida en una ventana corta deja sin medir todo lo que no se ve. Esa
  * es la trampa que hizo que una suite midiera el 24% de la página.
  *
- * `sinSesion` abre las páginas como las ve cualquiera: sin el estado de sesión
- * del banco, y solo las públicas. Hace falta porque media web cambia cuando
- * hay sesión. La portada deja de ser la portada y pasa a ser el home del
- * miembro, y el pie cambia sus enlaces de marketing por los del área privada.
- * La suite corre siempre con la sesión puesta, así que sin esto las reglas
- * sobre lo público no las medía nadie: dos comprobaciones pasaban en verde sin
- * haber abierto nunca lo que afirmaban.
+ * Recorre lo que devuelve `visitas()`: las públicas sin sesión y, cuando hay,
+ * también con ella; las de miembro solo con sesión. La etiqueta del fallo dice
+ * cuál de las dos, porque la misma ruta con y sin sesión son dos páginas.
  */
-export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBase = false, sinSesion = false } = {} ) {
+export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBase = false } = {} ) {
   const navegador = await chromium.launch();
   const fallos = [], mudas = [];
-  const destinos = soloBase ? [ BASE() ] : rutas( { sinSesion } );
+  const destinos = soloBase ? [ { url: BASE(), conSesion: !! SESION } ] : visitas();
 
   try {
-    for ( const url of destinos ) {
-      const camino = new URL( url ).pathname;
+    for ( const { url, conSesion } of destinos ) {
+      const camino = new URL( url ).pathname + ( conSesion && SESION ? ' · con sesión' : '' );
       for ( const ancho of anchos ) {
         const contexto = await navegador.newContext( {
           viewport: { width: ancho, height: alto },
-          ...( SESION && ! sinSesion ? { storageState: SESION } : {} ),
+          ...( SESION && conSesion ? { storageState: SESION } : {} ),
         } );
         const pagina = await contexto.newPage();
         const r = await pagina.goto( url, { waitUntil: 'networkidle' } ).catch( () => null );

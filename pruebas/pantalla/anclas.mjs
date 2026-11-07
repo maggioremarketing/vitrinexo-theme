@@ -15,9 +15,9 @@
  * está: los de otra página se miden cuando se visita esa página, porque todas
  * están en la lista.
  *
- * Y se recorre dos veces, con sesión y sin ella, porque el pie no es el mismo:
- * logueado cambia los enlaces de marketing por los del área privada, así que
- * una sola pasada con la sesión del banco no habría visto ni uno de los nueve
+ * El armazón recorre las públicas con sesión y sin ella, que acá hace toda la
+ * diferencia: logueado el pie cambia sus enlaces de marketing por los del área
+ * privada, y una sola pasada con sesión no habría visto ni uno de los nueve
  * enlaces rotos que encontró esta prueba.
  */
 
@@ -58,9 +58,6 @@ const medir =
       return [ ...malos ];
     } );
 
-const fallos = [ ...await enLaPagina( medir, { anchos: [ 1200 ], sinSesion: true } ) ];
-const conSesion = await enLaPagina( medir, { anchos: [ 1200 ] } );
-for ( const f of conSesion ) if ( ! fallos.includes( f ) ) fallos.push( f );
-if ( conSesion.nota ) fallos.nota = conSesion.nota;
+const fallos = await enLaPagina( medir, { anchos: [ 1200 ] } );
 
 informar( 'anclas', fallos );
