@@ -27,6 +27,24 @@ function vx_marca_decisiones(): array {
     return [
         [
             'fecha'    => '2026-11-07',
+            'titulo'   => 'Las preguntas frecuentes se corrigen con una migración, no a mano',
+            'eligio'   => 'Una migración de una sola vez en el plugin, que le pone la marca madre adelante a las seis entradas de vx_faq que la tenían desnuda, por sustitución de fragmentos y con respaldo del original.',
+            'contra'   => 'Corregirlas a mano en el editor, que era lo evidente, y reescribir cada entrada entera desde el repositorio.',
+            'medicion' => 'El primer despliegue que midió la regla contra producción la encontró rota en seis entradas de /preguntas-frecuentes/. Ese texto no está en ningún repositorio: es contenido del CPT vx_faq, así que ningún empuje lo arregla y el despliegue se quedaba en rojo. A mano se arregla una vez y no queda registro de qué se cambió ni por qué. La migración reemplaza cuatro fragmentos exactos y nada más: lo guardado puede traer marcado de bloques, y reescribir un cuerpo entero contra un original que no se conoce byte a byte pisa ediciones ajenas sin avisar. Verificada rompiendo el banco: con el texto de producción sembrado, `vocabulario` falla con el mismo mensaje que falló el despliegue; con la migración corrida, pasa; y una segunda pasada no vuelve a escribir. El respaldo de las seis originales queda en una opción, porque el CPT no tenía revisiones (ahora sí).',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-07',
+            'titulo'   => 'El banco siembra las preguntas con su categoría, que es lo que las dibuja',
+            'eligio'   => 'Las cinco categorías de producción en el banco, con su orden, y cada pregunta asignada a la suya.',
+            'contra'   => 'Dejar la fixture como estaba, que era más corta y parecía suficiente.',
+            'medicion' => 'El acordeón de [vx_faq] agrupa por vx_faq_cat con get_terms y hide_empty, así que una pregunta sin categoría no se dibuja. El banco las sembraba sin categoría desde el primer día: /preguntas-frecuentes/ estaba en la lista de rutas de la suite, respondía 200 y decía «Todavía no hay preguntas publicadas». Catorce comprobaciones midieron esa página durante meses sin ver jamás una pregunta, y por eso las seis entradas rotas de producción llegaron a producción. Es la cuarta vez que aparece la misma forma de pasar en verde sin medir nada, después de la sesión del banco, el opcache y el texto plegado.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-07',
             'titulo'   => 'El mito tachado, con la negación escrita y no solo dibujada',
             'eligio'   => 'La creencia enunciada y tachada en coral-tinta, el titular contestándola sobre mantequilla entera, y un «Mito:» que solo oyen los lectores de pantalla.',
             'contra'   => 'La raya en coral, que es el color obvio y el que pedía el diseño, y dejar que la raya fuera lo único que niega la frase.',

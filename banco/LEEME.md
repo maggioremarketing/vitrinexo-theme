@@ -83,3 +83,17 @@ En el plugin corre siempre, porque casi todo lo que el plugin renderiza es el
 área de miembros. En el tema, solo cuando el cambio toca estilos, plantillas,
 el PHP o las propias comprobaciones: un cambio en el manual no levanta
 WordPress.
+
+## Lo que el banco no puede ver
+
+Las preguntas frecuentes son un CPT: en producción las escribe alguien desde el
+escritorio y viven en la base, no en el repo. `banco/preguntas.php` siembra diez
+inventadas para que la página tenga qué mostrar, pero no son las de producción y
+nunca lo van a ser. Lo mismo pasa con el título de cada página, que es un campo
+editable: el plugin pone uno al crearla y después nadie lo vuelve a tocar desde
+el código.
+
+Por eso la compuerta puede estar verde acá y roja después del deploy, cuando la
+misma comprobación corre contra vitrinexo.com. No es un falso positivo: es la
+única mirada que alcanza esa copia. Lo que se arregla ahí se arregla en
+wp-admin, no en el repo.

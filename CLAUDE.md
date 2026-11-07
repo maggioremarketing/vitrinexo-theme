@@ -13,9 +13,11 @@ Vitrinexo es una plataforma B2B de directorio de servicios profesionales. Empres
 - Las piezas de la línea llevan **la marca madre adelante**, sin excepción y también en conversación:
   Vitrinexo 4Dinner, Vitrinexo Woman, Vitrinexo LGBTQ+, Vitrinexo Senior. Nunca "4Dinner" a secas.
   Lo mide `pruebas/pantalla/vocabulario.mjs` sobre el texto renderizado, no sobre el código: los
-  identificadores (`vx_landing_4dinner`, `comunidad-card--woman`) siguen siendo cortos
+  identificadores (`vx_landing_4dinner`, `comunidad-card--woman`) siguen siendo cortos.
+  Mide el cuerpo y también el título de la página, que es lo que se lee en la pestaña, en
+  el resultado de Google y cuando alguien pega el enlace
 - Programa: **Miembro Pionero / Miembros Pioneros**
-- Siempre **"distintivo"** — nunca "badge"
+- Siempre **"distintivo"** — nunca "badge" (lo mide `vocabulario.mjs`)
 - Sin guiones largos (—) en copy
 - Español chileno: "tienes", "puedes" — nunca voseo
 
