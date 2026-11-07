@@ -20,36 +20,42 @@
   --lavanda-hover: #B9B2E9;
   --lavanda-presion: #A6A0D2;
   --lavanda-suave: #EAE7FF;
+  --lavanda-tinta: #6A6686; /* 4,50 sobre su propio -suave, que es el fondo más oscuro donde va */
 
   /* Rosa */
   --rosa: #F4C6DC;
   --rosa-hover: #DEB4C9;
   --rosa-presion: #C7A3B6;
   --rosa-suave: #FBE8F1;
+  --rosa-tinta: #7D6571; /* 4,51 */
 
   /* Celeste */
   --celeste: #A9C6E8;
   --celeste-hover: #9AB4D4;
   --celeste-presion: #8BA3C0;
   --celeste-suave: #DDE8F6;
+  --celeste-tinta: #5A697B; /* 4,53 */
 
   /* Salvia */
   --salvia: #7DBF9E;
   --salvia-hover: #72AE91;
   --salvia-presion: #689D85;
   --salvia-suave: #CBE5D8;
+  --salvia-tinta: #456A58; /* 4,55 */
 
   /* Mantequilla */
   --mantequilla: #F2EC79;
   --mantequilla-hover: #DCD770;
   --mantequilla-presion: #C6C167;
   --mantequilla-suave: #FAF7C9;
+  --mantequilla-tinta: #73703A; /* 4,68 */
 
   /* Terracota */
   --terracota: #C58D78;
   --terracota-hover: #B3816F;
   --terracota-presion: #A27566;
   --terracota-suave: #E8D1C9;
+  --terracota-tinta: #775548; /* 4,53 */
 
   /* Tintas */
   --color-text-primary: var(--tinta);
@@ -74,18 +80,23 @@
   --color-secondary-hover: var(--lavanda-hover);
   --color-secondary-active: var(--lavanda-presion);
   --color-secondary-soft: var(--lavanda-suave);
+  --color-secondary-ink: var(--lavanda-tinta);
 
   --color-accent: var(--rosa);
   --color-accent-hover: var(--rosa-hover);
   --color-accent-active: var(--rosa-presion);
   --color-accent-soft: var(--rosa-suave);
+  --color-accent-ink: var(--rosa-tinta);
 
   --color-success: var(--salvia);
   --color-success-bg: var(--salvia-suave);
+  --color-success-ink: var(--salvia-tinta);
   --color-info: var(--celeste);
   --color-info-bg: var(--celeste-suave);
+  --color-info-ink: var(--celeste-tinta);
   --color-warning: var(--mantequilla);
   --color-warning-bg: var(--mantequilla-suave);
+  --color-warning-ink: var(--mantequilla-tinta);
   /* Remarcar una palabra dentro de una frase. No es un aviso: es un subrayado. */
   --color-remarcado: var(--mantequilla-suave);
 
@@ -269,32 +280,32 @@ h2 strong {
 /* Soft */
 .btn-soft-primary {
   background: var(--coral-suave);
-  color: var(--coral-presion);
+  color: var(--coral-tinta);
 }
 
 .btn-soft-primary:hover {
   background: var(--coral-suave);
-  color: var(--coral-presion);
+  color: var(--coral-tinta);
 }
 
 .btn-soft-secondary {
   background: var(--lavanda-suave);
-  color: var(--lavanda-presion);
+  color: var(--lavanda-tinta);
 }
 
 .btn-soft-secondary:hover {
   background: var(--lavanda-suave);
-  color: var(--lavanda-presion);
+  color: var(--lavanda-tinta);
 }
 
 .btn-soft-accent {
   background: var(--rosa-suave);
-  color: var(--rosa-presion);
+  color: var(--rosa-tinta);
 }
 
 .btn-soft-accent:hover {
   background: var(--rosa-suave);
-  color: var(--rosa-presion);
+  color: var(--rosa-tinta);
 }
 
 /* Ghost */
@@ -379,7 +390,7 @@ h2 strong {
 
 .badge-accent {
   background: var(--rosa-suave);
-  color: var(--rosa-presion);
+  color: var(--rosa-tinta);
 }
 
 .badge-founder {
@@ -421,14 +432,14 @@ h2 strong {
   border-color: var(--color-success);
 }
 .p-seeks {
-  color: var(--color-accent);
+  color: var(--color-accent-ink);
   padding: 0;
   margin: 0;
   font-size: 16px;
   font-variant: all-small-caps;
 }
 .p-offers {
-  color: var(--color-success);
+  color: var(--color-success-ink);
   padding: 0;
   margin: 0;
   font-size: 16px;
@@ -684,7 +695,7 @@ a.profile-company:hover {
 }
 
 .profile-pill-seek .profile-pill-title {
-  color: var(--rosa-presion);
+  color: var(--rosa-tinta);
 }
 
 .profile-pill-title i {
@@ -1038,13 +1049,13 @@ select.form-control-vx {
 
 .alert-info {
   background: var(--lavanda-suave);
-  color: var(--lavanda-presion);
+  color: var(--lavanda-tinta);
   border: 1px solid var(--lavanda-suave);
 }
 
 .alert-error {
   background: var(--rosa-suave);
-  color: var(--rosa-presion);
+  color: var(--rosa-tinta);
   border: 1px solid var(--rosa-suave);
 }
 
@@ -2356,13 +2367,13 @@ section#offers {
   color: var(--color-primary-ink);
 }
 .stat-num-vx--accent {
-  color: var(--color-accent);
+  color: var(--color-accent-ink);
 }
 .stat-num-vx--secondary {
-  color: var(--color-secondary);
+  color: var(--color-secondary-ink);
 }
 .stat-num-vx--success {
-  color: var(--color-success);
+  color: var(--color-success-ink);
 }
 
 /* Section headings (18px inline-style pattern) */
@@ -2563,14 +2574,14 @@ section#offers {
   background: var(--lavanda-suave);
 }
 .comunidad-icon--out2b i {
-  color: var(--lavanda-presion);
+  color: var(--lavanda-tinta);
 }
 
 .comunidad-icon--woman {
   background: var(--rosa-suave);
 }
 .comunidad-icon--woman i {
-  color: var(--rosa-presion);
+  color: var(--rosa-tinta);
 }
 
 .comunidad-icon--senior {
@@ -3181,7 +3192,7 @@ section#offers {
 .tag-option--selected-seek {
   border-color: var(--color-accent);
   background: var(--rosa-suave);
-  color: var(--rosa-presion);
+  color: var(--rosa-tinta);
 }
 
 .tag-option--selected-profile {
@@ -3194,7 +3205,7 @@ section#offers {
 .tag-option--selected-sector {
   border-color: var(--color-secondary, var(--lavanda-presion));
   background: var(--lavanda-suave);
-  color: var(--lavanda-presion);
+  color: var(--lavanda-tinta);
   font-weight: 600;
 }
 
@@ -3299,11 +3310,13 @@ section#offers {
 }
 
 .config-nav-item--danger {
-  color: var(--color-accent);
+  /* Era el rosa pastel: 1,34:1. Zona de peligro es justo el enlace que no
+     puede costar leer. */
+  color: var(--color-accent-ink);
 }
 .config-nav-item--danger:hover {
   background: var(--rosa-suave);
-  color: var(--color-accent);
+  color: var(--color-accent-ink);
 }
 
 /* ============================================================
@@ -3314,7 +3327,17 @@ section#offers {
   border-bottom: 2px solid var(--color-border);
   gap: 0;
   margin-bottom: 1.5rem;
+  /* En un teléfono las pestañas de Conexiones sumaban 635 px contra una
+     ventana de 390 y empujaban la página entera de lado. Se deslizan en vez
+     de envolverse: envueltas pierden la línea de abajo, que es lo que dice
+     cuál está activa. */
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+
+.vx-tabs::-webkit-scrollbar { display: none; }
+
+.vx-tabs > * { flex: 0 0 auto; }
 
 .vx-tab {
   display: inline-flex;
@@ -3830,10 +3853,10 @@ section#offers {
 .btn-vx--accent:hover          { background: var(--color-accent-hover); color: var(--color-on-fill); }
 .btn-vx--ghost                 { background: var(--color-surface); color: var(--color-text-primary); border: 1px solid var(--color-border); }
 .btn-vx--ghost:hover           { background: var(--hueso); color: var(--color-text-primary); }
-.btn-vx--soft-primary          { background: var(--coral-suave); color: var(--coral-presion); }
-.btn-vx--soft-primary:hover    { background: var(--coral-suave); color: var(--coral-presion); }
-.btn-vx--soft-accent           { background: var(--rosa-suave); color: var(--rosa-presion); }
-.btn-vx--soft-accent:hover     { background: var(--rosa-suave); color: var(--rosa-presion); }
+.btn-vx--soft-primary          { background: var(--coral-suave); color: var(--coral-tinta); }
+.btn-vx--soft-primary:hover    { background: var(--coral-suave); color: var(--coral-tinta); }
+.btn-vx--soft-accent           { background: var(--rosa-suave); color: var(--rosa-tinta); }
+.btn-vx--soft-accent:hover     { background: var(--rosa-suave); color: var(--rosa-tinta); }
 .btn-vx--success               { background: var(--color-success, var(--salvia)); color: var(--color-on-fill); }
 .btn-vx--success:hover         { background: var(--salvia-hover); color: var(--color-on-fill); }
 
@@ -4283,7 +4306,7 @@ textarea.vx-form__input,
 
 .vx-alert--error {
   background: var(--rosa-suave);
-  color: var(--rosa-presion);
+  color: var(--rosa-tinta);
   border: 1px solid var(--rosa-suave);
 }
 
@@ -4295,7 +4318,7 @@ textarea.vx-form__input,
 
 .vx-alert--info {
   background: var(--lavanda-suave);
-  color: var(--lavanda-presion);
+  color: var(--lavanda-tinta);
   border: 1px solid var(--lavanda-suave);
 }
 

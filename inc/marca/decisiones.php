@@ -63,6 +63,24 @@ function vx_marca_decisiones(): array {
         ],
         [
             'fecha'    => '2026-11-07',
+            'titulo'   => 'Cada familia gana su peldaño de tinta',
+            'eligio'   => 'Un paso oscuro por familia: --lavanda-tinta, --rosa-tinta, --celeste-tinta, --salvia-tinta, --mantequilla-tinta, --terracota-tinta, y sus papeles --color-*-ink. Coral ya tenía el suyo.', // primitivo a propósito: el registro nombra los peldaños que creó.
+            'contra'   => 'Escribir esos textos en tinta normal, que pasa el contraste pero pierde el color, y el color ahí lleva el significado: verde es lo que ofreces, rosa es lo que buscas.',
+            'medicion' => 'Veinte reglas escribían texto en el paso -presion de un pastel, que no es una tinta: sobre el -suave de su familia dan entre 1,71 y 2,87:1. Los peldaños nuevos se calcularon contra los tres fondos donde ese texto vive —hueso, blanco y el -suave de su propia familia— y dan 4,50 o más en el peor de los tres.',
+            'estado'   => 'aplicada',
+            'tokens'   => [ '--color-success-ink' => 'var(--salvia-tinta)', '--color-accent-ink' => 'var(--rosa-tinta)' ], // primitivo a propósito: el registro nombra los peldaños que creó.
+        ],
+        [
+            'fecha'    => '2026-11-07',
+            'titulo'   => 'El área de miembros se mide en un WordPress local',
+            'eligio'   => 'Un banco en 127.0.0.1 con WordPress sobre SQLite, el tema y el plugin enlazados desde sus repositorios, y seis miembros inventados. Las comprobaciones de pantalla recorren las rutas de miembro cuando VX_SESION apunta a una sesión suya.',
+            'contra'   => 'Entrar con una cuenta real a la web publicada.',
+            'medicion' => 'Catorce pantallas del producto no las había medido nunca nadie, no por difíciles sino porque hacía falta estar dentro. La primera medición encontró 34 fallos de contraste y un desborde: Conexiones medía 635 px de ancho en un teléfono de 390, porque sus pestañas ni envolvían ni se deslizaban. El banco no usa datos reales: los seis miembros son de mentira y viven en un SQLite de la máquina.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-07',
             'titulo'   => 'Todos los botones miden 44 de alto, y las sillas se diferencian a lo ancho',
             'eligio'   => 'min-height de 44 px en .btn-vx, en los enlaces del pie, en los del nav, en los dos enlaces con logotipo y en el botón de cerrar del menú del teléfono. La casilla se queda en 18 y el área la pone su etiqueta.',
             'contra'   => 'Aflojar la regla a los 24 × 24 de la norma, que es lo que habría hecho desaparecer el número sin arreglar nada.',

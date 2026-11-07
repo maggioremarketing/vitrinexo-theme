@@ -28,10 +28,30 @@ export const BASE = () => process.argv[ 2 ] ?? 'https://vitrinexo.com/marca';
  */
 export const RUTAS = [ '/', '/preguntas-frecuentes/', '/login/', '/privacidad/', '/terminos/' ];
 
+/**
+ * El área de miembros, que solo existe detrás de una sesión.
+ *
+ * Se mide cuando VX_SESION apunta a un estado de sesión de Playwright. Eso
+ * solo pasa contra el WordPress local del banco: en producción no hay sesión
+ * y estas rutas devuelven el login, así que no se piden.
+ *
+ * Hasta que existió ese banco, catorce pantallas del producto no las había
+ * medido nunca nadie. No porque fueran difíciles: porque hacía falta estar
+ * dentro, y las pruebas siempre miraron desde fuera.
+ */
+export const RUTAS_MIEMBRO = [
+  '/dashboard/', '/perfil/', '/editar-perfil/', '/directorio/', '/conexiones/',
+  '/favoritos/', '/notificaciones/', '/configuracion/', '/nexos/', '/mis-eventos/',
+  '/mis-publicaciones/', '/feed/', '/ayuda/',
+];
+
+export const SESION = process.env.VX_SESION || '';
+
 /** Las rutas a recorrer, con el origen de BASE y el propio camino de BASE. */
 export function rutas() {
   const u = new URL( BASE() );
-  return [ ...new Set( [ u.pathname, ...RUTAS ] ) ].map( ( r ) => u.origin + r );
+  const lista = [ u.pathname, ...RUTAS, ...( SESION ? RUTAS_MIEMBRO : [] ) ];
+  return [ ...new Set( lista ) ].map( ( r ) => u.origin + r );
 }
 
 /**
@@ -49,7 +69,10 @@ export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBa
     for ( const url of destinos ) {
       const camino = new URL( url ).pathname;
       for ( const ancho of anchos ) {
-        const contexto = await navegador.newContext( { viewport: { width: ancho, height: alto } } );
+        const contexto = await navegador.newContext( {
+          viewport: { width: ancho, height: alto },
+          ...( SESION ? { storageState: SESION } : {} ),
+        } );
         const pagina = await contexto.newPage();
         const r = await pagina.goto( url, { waitUntil: 'networkidle' } ).catch( () => null );
         if ( ! r || ! r.ok() ) {

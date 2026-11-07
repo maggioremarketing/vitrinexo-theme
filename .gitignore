@@ -1,6 +1,3 @@
-.DS_Store
-Thumbs.db
-*.log
 node_modules/
-.sass-cache/
-*.map
+banco/wp/
+.DS_Store

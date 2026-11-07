@@ -26,7 +26,9 @@ const DE_LA_PALETA = new Set(
 // portada con el azul, el cian y el verde de la paleta vieja, meses despues
 // del repintado: el barrido de entonces solo miraba hojas de estilo.
 const EXTENSIONES = [ '.php', '.css', '.js' ];
-const FUERA = [ 'node_modules', '.git', 'pruebas', 'assets/img' ];
+// banco/ queda fuera: dentro vive un WordPress entero, y su enlace al tema
+// apunta de vuelta acá, así que recorrerlo no termina nunca.
+const FUERA = [ 'node_modules', '.git', 'pruebas', 'assets/img', 'banco' ];
 
 function archivos( carpeta = '' ) {
   const salida = [];

@@ -32,7 +32,7 @@ import { TEMA } from '../pruebas/comun.mjs';
 
 const PLUGIN = join( TEMA, '../vitrinexo-core' );
 const CACHE  = join( TEMA, '../.wp-paginas.html' );
-const FUERA  = [ 'node_modules', '.git', 'vendor' ];
+const FUERA  = [ 'node_modules', '.git', 'vendor', 'banco' ];
 const EXT    = [ '.php', '.js', '.html', '.json', '.md', '.twig' ];
 
 function archivos( dir, salida = [] ) {

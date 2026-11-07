@@ -22,7 +22,9 @@ const PICTOGRAMAS = /[\u{1F000}-\u{1FAFF}\u{2190}-\u{21FF}\u{2300}-\u{23FF}\u{26
 const esComentario = ( linea ) => /^\s*(\/\/|\*|\/\*|#)/.test( linea );
 
 const EXTENSIONES = [ '.php', '.js' ];
-const FUERA = [ 'node_modules', '.git', 'pruebas' ];
+// banco/ queda fuera: dentro hay un WordPress entero y su enlace al tema
+// vuelve acá, así que recorrerlo no termina.
+const FUERA = [ 'node_modules', '.git', 'pruebas', 'banco' ];
 
 function archivos( carpeta = '' ) {
   const salida = [];

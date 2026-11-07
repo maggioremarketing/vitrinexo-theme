@@ -50,7 +50,8 @@ for ( const [ , valor ] of manual.matchAll( /letter-spacing:\s*([^;}]+)/g ) ) {
  * Hoy el tema no tiene CSS fuera de assets/css. Esto es lo que hace que siga
  * siendo verdad.
  */
-const FUERA = [ 'node_modules', '.git', 'assets/css', 'assets/img', 'assets/fonts', 'pruebas' ];
+// banco/ queda fuera por lo mismo que en colores: su enlace al tema vuelve acá.
+const FUERA = [ 'node_modules', '.git', 'assets/css', 'assets/img', 'assets/fonts', 'pruebas', 'banco' ];
 const EXT = [ '.php', '.js' ];
 
 function archivos( carpeta = '' ) {
