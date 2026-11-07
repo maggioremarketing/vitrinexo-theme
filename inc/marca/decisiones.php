@@ -318,11 +318,11 @@ function vx_marca_decisiones(): array {
         ],
         [
             'fecha'    => '2026-09-24',
-            'titulo'   => 'El fondo del botón primario sigue sin resolverse',
-            'eligio'   => 'Nada todavía.',
+            'titulo'   => 'Decisión superada: «el fondo del botón primario sigue sin resolverse»',
+            'eligio'   => 'Nada. Queda como registro de un problema que el repintado resolvió de camino.',
             'contra'   => 'Dejar el teal de marca como fondo de todo botón primario.',
-            'medicion' => 'Tinta blanca sobre #00AEB8 da 2,71:1, bajo el mínimo de 4,5:1. Sobre cyan-900 da 6,88:1. Cambiarlo toca todos los botones primarios del producto, no solo esta página.', // color ajeno: el registro cita la medición y el token que movió.
-            'estado'   => 'abierta',
+            'medicion' => 'Tinta blanca sobre #00AEB8 daba 2,71:1, bajo el mínimo de 4,5:1. Lo resolvió el repintado sin que esta entrada se enterara: el primario pasó a coral y la tinta encima a --color-on-fill, que da 6,99:1. Estuvo seis semanas diciendo que faltaba algo que ya estaba hecho.', // color ajeno: el registro cita la medición y el token que movió.
+            'estado'   => 'superada',
             'tokens'   => [],
         ],
         [
