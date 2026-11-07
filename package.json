@@ -5,7 +5,8 @@
   "scripts": {
     "verificar": "node pruebas/verificar.mjs",
     "accesibilidad": "node pruebas/accesibilidad.mjs",
-    "avance": "node pruebas/avance.mjs"
+    "avance": "node pruebas/avance.mjs",
+    "retratos": "node herramientas/retratos.mjs assets/img/marca"
   },
   "repository": {
     "type": "git",

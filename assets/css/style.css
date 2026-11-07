@@ -2009,7 +2009,8 @@ body.admin-bar:has(.vx-topbar) { padding-top: 92px; }
   max-width: 780px;
   width: 100%;
   border-radius: 16px;
-  box-shadow: 0 24px 64px rgba(0, 174, 184, 0.12), 0 4px 16px rgba(0,0,0,0.08);
+  /* La sombra era turquesa: el único resto del color viejo en la portada. */
+  box-shadow: 0 24px 64px rgba(20, 22, 31, 0.10), 0 4px 16px rgba(20, 22, 31, 0.06);
 }
 
 .network-hero::after {
@@ -5717,9 +5718,11 @@ a.pub-comment-author:hover {
 }
 .vx-img-banner img {
   width: 100%;
+  /* 1140 x 480 es 2,375, la proporción en la que se dibuja retratos-mosaico.svg:
+     en escritorio la franja se publica entera y no se recorta ninguna cara. */
   height: 480px;
   object-fit: cover;
-  object-position: center 35%;
+  object-position: center;
   display: block;
   transition: transform 0.6s ease;
 }
@@ -5737,8 +5740,11 @@ a.pub-comment-author:hover {
 }
 @media (max-width: 768px) {
   .vx-img-banner img {
-    height: auto;
-    object-fit: contain;
+    /* Entera en un teléfono, la pared mide 158 px de alto y las caras 15: deja
+       de ser gente y pasa a ser textura. Se recorta para que sigan siendo
+       caras, y que la pared se salga del marco dice lo mismo que la pared. */
+    height: 260px;
+    object-fit: cover;
     object-position: center;
   }
 }

@@ -135,7 +135,7 @@ function vx_marca_tamanos( string $archivo, string $alt, array $tamanos, string 
 function vx_marca_foto( string $archivo, string $alt, string $pie ): void {
     ?>
     <figure class="vx-foto">
-        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/marca/' . $archivo ); ?>"
+        <img src="<?php echo esc_url( vx_asset_url( 'marca/' . $archivo ) ); ?>"
              alt="<?php echo esc_attr( $alt ); ?>" class="vx-imagen" loading="lazy">
         <figcaption class="vx-nota"><?php echo esc_html( $pie ); ?></figcaption>
     </figure>

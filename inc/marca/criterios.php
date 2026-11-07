@@ -70,7 +70,7 @@ function vx_marca_partes(): array {
                 [ 'Paleta de color', 'definido', 'Pasteles sobre blanco con el coral de acento único. Ni un color escrito a mano queda fuera de la paleta.' ],
                 [ 'Iconografía', 'definido', 'Tabler Icons 3.19.0, trazo de 2 px sobre rejilla de 24. Una sola familia.' ],
                 [ 'Motivos', 'definido', 'El collage de perfiles, el lugar libre y la red de puntos, que baja a fondo.' ],
-                [ 'Dirección fotográfica', 'parcial', 'La marca ilustra, salvo las cenas. Faltan por reemplazar las tres fotos de plataforma del sitio.' ],
+                [ 'Dirección fotográfica', 'parcial', 'La marca ilustra, salvo las cenas. La portada y el tríptico ya son retratos; falta la foto del banner del problema.' ],
                 [ 'Favicon', 'definido', 'El isotipo lleno, en SVG y en PNG de 32, 16 y 180.' ],
                 [ 'Imagen para compartir', 'definido', '1200 × 630 sobre hueso, con el logotipo, el tagline y el dominio.' ],
             ],

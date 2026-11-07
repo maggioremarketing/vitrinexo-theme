@@ -100,8 +100,41 @@ for ( const nombre of [ ...new Set( porArgumento ) ] ) {
   }
 }
 
+/**
+ * Las piezas que el manual muestra con vx_marca_foto tienen que existir.
+ *
+ * No las cubría nadie. Se borró retratos-mosaico.svg a propósito y la suite
+ * siguió en verde: el nombre viaja como argumento y la carpeta marca/ estaba
+ * exenta por ser «material que el manual cita». Dejó de serlo el día que la
+ * portada del sitio pasó a publicar uno de esos archivos.
+ */
+const citadas = [ ...new Set( [ ...leer( 'inc/marca/contenido.php' )
+  .matchAll( /vx_marca_foto\(\s*'([\w.-]+\.(?:svg|png|jpe?g))'/g ) ].map( ( m ) => m[ 1 ] ) ) ];
+
+for ( const nombre of citadas ) {
+  if ( ! existsSync( join( TEMA, 'assets/img/marca', nombre ) ) ) {
+    fallos.push( `el manual muestra marca/${ nombre } y ese archivo no existe` );
+  }
+}
+
+/**
+ * Las dos piezas anchas del motivo, que el producto publica en la portada y en
+ * la franja del directorio. No son material citado: son marca en pantalla, y
+ * por eso sus colores se miden igual que los del logotipo.
+ */
+const ANCHAS = [ 'assets/img/marca/retratos-portada.svg', 'assets/img/marca/retratos-mosaico.svg' ];
+for ( const ruta of ANCHAS ) {
+  if ( ! existsSync( join( TEMA, ruta ) ) ) fallos.push( `falta ${ ruta }, que el producto publica` );
+  if ( ! citadas.includes( ruta.replace( 'assets/img/marca/', '' ) ) ) {
+    fallos.push( `${ ruta } se publica y el manual no lo muestra` );
+  }
+}
+
 /** Y los colores de cada pieza de marca salen de la paleta. */
-const svg = [ OFICIAL, ...DE_MARCA.filter( ( r ) => r.endsWith( '.svg' ) ) ].map( leer ).join( '\n' );
+// Solo se leen las que están. La que falte ya quedó denunciada arriba; sin este
+// filtro la prueba reventaba con un ENOENT en vez de decir qué archivo falta.
+const svg = [ OFICIAL, ...DE_MARCA.filter( ( r ) => r.endsWith( '.svg' ) ), ...ANCHAS ]
+  .filter( ( r ) => existsSync( join( TEMA, r ) ) ).map( leer ).join( '\n' );
 const palabra = /#[0-9a-fA-F]{6}\b/g;
 
 const delSistema = new Set(

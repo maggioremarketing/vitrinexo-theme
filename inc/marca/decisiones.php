@@ -27,6 +27,15 @@ function vx_marca_decisiones(): array {
     return [
         [
             'fecha'    => '2026-11-06',
+            'titulo'   => 'A lo ancho el motivo es una rejilla de retratos, no el collage',
+            'eligio'   => 'Dos piezas nuevas: diez retratos en dos filas para la portada y treinta en tres filas para la franja del directorio. Mismas coordenadas de rasgos, misma paleta, un solo lugar libre.',
+            'contra'   => 'Estirar el collage de seis recortes al ancho, que era la opción obvia y la que sonaba mejor en el papel.',
+            'medicion' => 'Se armaron las tres y se miraron al tamaño en el que se publican, no a 1600. El collage estirado deja cada recorte más grande que una cara entera y se lee como cuatro caras inconexas. Seis retratos en una fila de 16 a 9 dan una casilla de 0,30 contra los 0,80 del retrato y cortan la cara a ambos lados. Dos filas de cinco dan 0,71 y las cabezas salen enteras.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-06',
             'titulo'   => 'La paleta pasa a pasteles sobre blanco con un solo acento',
             'eligio'   => 'La paleta de la propuesta de identidad de Elisa: base, coral y cinco pasteles. Página blanca, paneles hueso, paneles oscuros en tinta.',
             'contra'   => 'Seguir con el teal, el púrpura y el rosa vibrantes, que es lo que el producto tenía lanzado.',
