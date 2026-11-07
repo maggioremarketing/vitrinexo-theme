@@ -27,6 +27,15 @@ function vx_marca_decisiones(): array {
     return [
         [
             'fecha'    => '2026-11-07',
+            'titulo'   => 'El título de una página lo manda la lista del plugin, no lo que quedó en la base',
+            'eligio'   => 'Que vx_create_pages compare también el título y lo corrija, y que las cenas no tengan costo también en las preguntas frecuentes.',
+            'contra'   => 'Renombrar las páginas a mano en el editor cada vez, que es lo que venía pasando sin que nadie lo notara.',
+            'medicion' => 'La condición miraba solo el shortcode y arrastraba el título de pasada, así que un cambio de nombre —que no mueve el shortcode— no llegaba nunca a producción: la lista decía «Vitrinexo 4Dinner: Sobre el evento» y el sitio servía «4Dinner — Sobre el evento», sin la marca madre y con una raya larga que el proyecto no usa, en la pestaña y en el resultado de Google. Lo encontró vocabulario al empezar a mirar el título. Verificado rompiéndolo en las dos direcciones: con la puerta de versión cerrada la comprobación lo caza, y con la puerta abierta el título vuelve solo al de la lista. Aparte, la respuesta de precios decía que el detalle se comunicaría más adelante mientras la portada decía que sentarse a la mesa no cuesta nada; decidido que no tienen costo, las dos piezas ahora dicen lo mismo y con las mismas palabras.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
+            'fecha'    => '2026-11-07',
             'titulo'   => 'Las preguntas frecuentes se corrigen con una migración, no a mano',
             'eligio'   => 'Una migración de una sola vez en el plugin, que le pone la marca madre adelante a las seis entradas de vx_faq que la tenían desnuda, por sustitución de fragmentos y con respaldo del original.',
             'contra'   => 'Corregirlas a mano en el editor, que era lo evidente, y reescribir cada entrada entera desde el repositorio.',
