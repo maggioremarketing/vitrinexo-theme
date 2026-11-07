@@ -3840,8 +3840,10 @@ section#offers {
 /* ── Forms ── */
 .vx-form__group   { margin-bottom: 1rem; }
 .vx-form__label   { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 5px; letter-spacing: var(--ls-caption); display: block; }
+/* 40,8 de alto con el relleno solo, igual que .form-control-vx. Son dos
+   familias de campos que conviven; las dos tienen que llegar a 44. */
 .vx-form__input,
-.vx-form__textarea { width: 100%; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text-primary); padding: 9px 14px; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 13px; transition: border-color 0.15s ease, box-shadow 0.15s ease; outline: none; }
+.vx-form__textarea { min-height: 44px; width: 100%; background: var(--color-surface); border: 1px solid var(--color-border); color: var(--color-text-primary); padding: 9px 14px; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 13px; transition: border-color 0.15s ease, box-shadow 0.15s ease; outline: none; }
 .vx-form__input:focus,
 .vx-form__textarea:focus { border-color: var(--salvia); box-shadow: 0 0 0 3px color-mix(in srgb, var(--salvia) 45%, transparent); }
 .vx-form__input::placeholder,
