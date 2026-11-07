@@ -88,13 +88,21 @@ En el panel de WordPress el tracking sigue escrito a mano a propósito: wp-admin
 
 Push a `main` → GitHub Actions → rsync SSH → Hostinger.
 
-**Si un cambio toca los dos repos, se empuja primero `vitrinexo-core` y se espera a que su
-deploy termine.** El CI del tema clona `vitrinexo-core` de `main` para levantar el banco, así
-que un tema empujado antes mide la copia vieja del plugin y sale rojo por una copia que ya
-está arreglada. Pasó dos veces el 7 de noviembre de 2026: la regla de la marca madre midiendo
-el onboarding sin corregir, y las dos reglas de región midiendo el blog sin corregir. El arreglo
-no es relanzar a ciegas: es empujar el plugin, esperar su verde y relanzar el run del tema,
-que vuelve a clonar.
+**Si un cambio toca los dos repos, se empuja primero aquel cuyo cambio se basta solo**, o sea
+el repo cuyas pruebas no necesitan el código nuevo del otro. Después se espera su verde y se
+empuja el segundo.
+
+El motivo es que la dependencia es mutua y en los dos sentidos: el workflow del tema clona
+`vitrinexo-core` de `main` para levantar el banco, y el del plugin clona `vitrinexo-theme` de
+`main` para correr `banco/ci.sh` y la prueba de colores. Ninguno de los dos fija un ref, así
+que cada uno mide la rama principal del otro en el momento del run. Si los dos cambios se
+necesitan entre sí, el primero sale rojo vaya cual vaya: se empuja el segundo y se relanza el
+run del primero, que vuelve a clonar.
+
+Hoy casi siempre el que se basta solo es el plugin, porque el copy vive ahí y el tema lo
+clona para tener qué medir, pero eso es la costumbre y no la regla. El 7 de noviembre de 2026
+mordió dos veces por empujar el tema primero: la regla de la marca madre midiendo el
+onboarding sin corregir, y las dos reglas de región midiendo el blog sin corregir.
 
 ```yaml
 # Secrets requeridos en el repo
