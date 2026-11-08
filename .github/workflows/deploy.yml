@@ -24,10 +24,16 @@ jobs:
         # puede llegar a esas pantallas: estilos, plantillas, el PHP del tema o
         # las propias comprobaciones. Un cambio en el manual o en el README no
         # las toca.
+        #
+        # package.json entra aunque no parezca del área de miembros: ahí viven
+        # el comando que levanta el banco y las tres variables de sesión que le
+        # dicen a la suite qué rutas pedir. Un cambio que solo toque ese archivo
+        # puede dejar el banco sin levantar o la suite sin sesiones, y hasta hoy
+        # se desplegaba sin que nadie lo midiera.
         run: |
           CAMBIOS=$(git diff --name-only HEAD^ HEAD 2>/dev/null || echo todo)
           echo "$CAMBIOS"
-          if echo "$CAMBIOS" | grep -qE '^(assets/css/|assets/js/|templates/|partials/|inc/|pruebas/|banco/|functions\.php|page\.php|style\.css|\.github/)'; then
+          if echo "$CAMBIOS" | grep -qE '^(assets/css/|assets/js/|templates/|partials/|inc/|pruebas/|banco/|functions\.php|page\.php|style\.css|package(-lock)?\.json|\.github/)'; then
             echo "corre=si" >> "$GITHUB_OUTPUT"
           else
             echo "corre=no" >> "$GITHUB_OUTPUT"
