@@ -128,18 +128,43 @@ jobs:
         # un fallo llegue al servidor, pero lo deja dicho en voz alta en el
         # mismo minuto, en vez de esperar a que alguien se acuerde de mirar.
         #
-        # Se espera a que el CDN suelte la versión nueva antes de medir: el
-        # caché sirve por URL y medir la anterior no dice nada.
+        # Se espera a que el CDN suelte el archivo nuevo antes de medir: el
+        # caché sirve por URL y medir la hoja anterior no dice nada.
+        #
+        # Esto comparaba la versión del tema contra la que aparece en el HTML, y
+        # era un portón decorativo: cuando la versión no cambiaba —que es lo
+        # normal, porque se sube a mano— las dos coincidían en el primer intento
+        # y el CDN seguía sirviendo el archivo viejo en esa misma URL. Verificaba
+        # la etiqueta, no el contenido.
+        #
+        # Mordió el 8 de noviembre de 2026: dos arreglos de accesibilidad se
+        # publicaron bien, el portón se abrió al instante, y la suite midió el
+        # CSS anterior y salió en rojo por defectos ya corregidos.
+        #
+        # Ahora se compara el archivo. Y si después de dos minutos el sitio
+        # sigue sirviendo otro, no se mide: medir la hoja vieja es decir algo
+        # sobre un sitio que ya no existe, y eso es peor que no decir nada.
         run: |
-          ESPERADA=$(grep -m1 '^Version:' style.css | tr -d ' ' | cut -d: -f2)
-          echo "esperando a que el sitio sirva la version $ESPERADA"
+          LOCAL=$(md5sum assets/css/style.css | cut -d' ' -f1)
+          echo "esperando a que el sitio sirva el CSS recién publicado ($LOCAL)"
+          SERVIDO=
           for i in $(seq 1 12); do
-            SERVIDA=$(curl -s https://vitrinexo.com/ | grep -o 'style\.css?ver=[0-9.]*' | head -1 | cut -d= -f2)
-            if [ "$SERVIDA" = "$ESPERADA" ]; then echo "lista tras $((i*10))s"; break; fi
-            echo "  intento $i: sirve ${SERVIDA:-nada}"
+            # Los atributos del HTML vienen con comilla simple, asi que un
+            # patron anclado en la doble se pasa de largo y arrastra « media='all' />».
+            # Se parten las dos comillas en lineas antes de buscar.
+            URL=$(curl -s https://vitrinexo.com/ | tr "\"'" "\n\n" | grep -o 'https://[^ ]*style\.css?ver=[^ ]*' | head -1)
+            [ -n "$URL" ] && SERVIDO=$(curl -s "$URL" | md5sum | cut -d' ' -f1)
+            if [ "$SERVIDO" = "$LOCAL" ]; then echo "lista tras $((i*10))s"; break; fi
+            echo "  intento $i: sirve ${SERVIDO:-nada}"
             sleep 10
           done
-          [ "$SERVIDA" = "$ESPERADA" ] || echo "AVISO: se mide $SERVIDA y no $ESPERADA"
+          if [ "$SERVIDO" != "$LOCAL" ]; then
+            echo "El sitio sigue sirviendo un CSS distinto del que acabamos de publicar."
+            echo "  publicado: $LOCAL"
+            echo "  servido:   ${SERVIDO:-nada}"
+            echo "Medir ahora sería medir la hoja anterior, así que no se mide."
+            exit 1
+          fi
 
           npm run accesibilidad -- https://vitrinexo.com/marca
 

@@ -32,6 +32,34 @@ add_action( 'after_setup_theme', function () {
 
 // ─── Enqueue assets ────────────────────────────────────────────────────────────
 
+/**
+ * La version con que se pide un archivo del tema, que es su clave de cache.
+ *
+ * El numero del tema a secas no sirve: las cabeceras mandan el CSS con
+ * max-age de siete dias, asi que mientras la URL no cambie, el navegador y el
+ * CDN siguen sirviendo el archivo viejo aunque el servidor ya tenga el nuevo.
+ * Y la version solo sube cuando alguien se acuerda de subirla.
+ *
+ * Mordio el 8 de noviembre de 2026: dos arreglos de accesibilidad —un
+ * contraste de 1,50:1 y un blanco de toque de 20,8 px— se desplegaron bien y
+ * el sitio siguio sirviendo el CSS anterior. La prueba de pantalla salio en
+ * rojo midiendo la hoja vieja, y a un miembro con la pagina ya visitada no le
+ * habrian llegado en una semana.
+ *
+ * Con la fecha del archivo adentro, la URL cambia sola cada vez que el archivo
+ * cambia, y nadie tiene que acordarse de nada.
+ *
+ * Es un stat por peticion, que no se nota, y en el CI la fecha la pone el
+ * checkout, asi que en la practica la cache se rompe una vez por despliegue
+ * aunque el archivo no haya cambiado. Se prefiere eso a lo contrario: que no
+ * se rompa cuando si cambio.
+ */
+function vx_version_archivo( string $relativo, string $respaldo ): string {
+    $ruta = get_template_directory() . $relativo;
+    $t    = is_readable( $ruta ) ? filemtime( $ruta ) : false;
+    return $t ? $respaldo . '.' . $t : $respaldo;
+}
+
 add_action( 'wp_enqueue_scripts', function () {
     $ver = wp_get_theme()->get( 'Version' );
     $uri = get_template_directory_uri();
@@ -43,13 +71,13 @@ add_action( 'wp_enqueue_scripts', function () {
     wp_enqueue_style( 'tabler-icons', 'https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css', [], '3.19.0' );
 
     // Sistema de diseño Vitrinexo (incluye Switzer Variable local vía @import en style.css)
-    wp_enqueue_style( 'vitrinexo-design', $uri . '/assets/css/style.css', [ 'bootstrap', 'tabler-icons' ], $ver );
+    wp_enqueue_style( 'vitrinexo-design', $uri . '/assets/css/style.css', [ 'bootstrap', 'tabler-icons' ], vx_version_archivo( '/assets/css/style.css', $ver ) );
 
     // Bootstrap JS Bundle
     wp_enqueue_script( 'bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', [], '5.3.3', true );
 
     // JS principal del tema
-    wp_enqueue_script( 'vitrinexo-main', $uri . '/assets/js/main.js', [ 'bootstrap' ], $ver, true );
+    wp_enqueue_script( 'vitrinexo-main', $uri . '/assets/js/main.js', [ 'bootstrap' ], vx_version_archivo( '/assets/js/main.js', $ver ), true );
 
     // Datos para JS (nonce, api_url, user_id)
     $user_id = get_current_user_id();
@@ -64,11 +92,11 @@ add_action( 'wp_enqueue_scripts', function () {
 
     // Scripts condicionales por página
     if ( is_page( 'onboarding' ) ) {
-        wp_enqueue_script( 'vitrinexo-onboarding', $uri . '/assets/js/onboarding.js', [ 'vitrinexo-main' ], $ver, true );
+        wp_enqueue_script( 'vitrinexo-onboarding', $uri . '/assets/js/onboarding.js', [ 'vitrinexo-main' ], vx_version_archivo( '/assets/js/onboarding.js', $ver ), true );
     }
 
     if ( is_page( [ 'directorio', 'busqueda' ] ) ) {
-        wp_enqueue_script( 'vitrinexo-directorio', $uri . '/assets/js/directorio.js', [ 'vitrinexo-main' ], $ver, true );
+        wp_enqueue_script( 'vitrinexo-directorio', $uri . '/assets/js/directorio.js', [ 'vitrinexo-main' ], vx_version_archivo( '/assets/js/directorio.js', $ver ), true );
     }
 
     if ( is_page( 'editar-perfil' ) ) {
