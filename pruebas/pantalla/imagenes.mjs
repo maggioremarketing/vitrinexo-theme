@@ -33,7 +33,14 @@ const fallos = await enLaPagina(
       [ ...document.images ].map( ( img ) => img.complete ? null : new Promise( ( listo ) => {
         img.addEventListener( 'load', listo, { once: true } );
         img.addEventListener( 'error', listo, { once: true } );
-        setTimeout( listo, 10000 ); // y un plazo, para que una sola imagen no cuelgue la suite
+        // Un plazo, para que una sola imagen no cuelgue la suite. Pero cuando
+        // vence, lo unico que sabemos es que dejamos de esperar. Decir «no
+        // cargo» seria afirmar algo que no medimos, y manda a alguien a buscar
+        // un archivo que esta perfecto: paso el 7 de noviembre de 2026 con
+        // compartir.png, que produccion servia en 0,27 s con 200 y 29.617
+        // bytes, y el rojo decia que no cargaba. Se deja la marca y el informe
+        // la cuenta como lo que es: una imagen sin medir.
+        setTimeout( () => { img.dataset.vxPlazoVencido = '1'; listo(); }, 10000 );
       } ) )
     ) );
 
@@ -61,7 +68,9 @@ const fallos = await enLaPagina(
         if ( sinSrc && oculta ) continue;
 
         if ( ! img.complete || ! img.naturalWidth ) {
-          malos.push( `${ nombre } no cargó` );
+          malos.push( img.dataset.vxPlazoVencido
+            ? `${ nombre } seguía cargando a los 10 s, así que no se midió`
+            : `${ nombre } no cargó` );
           continue;
         }
 

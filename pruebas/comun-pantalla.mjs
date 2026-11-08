@@ -33,6 +33,20 @@ export const RUTAS = [
   // suite pasaba en verde desde hacia meses porque nadie pedia esta ruta.
   // Responde 200 sin sesion, igual que las otras seis.
   '/blog/',
+  // Las ocho de abajo responden 200 y sirven su pantalla real SIN sesion: son
+  // las de antes de entrar (recuperar y fijar contrasena, confirmar correo,
+  // verificacion pendiente), las dos respuestas a una invitacion, y las dos del
+  // blog, que sin sesion muestran su estado cerrado («Debes iniciar sesion para
+  // escribir un articulo», «No tienes acceso a esta seccion»).
+  //
+  // Una auditoria las dio por muro de login mirando solo el tamano de la
+  // respuesta. No lo son, y la diferencia importa: si fueran el muro, medirlas
+  // sin sesion seria medir el muro; como no lo son, aca se mide la pantalla.
+  // Ninguna prueba las habia abierto nunca, y dos de ellas se anunciaban como
+  // «Documento legal».
+  '/recuperar-contrasena/', '/nueva-contrasena/', '/confirmar-correo/',
+  '/verificacion-pendiente/', '/conexion-aceptada/', '/conexion-rechazada/',
+  '/blog-nuevo/', '/blog-moderacion/',
 ];
 
 /**
@@ -51,12 +65,23 @@ export const RUTAS_MIEMBRO = [
   // «Perfil no encontrado», que es lo que midió la suite desde el primer día.
   '/dashboard/', '/perfil/ana-reyes/', '/editar-perfil/', '/directorio/', '/conexiones/',
   '/favoritos/', '/notificaciones/', '/configuracion/', '/nexos/', '/mis-eventos/',
-  '/mis-publicaciones/', '/feed/', '/ayuda/',
+  // '/feed/' estuvo aca y no media nada: `feed` es un endpoint reservado de
+  // WordPress y su regla de reescritura gana sobre cualquier pagina con ese
+  // slug, asi que produccion devolvia 824 bytes de RSS. La prueba de vocabulario
+  // leia ese XML, no encontraba palabras prohibidas porque un RSS no tiene copy,
+  // y se anotaba la ruta como medida. La pantalla vive en /oportunidades/, que
+  // es como la nombra el producto entero.
+  '/mis-publicaciones/', '/oportunidades/', '/ayuda/',
   // Las cuatro que faltaban, y son justo las que nombran las piezas de la línea:
   // la página del evento y las tres comunidades. Mientras no estuvieron, la
   // regla de la marca madre se podía medir en verde sin abrir ni una sola
   // pantalla que la rompiera.
   '/4dinner/', '/comunidad-out2b/', '/comunidad-woman/', '/comunidad-senior/',
+  // Las dos de nexos no las crea nadie en el codigo: son destinos enlazados
+  // desde los cuatro botones «Ver todos» del panel y del perfil
+  // (shortcodes-auth.php, lineas 1465, 1489, 1845 y 1871). Responden 200 en
+  // produccion, no estan en el sitemap y no estaban en ninguna lista.
+  '/nexos-que-ofrezco/', '/nexos-que-busco/',
 ];
 
 /**
@@ -201,7 +226,7 @@ export function visitasAdmin() {
  */
 export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBase = false } = {} ) {
   const navegador = await chromium.launch();
-  const fallos = [], mudas = [];
+  const fallos = [], mudas = [], noHtml = [];
   const afuera = [];
   const destinos = soloBase
     ? [ visita( BASE(), SESION, SESION ? ' · con sesión' : '' ) ]
@@ -218,6 +243,21 @@ export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBa
         const r = await pagina.goto( url, { waitUntil: 'networkidle' } ).catch( () => null );
         if ( ! r || ! r.ok() ) {
           if ( ! mudas.includes( camino ) ) mudas.push( camino );
+          await contexto.close();
+          continue;
+        }
+
+        // Responder 200 no es servir la pantalla. `feed` es un endpoint
+        // reservado de WordPress y su regla de reescritura gana sobre la página
+        // del mismo slug, así que /feed/ devolvía 824 bytes de RSS con un 200
+        // alegre. La prueba de vocabulario leía ese XML, no encontraba ninguna
+        // palabra prohibida —un RSS no tiene copy— y anotaba la ruta como
+        // medida. Mirar el tipo de contenido caza eso solo, sin que nadie sepa
+        // de antemano que el problema está.
+        const tipo = ( r.headers()[ 'content-type' ] || '' ).toLowerCase();
+        if ( ! tipo.startsWith( 'text/html' ) ) {
+          const dicho = `${ camino } (${ tipo.split( ';' )[ 0 ] || 'sin tipo' })`;
+          if ( ! noHtml.includes( dicho ) ) noHtml.push( dicho );
           await contexto.close();
           continue;
         }
@@ -252,6 +292,10 @@ export async function enLaPagina( medir, { anchos = [ 1200 ], alto = 900, soloBa
   // Si una ruta no tiene que existir, se saca de la lista. Mientras esté en la
   // lista, no cargar es fallar.
   if ( mudas.length ) fallos.unshift( `no respondieron, así que no se midieron: ${ mudas.join( ', ' ) }` );
+  // Y el mismo criterio para lo que respondió otra cosa: leer un XML y no
+  // encontrarle faltas de copy no es medir la pantalla, es medir que un RSS no
+  // tiene copy.
+  if ( noHtml.length ) fallos.unshift( `no devolvieron HTML, así que lo medido no era la pantalla: ${ noHtml.join( ', ' ) }` );
   return fallos;
 }
 

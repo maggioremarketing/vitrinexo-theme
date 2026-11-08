@@ -2633,11 +2633,25 @@ section#offers {
   background: linear-gradient(135deg, var(--salvia-suave) 0%, var(--blanco) 60%);
 }
 
+/* La palabra que la cabecera resalta, «buscas» en «Ofrecen lo que buscas», iba
+   en el color pleno sobre su propio fondo claro, y eso no se lee: 1,50:1 donde
+   la regla pide 3:1 para texto grande. El sistema ya tenía la respuesta en los
+   tokens: las variantes -tinta son las versiones legibles de cada color.
+   rosa-tinta pasa por los dos extremos del degradado, que termina en blanco:
+   4,51:1 sobre el rosa y 5,29:1 sobre el blanco.
+
+   Llevaba así desde que existe la pantalla, y no lo vio nadie porque
+   /nexos-que-busco/ no estaba en ninguna lista de rutas: responde 200 en
+   producción y ninguna prueba la abría.
+
+   --offers hoy no lo usa nadie: el único uso de esta familia es
+   shortcodes-auth.php:1914, y es --seeks. Se le da el mismo trato para que
+   nazca legible el día que alguien lo use, pero no era un defecto vivo. */
 .match-section-label--seeks {
-  color: var(--color-accent);
+  color: var(--rosa-tinta);
 }
 .match-section-label--offers {
-  color: var(--color-success);
+  color: var(--salvia-tinta);
 }
 
 .match-profile-label {
@@ -3939,7 +3953,13 @@ textarea.vx-form__input,
 
 /* ── Auth card title + back link ── */
 .vx-auth-card__title    { font-size: 1.4rem; font-weight: 400; letter-spacing: var(--ls-h3); margin-bottom: 0.75rem; color: var(--color-text-primary); }
-.vx-back-link           { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--color-text-secondary); text-decoration: none; }
+/* 44 de alto, que medía 20,8. El ancho ya pasa porque el texto es largo, pero
+   el alto es lo que se falla con el pulgar, y esta es la pantalla de quien
+   perdió la contraseña: la que menos conviene que sea difícil de tocar.
+   La segunda regla existe porque el marcado le pone además la utilidad d-block,
+   que pisa el display y deja el centrado sin efecto. */
+.vx-back-link           { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 13px; color: var(--color-text-secondary); text-decoration: none; }
+.vx-back-link.d-block   { display: flex; }
 .vx-back-link:hover     { color: var(--color-text-primary); }
 
 /* ── Form extras ── */

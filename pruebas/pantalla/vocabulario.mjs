@@ -134,11 +134,24 @@ for ( const { sesion } of paradas ) {
   pestana[ sesion ] = await contexto.newPage();
 }
 
+const noHtml = [];
+
 for ( const { url, sesion, camino: ruta, escritorio } of paradas ) {
   pendientes.push( ruta );
   const pagina = pestana[ sesion ];
   const r = await pagina.goto( url, { waitUntil: 'domcontentloaded' } ).catch( () => null );
   if ( ! r || ! r.ok() ) continue;
+
+  // Responder 200 no es servir la pantalla. `feed` es un endpoint reservado de
+  // WordPress y su regla de reescritura gana sobre la página con ese slug, así
+  // que /feed/ devolvía 824 bytes de RSS. Esta comprobación leía ese XML, no le
+  // encontraba ninguna palabra prohibida —un RSS no tiene copy— y se anotaba la
+  // ruta como medida. Mirar el tipo de contenido lo caza solo.
+  const tipo = ( r.headers()[ 'content-type' ] || '' ).toLowerCase();
+  if ( ! tipo.startsWith( 'text/html' ) ) {
+    noHtml.push( `${ ruta } (${ tipo.split( ';' )[ 0 ] || 'sin tipo' })` );
+    continue;
+  }
   if ( sesion && ! escritorio && false === await estaDentro( pagina ) ) afuera.push( ruta );
   medidas.push( ruta );
 
@@ -231,7 +244,14 @@ await navegador.close();
 
 if ( afuera.length ) fallos.unshift( receta( afuera ) );
 
-const sinMedir = pendientes.filter( ( r ) => ! medidas.includes( r ) );
-if ( sinMedir.length ) console.log( `      (no respondieron, no se midieron: ${ sinMedir.join( ', ' ) })` );
+// Esto iba con console.log, que se imprime en verde y en rojo pero no cambia el
+// código de salida: la comprobación podía no abrir una sola pantalla y el
+// despliegue pasaba igual. Es el mismo agujero que ya se tapó en enLaPagina el
+// 7 de noviembre de 2026, y seguía abierto acá, que es justo donde se mide el
+// copy. Mientras una ruta esté en la lista, no medirla es fallar.
+const dichoNoHtml = noHtml.map( ( d ) => d.split( ' (' )[ 0 ] );
+const sinMedir = pendientes.filter( ( r ) => ! medidas.includes( r ) && ! dichoNoHtml.includes( r ) );
+if ( noHtml.length ) fallos.unshift( `no devolvieron HTML, así que lo medido no era la pantalla: ${ noHtml.join( ', ' ) }` );
+if ( sinMedir.length ) fallos.unshift( `no respondieron, así que no se midieron: ${ sinMedir.join( ', ' ) }` );
 
 informar( 'vocabulario', fallos );
