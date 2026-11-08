@@ -78,15 +78,20 @@ function vx_marca_estrategia(): void {
 
     vx_marca_bloque( 'estrategia-objetivos-estrategicos', function () {
         vx_marca_p( 'Uno manda sobre todos los demás, y tiene fecha.' );
-        vx_marca_declaracion( '100 miembros aprobados antes de que termine 2026, para empezar a cobrar en 2027.' );
+        vx_marca_declaracion( '100 miembros aprobados antes de que termine 2026.' );
         vx_marca_p( 'De ahí sale el programa de lanzamiento entero, y por eso el sistema lo hace cumplir en vez de confiarlo al copy: los <strong>primeros 100 miembros aprobados</strong> reciben el distintivo de Miembro Pionero, que es permanente.' );
         vx_marca_p( 'La consecuencia al escribir es que el programa no se anuncia como una promoción sino como una fecha de corte. Cuando se llegue a 100, cierra.' );
-        vx_marca_declaracion( 'El período gratuito no vence en una fecha: vence en un número.' );
-        vx_marca_p( 'Termina cuando el programa llega a sus <strong>100 miembros</strong>. Ahí se avisa y se da un plazo antes de cobrar, y recién entonces se fija la fecha. Hasta ese momento el plan de un Pionero no tiene vencimiento, y eso está escrito en el sistema y no en el copy: la aprobación guarda «sin vencimiento», y el cron de avisos no le manda nada a quien no tiene fecha.' );
-        vx_marca_p( 'Antes la regla era noventa días desde la aprobación, y la decisión la cambió. El cambio no le quita nada a los 44 que ya se inscribieron leyendo la promesa anterior: con 44 de 100, llegar al cupo toma más que tres meses, así que el período se alarga. Lo único que desaparece es la fecha fija, y en su lugar queda dicho lo que sí se va a cumplir, que es avisar antes de cobrar.' );
-        vx_marca_declaracion( 'Condiciones preferenciales quiere decir un precio más bajo, para siempre.' );
-        vx_marca_p( 'No es un precio congelado ni un año gratis, que son otras dos promesas distintas: es <strong>19 en vez de 29 al mes, mientras el miembro siga siendo miembro</strong>. Los precios son los tres que el panel trae: <strong>29 mensual, 249 anual y 19 preferencial</strong>, y ahora sí son una decisión y no un valor que alguien escribió.' );
-        vx_marca_p( 'Lo que falta no es una decisión sino una pieza: el disparador. Hoy nada ocurre solo al aprobar al miembro 100, no hay aviso ni plazo ni fecha, y mientras el contador vaya en 44 hay tiempo. Pero el día que llegue a 100, esto se hace a mano o no se hace, y conviene que esté dicho acá y no descubierto ese día.' );
+        vx_marca_declaracion( 'El período gratuito de los primeros 100 no termina.' );
+        vx_marca_p( 'Ser Miembro Pionero significa no pagar nunca: acceso gratuito <strong>sin fecha de término y sin cobro posterior</strong>. No es un período de prueba largo ni un precio congelado, que son otras dos promesas distintas. La razón es de negocio: los primeros cien son los que hacen que el directorio exista el día uno, cuando todavía no hay nada que ver, y cobrarles por eso es la forma más cara de perderlos.' );
+        vx_marca_p( 'Está escrito en el sistema y no en el copy. La aprobación guarda «sin vencimiento», el cron de avisos no le manda nada a quien no tiene fecha, y el ajuste del panel que podía ponerles fecha a todos de una vez se quitó, porque un botón capaz de deshacer la regla con un clic no es una herramienta sino una trampa.' );
+        vx_marca_p( 'La regla cambió dos veces en dos días: primero fueron noventa días desde la aprobación, después el cupo de 100 con aviso y plazo, y ahora no termina. Las tres versiones están en el registro de decisiones, las dos primeras marcadas como superadas. Ninguna le quitó nada a los 44 que ya estaban: cada una prometió más que la anterior.' );
+
+        vx_marca_declaracion( 'El número 100 cierra el programa, no abre el cobro.' );
+        vx_marca_p( 'Al completarse, el distintivo deja de entregarse. Para quien ya lo tiene no cambia nada: es permanente, y esa promesa es anterior al cupo. Hubo dos puertas al programa y solo una miraba el número, así que el miembro 130 salía Pionero igual; ahora hay una sola, y una prueba falla si alguien escribe el distintivo fuera de ella.' );
+
+        vx_marca_declaracion( 'Hay dos precios, y son para quien llegue después.' );
+        vx_marca_p( '<strong>29 al mes y 249 al año</strong>, del miembro 101 en adelante. Hubo un tercero, 19, pensado como precio preferencial para los Pioneros: se fue el día que los Pioneros dejaron de pagar, porque un precio más bajo no tiene a quién aplicarse si quien lo tendría no paga nunca.' );
+        vx_marca_p( 'Lo que falta ya no es el disparador sino el miembro 101. Stripe está entero comentado, así que hoy nadie puede pagar, y la portada ofrece una lista de espera que no está construida. Mientras el contador no llegue a 100 hay tiempo; el día que llegue, esa pantalla miente.' );
     } );
 
     vx_marca_bloque( 'estrategia-propuesta-de-valor', function () {

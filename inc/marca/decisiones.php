@@ -26,12 +26,21 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function vx_marca_decisiones(): array {
     return [
         [
+            'fecha'    => '2026-11-08',
+            'titulo'   => 'Los primeros 100 son gratis para siempre',
+            'eligio'   => 'Ser Miembro Pionero significa no pagar nunca: acceso gratuito sin fecha de término y sin cobro posterior. El número 100 cierra el programa y no abre el cobro. Quedan dos precios, 29 al mes y 249 al año, para quien entre del 101 en adelante.',
+            'contra'   => 'Lo decidido el día anterior, que era cobrarles al llegar a 100 con aviso y plazo; y el precio preferencial de 19, que era la forma suave de la misma idea.',
+            'medicion' => 'No es una medición: es una decisión de negocio, y la razón es que cobrarle a quien entró cuando no había nada que ver es la forma más cara de perderlo. Lo que sí se midió es el alcance. A los 44 Pioneros se les había prometido «gratis mientras el programa esté abierto y después precio preferencial», así que la regla nueva les da más, no menos, y nadie necesita una explicación incómoda. Y el sistema no lo sostenía: el distintivo se repartía desde dos sitios y solo uno miraba el cupo, con lo que el miembro 130 salía Pionero igual, y en el panel había una casilla que le escribía vencimiento a los 44 de una sola vez. Ahora hay una puerta única con su prueba, que falla si alguien escribe el distintivo fuera de ella, y el ajuste del panel se quitó. Queda un hueco dicho en voz alta: Stripe está entero comentado, así que hoy nadie puede pagar, y la portada ofrece una lista de espera que no existe. Ese es el trabajo del miembro 101, y todavía no está hecho.',
+            'estado'   => 'aplicada',
+            'tokens'   => [],
+        ],
+        [
             'fecha'    => '2026-11-07',
             'titulo'   => 'El período gratuito vence en un número y no en una fecha',
             'eligio'   => 'El plan gratuito de los Pioneros dura mientras el programa esté abierto y termina al llegar a 100 miembros, con aviso y plazo antes de cobrar. Preferencial quiere decir 19 en vez de 29 al mes, para siempre. Los precios del panel —29, 249 y 19— quedan como decisión.',
             'contra'   => 'Los noventa días desde la aprobación, que es lo que el sistema hacía y lo que el sitio prometía; el precio congelado y el año gratis, que son las otras dos lecturas de «preferencial».',
             'medicion' => 'No es una medición, es la decisión de negocio que al manual le faltaba y que tenía reloj. Lo que sí se midió es el alcance: 44 miembros aprobados tenían una fecha de vencimiento guardada, el cron de avisos la lee y manda «tu membresía está por vencer», y al pasar la fecha el plan deja de estar vigente. Sin corregir los datos, gente a la que le dijimos que el acceso sigue se habría quedado afuera sola. El cambio no le quita nada a nadie: con 44 de 100, llegar al cupo toma más que tres meses, así que el período se alarga en vez de acortarse. Queda un hueco dicho en voz alta: el disparador no existe, y el día que se apruebe al miembro 100 el aviso y el plazo se hacen a mano.',
-            'estado'   => 'aplicada',
+            'estado'   => 'superada',
             'tokens'   => [],
         ],
         [

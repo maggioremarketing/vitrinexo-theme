@@ -46,7 +46,7 @@ $preguntas = [
   [ '¿Vitrinexo cobra comisión por los negocios?', 'No. Vitrinexo no cobra por conectar a dos miembros ni actúa como intermediario. Tampoco vende posiciones destacadas: el orden del directorio no se paga.' , 'Qué es Vitrinexo' ],
   [ '¿Cómo se verifica mi empresa?', 'Revisamos cada solicitud antes de activarla. Ningún perfil se activa solo. Si falta un dato, te escribimos para completarlo.' , 'Funcionamiento de la plataforma' ],
   [ '¿Tengo que estar activo para que funcione?', 'No. Creas tu perfil una vez y queda visible para los miembros aprobados. No hay feed, rachas ni contenido obligatorio.' , 'Funcionamiento de la plataforma' ],
-  [ '¿Qué es el programa Miembro Pionero?', 'Los primeros 100 miembros aprobados reciben el distintivo Miembro Pionero, que es permanente, y el acceso es gratuito mientras el programa esté abierto. Al llegar a 100, el programa cierra: te avisamos con tiempo antes de cobrar y te quedas con el precio preferencial.' , 'Funcionamiento de la plataforma' ],
+  [ '¿Qué es el programa Miembro Pionero?', 'Los primeros 100 miembros aprobados reciben el distintivo Miembro Pionero, que es permanente, y acceso gratuito a la plataforma para siempre. Ser Pionero significa que no pagas nunca. Al llegar a 100 el programa cierra para quien llegue después, y para ti no cambia nada.' , 'Funcionamiento de la plataforma' ],
   [ '¿Qué es Vitrinexo 4Dinner?', 'Cenas de cuatro personas en una mesa, los miércoles a las 20:00 hora local. Vitrinexo arma cada mesa según el rubro, los intereses y los objetivos de negocio de cada miembro.' , 'Vitrinexo 4Dinner en detalle' ],
   [ '¿Puedo estar en más de una comunidad?', 'Sí. Vitrinexo Woman, Vitrinexo LGBTQ+ y Vitrinexo Senior son comunidades dentro del mismo directorio, y un miembro puede estar en varias.' , 'Comunidades dentro de Vitrinexo' ],
   [ '¿Quién puede ver mi perfil?', 'Solo los miembros aprobados ven tu perfil completo y tus datos de contacto. Tus datos no se venden ni se comparten con terceros.' , 'Privacidad y legal' ],
@@ -62,12 +62,26 @@ foreach ( $preguntas as $i => [ $t, $r, $cat ] ) {
     ] );
     if ( is_wp_error( $id ) ) { echo "  ! $t\n"; continue; }
 
+    // La respuesta tambien se escribe cuando ya estaba y cambio. Esto solo
+    // creaba, asi que un banco sembrado una vez seguia sirviendo el texto
+    // viejo para siempre: cambiar una respuesta en este archivo no cambiaba
+    // nada, y la suite medía algo que el repositorio ya no decía. Es la misma
+    // deriva que tenia la lista de paginas del plugin.
+    $cambio = false;
+    if ( $ya ) {
+        $actual = get_post_field( 'post_content', $id );
+        if ( trim( (string) $actual ) !== trim( $r ) ) {
+            wp_update_post( [ 'ID' => $id, 'post_content' => $r ] );
+            $cambio = true;
+        }
+    }
+
     // La categoría se escribe siempre, también en las que ya estaban: las que
     // sembró la versión anterior de este archivo no tienen ninguna y por eso
     // no se dibujan. Sin esto, un banco viejo sigue con la página vacía.
     wp_set_object_terms( $id, $cat, 'vx_faq_cat', false );
 
     if ( ! $ya && $i < 8 ) update_post_meta( $id, '_vx_faq_destacada', '1' );
-    echo $ya ? "  = $t\n" : "  + $t\n";
+    echo $ya ? ( $cambio ? "  ~ $t\n" : "  = $t\n" ) : "  + $t\n";
 }
 echo "listo\n";
