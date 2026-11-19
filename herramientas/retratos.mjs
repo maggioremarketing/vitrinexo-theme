@@ -76,18 +76,37 @@ const reparto = n => Array.from( { length: n }, ( _, i ) => ( {
   cl: ROPAS[ ( i * 7 + 2 ) % 6 ],
 } ) );
 
-/* Siete fondos: con cinco o diez columnas no se alinean nunca en franjas. */
-const FONDOS = [ C.hueso, C.blanco, C.hueso, C.lav, C.blanco, C.cel, C.hueso ];
+/* ── Los fondos ─────────────────────────────────────────────────────────────
+ * Eran hueso, blanco, lavanda y celeste enteros, y fallaban de tres maneras:
+ * dos casillas vecinas en hueso se fundían en una, el hueso y el blanco se
+ * perdían contra la página, y una cara lavanda sobre fondo lavanda (o una
+ * camisa celeste sobre celeste) desaparecía. Ahora cada casilla toma un
+ * -suave de la paleta que no sea de la familia de la piel, el pelo ni la ropa
+ * de quien está dentro, y que no repita el de la casilla de la izquierda ni el
+ * de la de arriba. Son siete familias y se descartan cinco como mucho, así que
+ * siempre queda una.                                                          */
+const SUAVES = [
+  [ 'coral', '#FFE3D8' ], [ 'lav', '#EAE7FF' ],   [ 'rosa', '#FBE8F1' ],
+  [ 'cel',   '#DDE8F6' ], [ 'sal', '#CBE5D8' ],   [ 'mant', '#FAF7C9' ],
+  [ 'terra', '#E8D1C9' ],
+];
+const FAMILIA = Object.fromEntries( Object.entries( C ).map( ( [ k, v ] ) => [ v, k ] ) );
 
-/** Un retrato dentro de su casilla, escalado para cubrirla y centrado en la cara. */
-function casilla( x, y, w, h, i, { libre = false, id, gente } ) {
-  const p = gente[ i % gente.length ];
-  const crudo = FONDOS[ i % FONDOS.length ];
-  // El lugar libre va siempre sobre blanco: sobre un pastel parece una ficha a
-  // la que le falta la foto, no un lugar que está esperando a alguien.
-  const fondo = libre ? C.blanco : ( crudo === p.sk ? C.blanco : crudo );
-  const k = Math.max( w / 200, h / 250 );
-  const ox = x + ( w - 200 * k ) / 2, oy = y + ( h - 250 * k ) / 2;
+function fondoDe( p, vecinos, i ) {
+  const fuera = new Set( [ FAMILIA[ p.sk ], FAMILIA[ p.ha ], FAMILIA[ p.cl ], ...vecinos ] );
+  for ( let n = 0; n < SUAVES.length; n++ ) {
+    const [ familia, valor ] = SUAVES[ ( i * 3 + n ) % SUAVES.length ];
+    if ( ! fuera.has( familia ) ) return { familia, valor };
+  }
+  throw new Error( `la casilla ${ i } se quedó sin fondo` );
+}
+
+/** Un retrato dentro de su casilla, entero y apoyado en el borde de abajo.
+ *  Antes se escalaba para cubrir la casilla y los hombros, o el pelo, quedaban
+ *  fuera. Ahora cabe completo: los hombros tocan el pie y sobra aire arriba. */
+function casilla( x, y, w, h, { libre = false, id, p, fondo } ) {
+  const k = Math.min( w / 200, h / 250 );
+  const ox = x + ( w - 200 * k ) / 2, oy = y + h - 250 * k;
   return `<g clip-path="url(#${id})"><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${fondo}"/>`
        + `<g transform="translate(${ox.toFixed(1)} ${oy.toFixed(1)}) scale(${k.toFixed(3)})">`
        + `${libre ? lugarLibre : retrato( p )}</g></g>`;
@@ -95,12 +114,17 @@ function casilla( x, y, w, h, i, { libre = false, id, gente } ) {
 
 function rejilla( { w, h, cols, filas, libre, alt, pre } ) {
   const tw = w / cols, th = h / filas, gente = reparto( cols * filas );
-  const defs = [], cuerpo = [];
+  const defs = [], cuerpo = [], familias = [];
   let i = 0;
   for ( let f = 0; f < filas; f++ ) for ( let c = 0; c < cols; c++, i++ ) {
-    const id = `${pre}${i}`;
+    const id = `${pre}${i}`, p = gente[ i % gente.length ];
+    const vecinos = [ c > 0 ? familias[ i - 1 ] : null, f > 0 ? familias[ i - cols ] : null ];
+    // El lugar libre va siempre sobre blanco: sobre un pastel parece una ficha a
+    // la que le falta la foto, no un lugar que está esperando a alguien.
+    const { familia, valor } = i === libre ? { familia: 'blanco', valor: C.blanco } : fondoDe( p, vecinos, i );
+    familias.push( familia );
     defs.push( `<clipPath id="${id}"><rect x="${( c * tw ).toFixed(2)}" y="${( f * th ).toFixed(2)}" width="${tw.toFixed(2)}" height="${th.toFixed(2)}"/></clipPath>` );
-    cuerpo.push( casilla( c * tw, f * th, tw, th, i, { libre: i === libre, id, gente } ) );
+    cuerpo.push( casilla( c * tw, f * th, tw, th, { libre: i === libre, id, p, fondo: valor } ) );
   }
   return `<?xml version="1.0" encoding="UTF-8"?>\n`
     + `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" role="img" aria-label="${alt}">`

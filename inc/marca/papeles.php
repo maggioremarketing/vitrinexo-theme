@@ -49,6 +49,8 @@ function vx_marca_familias(): array {
                 '--color-primary-active' => 'La misma acción mientras se presiona.',
                 '--color-primary-soft'   => 'El fondo tenue que señala sin gritar: avisos, distintivos, filas activas.',
                 '--color-primary-ink'    => 'El coral cuando tiene que leerse: enlaces, títulos de acento e íconos sobre superficie clara.',
+                '--color-primary-display' => 'El coral que todavía se ve coral, solo para el remate de un titular de 24 px o más. Da 3,49 sobre blanco y 3,09 sobre hueso: alcanza para texto grande y no para prosa.',
+                '--color-surface-inverse' => 'La superficie oscura, para la pieza que tiene que destacar en una página clara. Encima va la tinta inversa, y el coral entero da 7 sobre ella.',
                 '--color-on-fill'        => 'La tinta que va encima de cualquier relleno de la paleta, coral o pastel. Es oscura, no blanca: blanco sobre coral da 2,58, sobre lavanda 1,43 y sobre salvia 2,12.',
             ],
         ],
