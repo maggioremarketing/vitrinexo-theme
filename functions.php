@@ -104,7 +104,13 @@ add_action( 'wp_enqueue_scripts', function () {
     }
 
     if ( is_front_page() || is_page( [ 'privacidad', 'terminos' ] ) ) {
-        wp_enqueue_script( 'vitrinexo-network', $uri . '/assets/js/network.js', [], $ver, true );
+        wp_enqueue_script( 'vitrinexo-network', $uri . '/assets/js/network.js', [], vx_version_archivo( '/assets/js/network.js', $ver ), true );
+    }
+
+    // La mesa del hero: su entrada y su inclinación con el puntero. Solo la
+    // portada pública la lleva; el miembro con sesión ve otra portada.
+    if ( is_front_page() && ! is_user_logged_in() ) {
+        wp_enqueue_script( 'vitrinexo-portada', $uri . '/assets/js/portada.js', [], vx_version_archivo( '/assets/js/portada.js', $ver ), true );
     }
 } );
 

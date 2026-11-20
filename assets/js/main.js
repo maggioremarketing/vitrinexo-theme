@@ -505,3 +505,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+/* La barra de vidrio se compacta cuando se pasa el titular de la página, y
+   la línea de abajo muestra cuánto se ha leído. Un solo cálculo por cuadro:
+   el scroll dispara muchas veces por segundo y basta con el último. */
+(function () {
+  'use strict';
+  const barra = document.querySelector('.vx-topbar');
+  if (!barra) return;
+  const avance = barra.querySelector('.vx-topbar__avance i');
+  const titular = document.querySelector('main h1');
+  let pendiente = false;
+
+  function medir() {
+    pendiente = false;
+    const y = window.scrollY;
+    const umbral = titular ? titular.getBoundingClientRect().top + y - 90 : 40;
+    barra.classList.toggle('is-compacta', y > Math.max(umbral, 40));
+    if (avance) {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      avance.style.setProperty('--vx-avance', total > 0 ? (y / total).toFixed(4) : 0);
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    if (pendiente) return;
+    pendiente = true;
+    requestAnimationFrame(medir);
+  }, { passive: true });
+  medir();
+})();

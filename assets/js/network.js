@@ -7,6 +7,9 @@ class NetworkCanvas {
     // paleta vieja, pintandose detras de toda la portada mucho despues del
     // repintado, porque aquel barrido solo miro el CSS.
     this.colors = NetworkCanvas.paleta();
+    // Las líneas hacia el puntero van en coral, como en la propuesta: es lo
+    // único de la red que responde a quien la mira, y por eso se distingue.
+    this.colorPuntero = getComputedStyle(document.documentElement).getPropertyValue("--coral").trim() || this.colors[0];
     this.width = 0;
     this.height = 0;
     this.particles = [];
@@ -27,8 +30,15 @@ class NetworkCanvas {
     this.animate = this.animate.bind(this);
 
     window.addEventListener("resize", this.resizeCanvas);
-    this.canvas.addEventListener("mousemove", this.onMouseMove);
-    this.canvas.addEventListener("mouseleave", this.onMouseLeave);
+    // El lienzo está detrás de todo y con pointer-events apagado, así que
+    // escucharlo a él no recibía nunca un movimiento: la función estaba
+    // escrita y no funcionaba. Se escucha a la ventana. Solo con mouse o
+    // trackpad; en un teléfono no hay puntero que seguir.
+    if (window.matchMedia("(pointer: fine)").matches) {
+      window.addEventListener("pointermove", this.onMouseMove, { passive: true });
+      document.documentElement.addEventListener("pointerleave", this.onMouseLeave);
+      window.addEventListener("blur", this.onMouseLeave);
+    }
 
     this.resizeCanvas();
     this.animate();
@@ -164,9 +174,12 @@ class NetworkCanvas {
         this.ctx.beginPath();
         this.ctx.moveTo(this.mouse.x, this.mouse.y);
         this.ctx.lineTo(p.x, p.y);
-        this.ctx.strokeStyle = p.color;
-        this.ctx.globalAlpha = (1 - dist / this.mouse.radius) * 0.36;
-        this.ctx.lineWidth = 1;
+        this.ctx.strokeStyle = this.colorPuntero;
+        // 0,9 y no 0,45: el lienzo entero va al 50 % de opacidad en el CSS,
+        // así que acá se dobla para que en pantalla quede en el 0,45 de la
+        // propuesta. Con 0,36 la línea existía y no se veía.
+        this.ctx.globalAlpha = (1 - dist / this.mouse.radius) * 0.9;
+        this.ctx.lineWidth = 1.4;
         this.ctx.stroke();
         this.ctx.globalAlpha = 1;
       }
