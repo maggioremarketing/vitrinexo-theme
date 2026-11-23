@@ -5442,16 +5442,11 @@ textarea {
   font-size: 18px;
 }
 
+/* El cambio de texto lo anima portada.js: se va el texto, la casilla ajusta
+   su ancho y llega el nuevo. Acá solo lo necesario para que se pueda mover. */
 .vx-casilla [data-vx-rubro],
 .vx-casilla [data-vx-cargo] {
   display: inline-block;
-  transition: opacity .35s ease, transform .35s ease;
-}
-
-.vx-casilla [data-vx-rubro].is-cambiando,
-.vx-casilla [data-vx-cargo].is-cambiando {
-  opacity: 0;
-  transform: translateY(6px);
 }
 
 .vx-casilla__icono--lavanda { background: var(--lavanda); }

@@ -23,32 +23,75 @@ window.VX_CARGOS = [
   'Jefa de personas', 'Encargado de compras', 'Fundadora', 'Director creativo',
 ];
 
-/* Cambia el texto de un grupo de casillas cada `cada` milisegundos, con un
- * fundido. Se detiene con el puntero encima, con la pestaña oculta y con
- * movimiento reducido: nadie tiene que leer algo que se le escapa. */
-window.vxRotarRubros = function (casillas, contenedor, cada, lista = window.VX_RUBROS) {
+/* Cambia un texto de casilla en tres tiempos: el texto se va, la casilla se
+ * estira o se encoge hasta el ancho del nuevo y el nuevo llega. Antes el
+ * texto cambiaba de golpe y la casilla saltaba de ancho con él, que de una
+ * frase larga a una corta se veía cortado. */
+const vxCambiarTexto = async (texto, nuevo) => {
+  const casilla = texto.closest('.vx-casilla') || texto.parentElement;
+  const suave = 'cubic-bezier(.2,.8,.2,1)';
+
+  const salir = texto.animate(
+    [{ opacity: 1, transform: 'none', filter: 'blur(0)' },
+     { opacity: 0, transform: 'translateY(-4px)', filter: 'blur(2px)' }],
+    { duration: 260, easing: 'ease-in', fill: 'forwards' });
+  await salir.finished;
+
+  // offsetWidth y no getBoundingClientRect: la mesa se inclina con el
+  // puntero, y el rectángulo vendría deformado por esa transformación.
+  const antes = { w: casilla.offsetWidth, h: casilla.offsetHeight };
+  texto.textContent = nuevo;
+  const despues = { w: casilla.offsetWidth, h: casilla.offsetHeight };
+
+  casilla.style.overflow = 'hidden';
+  const tamano = casilla.animate(
+    [{ width: antes.w + 'px', height: antes.h + 'px' },
+     { width: despues.w + 'px', height: despues.h + 'px' }],
+    { duration: 420, easing: suave });
+  texto.animate(
+    [{ opacity: 0, transform: 'translateY(4px)', filter: 'blur(2px)' },
+     { opacity: 1, transform: 'none', filter: 'blur(0)' }],
+    { duration: 340, delay: 220, easing: 'ease-out', fill: 'backwards' });
+  salir.cancel();
+
+  await tamano.finished;
+  casilla.style.overflow = '';
+};
+
+/* Cambia todas las casillas de un grupo cada `cada` milisegundos, las tres
+ * al mismo tiempo. Cada casilla saca su lista de lo que muestra: el cargo de
+ * VX_CARGOS y el resto de VX_RUBROS. Se detiene con el puntero encima, con la
+ * pestaña oculta y con movimiento reducido: nadie tiene que leer algo que se
+ * le escapa. */
+window.vxRotarRubros = function (casillas, contenedor, cada) {
   if (!casillas.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (typeof document.body.animate !== 'function') return;
   let pausa = false;
+  let cambiando = false;
   contenedor.addEventListener('pointerenter', () => { pausa = true; });
   contenedor.addEventListener('pointerleave', () => { pausa = false; });
 
-  const elegir = (evitar) => {
+  const listaDe = (c) => (c.hasAttribute('data-vx-cargo') ? window.VX_CARGOS : window.VX_RUBROS);
+  const elegir = (lista, evitar) => {
     let r;
     do { r = lista[Math.floor(Math.random() * lista.length)]; } while (evitar.includes(r));
     return r;
   };
 
-  setInterval(() => {
-    if (pausa || document.hidden) return;
+  setInterval(async () => {
+    if (pausa || cambiando || document.hidden) return;
+    cambiando = true;
     const usados = casillas.map((c) => c.textContent);
-    casillas.forEach((c, i) => {
-      const nuevo = elegir(usados);
-      usados.push(nuevo);
-      setTimeout(() => {
-        c.classList.add('is-cambiando');
-        setTimeout(() => { c.textContent = nuevo; c.classList.remove('is-cambiando'); }, 350);
-      }, i * 250);
+    const nuevos = casillas.map((c) => {
+      const n = elegir(listaDe(c), usados);
+      usados.push(n);
+      return n;
     });
+    try {
+      await Promise.all(casillas.map((c, i) => vxCambiarTexto(c, nuevos[i])));
+    } finally {
+      cambiando = false;
+    }
   }, cada);
 };
 
@@ -58,8 +101,8 @@ window.vxRotarRubros = function (casillas, contenedor, cada, lista = window.VX_R
   const hero = document.getElementById('vxMesaHero');
   if (!hero) return;
 
-  window.vxRotarRubros([...hero.querySelectorAll('[data-vx-rubro]')], hero, 3500);
-  window.vxRotarRubros([...hero.querySelectorAll('[data-vx-cargo]')], hero, 3500, window.VX_CARGOS);
+  // Un solo reloj para las tres casillas: rubros y cargo cambian juntos.
+  window.vxRotarRubros([...hero.querySelectorAll('[data-vx-rubro], [data-vx-cargo]')], hero, 3500);
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
